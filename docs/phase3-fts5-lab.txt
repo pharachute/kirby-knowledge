@@ -1,0 +1,103 @@
+SQLite 3.45.3  | FTS5 compiled: True
+query             tokenizer   ids                     bm25
+RAG               unicode61   mem_1,mem_6,mem_4       [-0.3709, -0.3178, -0.2931]
+RAG               trigram     mem_5,mem_1,mem_6,mem_  [-0.0, -0.0, -0.0, -0.0, -0.0]
+RAG               porter      mem_1,mem_6,mem_4       [-0.3709, -0.3178, -0.2931]
+RAG               LIKE        mem_1,mem_3,mem_4,mem_
+
+rag               unicode61   mem_1,mem_6,mem_4       [-0.3709, -0.3178, -0.2931]
+rag               trigram     mem_5,mem_1,mem_6,mem_  [-0.0, -0.0, -0.0, -0.0, -0.0]
+rag               porter      mem_1,mem_6,mem_4       [-0.3709, -0.3178, -0.2931]
+rag               LIKE        mem_1,mem_3,mem_4,mem_
+
+SQLite            unicode61   mem_3                   [-2.031]
+SQLite            trigram     mem_3                   [-2.048]
+SQLite            porter      mem_3                   [-2.031]
+SQLite            LIKE        mem_3
+
+Agent             unicode61   mem_2                   [-2.2966]
+Agent             trigram     mem_2                   [-2.2999]
+Agent             porter      mem_2                   [-2.2966]
+Agent             LIKE        mem_2
+
+retriev           unicode61                           []
+retriev           trigram     mem_1                   [-1.1836]
+retriev           porter      mem_1                   [-1.3049]
+retriev           LIKE        mem_1
+
+长期记忆              unicode61                           []
+长期记忆              trigram     mem_2,mem_7             [-0.9608, -0.9367]
+长期记忆              porter                              []
+长期记忆              LIKE        mem_2,mem_7
+
+记忆                unicode61                           []
+记忆                trigram                             []
+记忆                porter                              []
+记忆                LIKE        mem_2,mem_6,mem_7
+
+本地存储              unicode61   mem_3                   [-1.1667]
+本地存储              trigram     mem_5,mem_3             [-0.8152, -0.6364]
+本地存储              porter      mem_3                   [-1.1667]
+本地存储              LIKE        mem_3,mem_5
+
+存储                unicode61                           []
+存储                trigram                             []
+存储                porter                              []
+存储                LIKE        mem_3,mem_5
+
+RAG 原理            unicode61                           []
+RAG 原理            trigram     mem_5,mem_1,mem_6,mem_  [-0.0, -0.0, -0.0, -0.0, -0.0]
+RAG 原理            porter                              []
+RAG 原理            LIKE        
+
+维护成本              unicode61                           []
+维护成本              trigram     mem_7                   [-1.742]
+维护成本              porter                              []
+维护成本              LIKE        mem_7
+
+local-first       unicode61   ERROR: OperationalError: no such column: first
+local-first       trigram     ERROR: OperationalError: no such column: first
+local-first       porter      ERROR: OperationalError: no such column: first
+local-first       LIKE        mem_3
+
+"                 unicode61   ERROR: OperationalError: unterminated string
+"                 trigram     ERROR: OperationalError: unterminated string
+"                 porter      ERROR: OperationalError: unterminated string
+"                 LIKE        
+
+'                 unicode61   ERROR: OperationalError: fts5: syntax error near "'"
+'                 trigram     ERROR: OperationalError: fts5: syntax error near "'"
+'                 porter      ERROR: OperationalError: fts5: syntax error near "'"
+'                 LIKE        
+
+*                 unicode61   ERROR: OperationalError: unknown special query: 
+*                 trigram     ERROR: OperationalError: unknown special query: 
+*                 porter      ERROR: OperationalError: unknown special query: 
+*                 LIKE        
+
+:                 unicode61   ERROR: OperationalError: fts5: syntax error near ":"
+:                 trigram     ERROR: OperationalError: fts5: syntax error near ":"
+:                 porter      ERROR: OperationalError: fts5: syntax error near ":"
+:                 LIKE        
+
+(                 unicode61   ERROR: OperationalError: fts5: syntax error near ""
+(                 trigram     ERROR: OperationalError: fts5: syntax error near ""
+(                 porter      ERROR: OperationalError: fts5: syntax error near ""
+(                 LIKE        
+
+AND               unicode61   ERROR: OperationalError: fts5: syntax error near "AND"
+AND               trigram     ERROR: OperationalError: fts5: syntax error near "AND"
+AND               porter      ERROR: OperationalError: fts5: syntax error near "AND"
+AND               LIKE        
+
+OR                unicode61   ERROR: OperationalError: fts5: syntax error near "OR"
+OR                trigram     ERROR: OperationalError: fts5: syntax error near "OR"
+OR                porter      ERROR: OperationalError: fts5: syntax error near "OR"
+OR                LIKE        mem_2,mem_3,mem_5
+
+RAG 原理            unicode61   mem_1,mem_6,mem_4       [-0.3709, -0.3178, -0.2931]
+RAG 原理            trigram     mem_5,mem_1,mem_6,mem_  [-0.0, -0.0, -0.0, -0.0, -0.0]
+RAG 原理            porter      mem_1,mem_6,mem_4       [-0.3709, -0.3178, -0.2931]
+RAG 原理            OR(trigram) ['mem_5', 'mem_1', 'mem_6', 'mem_4', 'mem_3']
+
+evidence -> docs\phase3-fts5-lab.json

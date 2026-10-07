@@ -1,0 +1,53 @@
+Knowledge Base 1.0 Phase 5 (PDF Importer) acceptance run
+==============================================================================
+backend      : pdfminer.six 20260107
+db           : data\kb1p5-acceptance.db
+credential   : C:\Users\Pharachute\.dsh\.credentials.yaml
+
+-- real local PDFs imported through the real CLI (real LLM Formation) --
+[A1_chinese_with_metadata] exit=0  file=课表-文字型.pdf
+   pages=1 chars=227 import=imported formation=persisted worth=True memories=1 sources=1 title_source=first_page_line
+   memories: [('event', 'source_content', 'active', 'title_len=13')]
+   source: type=file chars=227 cjk=103 latin=10 page_markers=1 raw_pdf_structure=False captured_from=pdf pdf_page_count=1 backend=pdfminer.six local_path_in_metadata=False
+   counts: {'sources': 0, 'memories': 0, 'memory_sources': 0} -> {'sources': 1, 'memories': 1, 'memory_sources': 1}
+[A2_chinese_multipage] exit=0  file=高性价比人生指南-对我的启示与发展点.pdf
+   pages=20 chars=19129 import=imported formation=persisted worth=True memories=4 sources=1 title_source=first_page_line
+   memories: [('knowledge', 'source_content', 'active', 'title_len=10'), ('knowledge', 'source_content', 'active', 'title_len=12'), ('knowledge', 'source_content', 'active', 'title_len=12'), ('knowledge', 'source_content', 'active', 'title_len=14')]
+   source: type=file chars=19129 cjk=8358 latin=2508 page_markers=20 raw_pdf_structure=False captured_from=pdf pdf_page_count=20 backend=pdfminer.six local_path_in_metadata=False
+   counts: {'sources': 1, 'memories': 1, 'memory_sources': 1} -> {'sources': 2, 'memories': 5, 'memory_sources': 5}
+[B_english_technical] exit=0  file=ReferenceCard.pdf
+   pages=1 chars=4098 import=imported formation=persisted worth=True memories=2 sources=1 title_source=first_page_line
+   memories: [('knowledge', 'source_content', 'active', 'title_len=16'), ('knowledge', 'source_content', 'active', 'title_len=14')]
+   source: type=file chars=4098 cjk=0 latin=2838 page_markers=1 raw_pdf_structure=False captured_from=pdf pdf_page_count=1 backend=pdfminer.six local_path_in_metadata=False
+   counts: {'sources': 2, 'memories': 5, 'memory_sources': 5} -> {'sources': 3, 'memories': 7, 'memory_sources': 7}
+
+-- new-process retrieval (each search is a separate OS process) --
+   A1_chinese_with_metadata     memory=mem_7625edb012e141… keyword_len=2 total=1 found=True
+   A2_chinese_multipage         memory=mem_c4b892c4fe004f… keyword_len=4 total=1 found=True
+   A2_chinese_multipage         memory=mem_02f24b8a2bb94c… keyword_len=4 total=2 found=True
+   A2_chinese_multipage         memory=mem_be3f09239c0045… keyword_len=4 total=1 found=True
+   A2_chinese_multipage         memory=mem_37b58a53a8c943… keyword_len=7 total=1 found=True
+   B_english_technical          memory=mem_7ed1bf5558f540… keyword_len=7 total=2 found=True
+   B_english_technical          memory=mem_5605429088764b… keyword_len=7 total=2 found=True
+
+-- real Web UI upload (real `web` server subprocess, POST /import-pdf) --
+   server_ready=True http=200 marker=True memory_delta=2 counts {'sources': 3, 'memories': 7, 'memory_sources': 7} -> {'sources': 3, 'memories': 9, 'memory_sources': 9}
+
+-- failure cases (synthetic PDFs in %TEMP%; no repo files, no text recorded) --
+   corrupt_non_pdf                  exit=3 error=PdfCorruptError            counts_unchanged=True ok=True
+   truncated                        exit=3 error=PdfCorruptError            counts_unchanged=True ok=True
+   encrypted_password               exit=3 error=PdfEncryptedError          counts_unchanged=True ok=True
+   encryption_forbids_extraction    exit=3 error=PdfEncryptedError          counts_unchanged=True ok=True
+   no_text_scanned                  exit=3 error=PdfEmptyTextError          counts_unchanged=True ok=True
+   over_max_bytes                   exit=3 error=PdfTooLargeError           counts_unchanged=True ok=True
+   over_max_pages                   exit=3 error=PdfTooManyPagesError       counts_unchanged=True ok=True
+   over_max_text_chars              exit=3 error=PdfTextTooLargeError       counts_unchanged=True ok=True
+   below_min_chars                  exit=3 error=PdfEmptyTextError          counts_unchanged=True ok=True
+
+final counts : {'sources': 3, 'memories': 9, 'memory_sources': 9}
+statuses     : {'active': 7, 'pending': 2, 'archived': 0}
+index        : consistent=True
+checks       : imports=True memory_forming=True failures=True retrieval=True ui=True
+OVERALL      : PASS
+
+privacy note : counts/ids/hashes/metadata only: no personal PDF text, no memory titles

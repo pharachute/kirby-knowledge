@@ -1,0 +1,37 @@
+﻿# Cross-process persistence transcript (Phase 1 Test 7, hardened)
+# Date: 2026-10-04  |  Python: Python 3.13.2  |  SQLite: 3.45.3
+# DB: C:\Users\PHARAC~1\AppData\Local\Temp\pms-xproc-8752b82c\memory.db
+
+## Process A (write + exit)
+import sys
+from personal_memory import Database, Memory, MemoryRepository, Source
+repo = MemoryRepository(Database(sys.argv[1]))
+s = repo.create_source(Source.create(source_type="text", title="跨进程来源", content="进程 A 写入的正文"))
+m = repo.create_memory(Memory.create(type="event", title="跨进程记忆", content="进程 A 写入的记忆",
+                                     information_origin="user_explicit", tags=["xproc"], importance=0.7))
+repo.link(m.id, s.id)
+print("counts:", repo.counts())
+print("source:", s.id, "|", s.content_hash)
+print("memory:", m.id, "| schema_version:", m.schema_version)
+observed:
+counts: {'sources': 1, 'memories': 1, 'memory_sources': 1}
+source: src_d79c93bcb9304f3ba3b91e3964a123a8 | 016e852b4df025669aa531d37fd9e88dddd2c16e8f0a0af95f8408251b968299
+memory: mem_4c47b3c1fbf94538a1c7ff6548e8b46d | schema_version: 1
+
+## Process B (separate interpreter, re-open same file)
+import sys
+from personal_memory import Database, MemoryRepository
+repo = MemoryRepository(Database(sys.argv[1]))
+print("counts:", repo.counts())
+print("re-initialize applied_count:", Database(sys.argv[1]).initialize().applied_count)
+for s in repo.list_sources():
+    print("source:", s.id, "|", s.title, "|", s.content_hash)
+for m in repo.list_memories():
+    print("memory:", m.id, "|", m.title, "| tags:", m.tags, "| importance:", m.importance, "| schema_version:", m.schema_version)
+    print("memory -> sources:", [x.id for x in repo.get_sources_for_memory(m.id)])
+observed:
+counts: {'sources': 1, 'memories': 1, 'memory_sources': 1}
+re-initialize applied_count: 0
+source: src_d79c93bcb9304f3ba3b91e3964a123a8 | 跨进程来源 | 016e852b4df025669aa531d37fd9e88dddd2c16e8f0a0af95f8408251b968299
+memory: mem_4c47b3c1fbf94538a1c7ff6548e8b46d | 跨进程记忆 | tags: ['xproc'] | importance: 0.7 | schema_version: 1
+memory -> sources: ['src_d79c93bcb9304f3ba3b91e3964a123a8']

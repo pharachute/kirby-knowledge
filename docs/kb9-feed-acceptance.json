@@ -1,0 +1,197 @@
+{
+  "server_ready": true,
+  "home": {
+    "has_kirby": true,
+    "has_lead": true,
+    "stat_cards": false,
+    "chinese_nav": true,
+    "state_hooks": true,
+    "fallbacks": true
+  },
+  "inputs": [
+    {
+      "label": "文字输入",
+      "endpoint": "/capture",
+      "http": 200,
+      "ok": true,
+      "feedback": "吃饱了~",
+      "note": "记住了 1 件事",
+      "title": "处理完成",
+      "memory_count": 1,
+      "source_count": 1,
+      "counts_before": {
+        "sources": 0,
+        "memories": 0,
+        "memory_sources": 0
+      },
+      "counts_after": {
+        "sources": 1,
+        "memories": 1,
+        "memory_sources": 1
+      }
+    },
+    {
+      "label": "TXT/Markdown 文件",
+      "endpoint": "/import-file",
+      "http": 200,
+      "ok": true,
+      "feedback": "吃饱了~",
+      "note": "这次没有留下长期记忆",
+      "title": "文件导入完成",
+      "memory_count": 0,
+      "source_count": 0,
+      "counts_before": {
+        "sources": 1,
+        "memories": 1,
+        "memory_sources": 1
+      },
+      "counts_after": {
+        "sources": 1,
+        "memories": 1,
+        "memory_sources": 1
+      }
+    },
+    {
+      "label": "聊天记录",
+      "endpoint": "/import-chat",
+      "http": 200,
+      "ok": true,
+      "feedback": "吃饱了~",
+      "note": "记住了 1 件事",
+      "title": "聊天导入完成",
+      "memory_count": 1,
+      "source_count": 0,
+      "counts_before": {
+        "sources": 1,
+        "memories": 1,
+        "memory_sources": 1
+      },
+      "counts_after": {
+        "sources": 1,
+        "memories": 2,
+        "memory_sources": 1
+      }
+    },
+    {
+      "label": "URL",
+      "endpoint": "/import-url",
+      "http": 200,
+      "ok": true,
+      "feedback": "吃饱了~",
+      "note": "记住了 2 件事",
+      "title": "网页导入完成",
+      "memory_count": 2,
+      "source_count": 1,
+      "counts_before": {
+        "sources": 1,
+        "memories": 2,
+        "memory_sources": 1
+      },
+      "counts_after": {
+        "sources": 2,
+        "memories": 4,
+        "memory_sources": 3
+      }
+    },
+    {
+      "label": "PDF",
+      "endpoint": "/import-pdf",
+      "http": 200,
+      "ok": true,
+      "feedback": "吃饱了~",
+      "note": "记住了 1 件事",
+      "title": "PDF 导入完成",
+      "memory_count": 1,
+      "source_count": 1,
+      "counts_before": {
+        "sources": 2,
+        "memories": 4,
+        "memory_sources": 3
+      },
+      "counts_after": {
+        "sources": 3,
+        "memories": 5,
+        "memory_sources": 4
+      }
+    },
+    {
+      "label": "低价值内容",
+      "endpoint": "/capture",
+      "http": 200,
+      "ok": true,
+      "feedback": "吃饱了~",
+      "note": "这次没有留下长期记忆",
+      "title": "处理完成",
+      "memory_count": 0,
+      "source_count": 0,
+      "counts_before": {
+        "sources": 3,
+        "memories": 5,
+        "memory_sources": 4
+      },
+      "counts_after": {
+        "sources": 3,
+        "memories": 5,
+        "memory_sources": 4
+      }
+    }
+  ],
+  "failures": [
+    {
+      "label": "损坏 PDF",
+      "endpoint": "/import-pdf",
+      "http": 400,
+      "ok": false,
+      "title": "这份 PDF 好像坏掉了",
+      "hint": "文件不完整，暂时读不出来。",
+      "leaks": []
+    },
+    {
+      "label": "无文字 PDF",
+      "endpoint": "/import-pdf",
+      "http": 400,
+      "ok": false,
+      "title": "这份 PDF 里没有文字",
+      "hint": "看起来像是扫描件或图片型 PDF，暂时读不出来。",
+      "leaks": []
+    },
+    {
+      "label": "不允许的网址",
+      "endpoint": "/import-url",
+      "http": 400,
+      "ok": false,
+      "title": "这个网址卡比不能去",
+      "hint": "只能喂公开的网页地址。",
+      "leaks": []
+    },
+    {
+      "label": "空内容",
+      "endpoint": "/capture",
+      "http": 400,
+      "ok": false,
+      "title": "先写点东西再喂",
+      "hint": "内容不能为空。",
+      "leaks": []
+    }
+  ],
+  "counts_before": {
+    "sources": 0,
+    "memories": 0,
+    "memory_sources": 0
+  },
+  "counts_after": {
+    "sources": 3,
+    "memories": 5,
+    "memory_sources": 4
+  },
+  "browser_form": {
+    "http": 200,
+    "has_banner": true,
+    "redirect_followed": true
+  },
+  "all_inputs_ok": true,
+  "low_value_not_failure": true,
+  "all_failures_friendly": true,
+  "browser_form_ok": true,
+  "overall_ok": true
+}

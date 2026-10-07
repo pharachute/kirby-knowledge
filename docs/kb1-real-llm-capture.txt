@@ -1,0 +1,5 @@
+KB 1.0 Phase 1 -- opt-in real-LLM end-to-end test (Test 10)
+command : python -m unittest tests.test_capture.RealLLMCaptureTest -v
+note    : the API key was exported into this process's environment only; it is never printed
+==============================================================================
+

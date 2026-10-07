@@ -1,0 +1,183 @@
+{
+  "db_path": "data\\memory.db",
+  "schema_version": 1,
+  "migrations_applied": [],
+  "sources": [
+    {
+      "id": "src_demo_text_02",
+      "source_type": "text",
+      "title": "项目启动记录",
+      "content": "2026-10-04：决定开始搭建 Personal Memory System，先做统一记忆模型与持久化基础。",
+      "url": null,
+      "content_hash": "a00577c8bcebec06e10c7c1e2826a4d14bef0788d77cfbd8a389146b35837137",
+      "created_at": "2026-10-04T13:50:00.720Z",
+      "updated_at": "2026-10-04T13:50:00.720Z",
+      "metadata": {
+        "language": "zh",
+        "origin": "demo"
+      }
+    },
+    {
+      "id": "src_demo_text_01",
+      "source_type": "text",
+      "title": "本地优先存储的笔记",
+      "content": "本地优先的笔记系统用 SQLite 就够了：单文件、零服务、可备份，个人规模下不需要独立数据库进程。",
+      "url": null,
+      "content_hash": "e7c6e8b2217b9ce656dfaf41ca61565f3c470928df9ac4ddc527957bdcad35b3",
+      "created_at": "2026-10-04T13:50:00.716Z",
+      "updated_at": "2026-10-04T13:50:00.716Z",
+      "metadata": {
+        "language": "zh",
+        "origin": "demo"
+      }
+    }
+  ],
+  "memories": [
+    {
+      "id": "mem_demo_profile_01",
+      "type": "profile",
+      "title": "偏好本地优先、零依赖的工具链",
+      "content": "倾向单文件、可离线、无需常驻服务的方案。",
+      "summary": null,
+      "importance": 0.5,
+      "confidence": 0.4,
+      "information_origin": "agent_inference",
+      "status": "pending",
+      "created_at": "2026-10-04T13:50:00.735Z",
+      "updated_at": "2026-10-04T13:50:00.735Z",
+      "schema_version": 1,
+      "tags": [
+        "preference",
+        "tooling"
+      ]
+    },
+    {
+      "id": "mem_demo_event_01",
+      "type": "event",
+      "title": "启动 Personal Memory System 阶段 1",
+      "content": "2026-10-04 开始实现统一记忆数据模型与 SQLite 持久化基础。",
+      "summary": null,
+      "importance": 0.6,
+      "confidence": 1.0,
+      "information_origin": "user_explicit",
+      "status": "active",
+      "created_at": "2026-10-04T13:50:00.731Z",
+      "updated_at": "2026-10-04T13:50:00.731Z",
+      "schema_version": 1,
+      "tags": [
+        "project",
+        "milestone"
+      ]
+    },
+    {
+      "id": "mem_demo_experience_01",
+      "type": "experience",
+      "title": "无第三方依赖时用 dataclass 承担校验层",
+      "content": "dataclass 的 __post_init__ 能在构造时拒绝非法数据；用问题收集器一次报出全部字段错误，比逐条抛异常更好排查。",
+      "summary": null,
+      "importance": 0.7,
+      "confidence": 0.85,
+      "information_origin": "source_content",
+      "status": "active",
+      "created_at": "2026-10-04T13:50:00.727Z",
+      "updated_at": "2026-10-04T13:50:00.727Z",
+      "schema_version": 1,
+      "tags": [
+        "python",
+        "dataclass",
+        "validation"
+      ]
+    },
+    {
+      "id": "mem_demo_knowledge_01",
+      "type": "knowledge",
+      "title": "SQLite 适合个人规模的本地优先存储",
+      "content": "单文件、零服务、易备份；个人数据量下无需独立数据库进程。",
+      "summary": "本地优先场景优先选 SQLite。",
+      "importance": 0.8,
+      "confidence": 0.9,
+      "information_origin": "source_content",
+      "status": "active",
+      "created_at": "2026-10-04T13:50:00.723Z",
+      "updated_at": "2026-10-04T13:50:00.723Z",
+      "schema_version": 1,
+      "tags": [
+        "sqlite",
+        "local-first",
+        "storage"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "memory_id": "mem_demo_profile_01",
+      "source_ids": [
+        "src_demo_text_02"
+      ]
+    },
+    {
+      "memory_id": "mem_demo_event_01",
+      "source_ids": [
+        "src_demo_text_01",
+        "src_demo_text_02"
+      ]
+    },
+    {
+      "memory_id": "mem_demo_experience_01",
+      "source_ids": [
+        "src_demo_text_01"
+      ]
+    },
+    {
+      "memory_id": "mem_demo_knowledge_01",
+      "source_ids": [
+        "src_demo_text_01"
+      ]
+    }
+  ],
+  "memory_to_sources": {
+    "mem_demo_profile_01": [
+      "src_demo_text_02"
+    ],
+    "mem_demo_event_01": [
+      "src_demo_text_01",
+      "src_demo_text_02"
+    ],
+    "mem_demo_experience_01": [
+      "src_demo_text_01"
+    ],
+    "mem_demo_knowledge_01": [
+      "src_demo_text_01"
+    ]
+  },
+  "source_to_memories": {
+    "src_demo_text_02": [
+      "mem_demo_event_01",
+      "mem_demo_profile_01"
+    ],
+    "src_demo_text_01": [
+      "mem_demo_knowledge_01",
+      "mem_demo_experience_01",
+      "mem_demo_event_01"
+    ]
+  },
+  "duplicate_hash_check": {
+    "content_hash": "e7c6e8b2217b9ce656dfaf41ca61565f3c470928df9ac4ddc527957bdcad35b3",
+    "already_known": true,
+    "existing_source_id": "src_demo_text_01"
+  },
+  "counts": {
+    "sources": 2,
+    "memories": 4,
+    "memory_sources": 5
+  },
+  "persistence_check": {
+    "reopened_from_disk": true,
+    "counts": {
+      "sources": 2,
+      "memories": 4,
+      "memory_sources": 5
+    },
+    "identical": true
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "credential_source": "C:\\Users\\Pharachute\\.dsh\\.credentials.yaml (refs.DEEPSEEK_API_KEY)",
+  "db_path": "data\\kb1-capture.db",
+  "final_counts": {
+    "memories": 1,
+    "memory_sources": 1,
+    "sources": 1
+  },
+  "final_status_counts": {
+    "active": 1,
+    "archived": 0,
+    "pending": 0
+  },
+  "generated_at": "2026-10-04T15:16:41.081Z",
+  "index_consistency": {
+    "consistent": true,
+    "memories": 1,
+    "orphan_trigram_rows": 0,
+    "orphan_word_rows": 0,
+    "trigram_index": 1,
+    "word_index": 1
+  },
+  "llm": {
+    "key_present": true,
+    "model": "deepseek-flash",
+    "provider": "deepseek"
+  },
+  "overall_ok": true,
+  "package_version": "0.5.0",
+  "phase": "kb-1.0 phase-1 (capture layer)",
+  "scenarios": [
+    {
+      "capture_status": "persisted",
+      "captured_from": "cli",
+      "command_output": "{\n  \"captured\": true,\n  \"status\": \"persisted\",\n  \"formation_status\": \"persisted\",\n  \"captured_from\": \"cli\",\n  \"input\": {\n    \"content\": \"Retrieval-Augmented Generation（RAG）把检索与生成结合起来：先用检索器从外部语料库取回相关片段，再让生成模型只基于这些片段作答，因此答案可以追溯到具体资料，并显著降低幻觉。\",\n    \"content_chars\": 102,\n    \"title\": \"RAG 基础\",\n    \"source_type\": \"text\",\n    \"url\": null,\n    \"metadata\": {},\n    \"captured_at\": \"2026-10-04T15:16:41.198Z\"\n  },\n  \"memories_created\": [\n    {\n      \"id\": \"mem_c668c17cfb92430182fe7c4dbe22da1e\",\n      \"type\": \"knowledge\",\n      \"title\": \"RAG 的核心机制与价值\",\n      \"content\": \"Retrieval-Augmented Generation（RAG）先用检索器从外部语料库取回相关片段，再让生成模型只基于这些片段作答，因此答案可追溯到具体资料，并能显著降低幻觉。\",\n      \"summary\": \"RAG = 先检索外部语料片段，再让生成模型基于片段作答，答案可追溯、降低幻觉。\",\n      \"importance\": 0.65,\n      \"confidence\": 0.95,\n      \"information_origin\": \"source_content\",\n      \"status\": \"active\",\n      \"created_at\": \"2026-10-04T15:16:44.570Z\",\n      \"updated_at\": \"2026-10-04T15:16:44.570Z\",\n      \"schema_version\": 1,\n      \"tags\": [\n        \"rag\",\n        \"检索增强生成\",\n        \"llm\"\n      ]\n    }\n  ],\n  \"sources_created\": [\n    {\n      \"id\": \"src_80a731d4fe63486c9b35603f6c4a1c63\",\n      \"source_type\": \"text\",\n      \"title\": \"RAG 基础\",\n      \"url\": null",
+      "counts_after": {
+        "memories": 1,
+        "memory_sources": 1,
+        "sources": 1
+      },
+      "counts_before": {
+        "memories": 0,
+        "memory_sources": 0,
+        "sources": 0
+      },
+      "exit_code": 0,
+      "expectation": "capture -> formation -> persisted -> Memory created",
+      "formation_status": "persisted",
+      "memories_created": [
+        {
+          "id": "mem_c668c17cfb92430182fe7c4dbe22da1e",
+          "status": "active",
+          "title": "RAG 的核心机制与价值",
+          "type": "knowledge"
+        }
+      ],
+      "memory_count": 1,
+      "ok": true,
+      "reason": "RAG 的定义与核心机制属于稳定的专业知识，用户在学习该主题，未来讨论检索增强生成时可复用。 | source: memory states facts taken from the source material: ['RAG 的核心机制与价值']",
+      "scenario": "A_high_value",
+      "source_count": 1,
+      "sources_created": [
+        {
+          "id": "src_80a731d4fe63486c9b35603f6c4a1c63",
+          "source_type": "text",
+          "title": "RAG 基础"
+        }
+      ]
+    },
+    {
+      "capture_status": "skipped",
+      "command_output": "{\n  \"captured\": true,\n  \"status\": \"skipped\",\n  \"formation_status\": \"skipped\",\n  \"captured_from\": \"cli\",\n  \"input\": {\n    \"content\": \"今天喝了一杯奶茶。\",\n    \"content_chars\": 9,\n    \"title\": null,\n    \"source_type\": \"text\",\n    \"url\": null,\n    \"metadata\": {},\n    \"captured_at\": \"2026-10-04T15:16:44.708Z\"\n  },\n  \"memories_created\": [],\n  \"sources_created\": [],\n  \"memory_count\": 0,\n  \"source_count\": 0,\n  \"source_reused\": false,\n  \"formation_result\": {\n    \"status\": \"skipped\",\n    \"reason\": \"这是一次性的日常闲聊，没有长期价值，未来与用户交互时不会用到。\",\n    \"worth_remembering\": false,\n    \"input_digest\": \"48a371fa99215b9ddbf0f8196ee5dafce7c0cb530ecaeedfd21c40c94cffbbf0\",\n    \"memories\": [],\n    \"reused\": [],\n    \"quality\": null,\n    \"source\": null,\n    \"source_reused\": false,\n    \"links\": 0,\n    \"attempts\": 1,\n    \"dropped\": [],",
+      "counts_after": {
+        "memories": 1,
+        "memory_sources": 1,
+        "sources": 1
+      },
+      "counts_before": {
+        "memories": 1,
+        "memory_sources": 1,
+        "sources": 1
+      },
+      "exit_code": 0,
+      "expectation": "capture -> formation -> skipped -> 0 Memory, 0 Source, no write",
+      "memory_count": 0,
+      "ok": true,
+      "scenario": "B_low_value",
+      "source_count": 0,
+      "worth_remembering": false
+    },
+    {
+      "broken_config": "data\\kb1-capture-broken-llm.json",
+      "counts_after": {
+        "memories": 1,
+        "memory_sources": 1,
+        "sources": 1
+      },
+      "counts_before": {
+        "memories": 1,
+        "memory_sources": 1,
+        "sources": 1
+      },
+      "error": "could not reach http://127.0.0.1:9/v1: timed out",
+      "error_type": "LLMRequestError",
+      "exit_code": 3,
+      "expectation": "LLM/transport failure -> typed error, no half-written long-term record",
+      "index_consistent": true,
+      "leftover_memory_for_this_input": false,
+      "leftover_source_for_this_input": false,
+      "ok": true,
+      "scenario": "C_failure"
+    },
+    {
+      "command_output": "{\n  \"query\": \"RAG\",\n  \"total\": 1,\n  \"limit\": 5,\n  \"offset\": 0,\n  \"statuses\": [\n    \"active\"\n  ],\n  \"memory_type\": null,\n  \"mode\": \"index\",\n  \"took_ms\": 3.089,\n  \"index_matches\": 1,\n  \"like_only_matches\": 0,\n  \"truncated\": false,\n  \"score_direction\": \"higher is more relevant (bm25 is negated; raw bm25 kept on each hit)\",\n  \"hits\": [\n    {\n      \"memory\": {\n        \"id\": \"mem_c668c17cfb92430182fe7c4dbe22da1e\",\n        \"type\": \"knowledge\",\n        \"title\": \"RAG 的核心机制与价值\",\n        \"content\": \"Retrieval-Augmented Generation（RAG）先用检索器从外部语料库取回相关片段，再让生成模型只基于这些片段作答，因此答案可追溯到具体资料，并能显著降低幻觉。\",\n        \"summary\": \"RAG = 先检索外部语料片段，再让生成模型基于片段作答，答案可追溯、降低幻觉。\",\n        \"importance\": 0.65,\n        \"confidence\": 0.95,\n        \"information_origin\": \"source_content\",\n        \"status\": \"active\",\n        \"created_",
+      "exit_code": 0,
+      "expectation": "after the capturing process exited, the Memory is still there (new process)",
+      "fresh_connection_counts": {
+        "memories": 1,
+        "memory_sources": 1,
+        "sources": 1
+      },
+      "ok": true,
+      "scenario": "D_persistence",
+      "search_ids": [
+        "mem_c668c17cfb92430182fe7c4dbe22da1e"
+      ],
+      "search_titles": [
+        "RAG 的核心机制与价值"
+      ],
+      "search_total": 1,
+      "source_refs": [
+        1
+      ]
+    },
+    {
+      "counts_after": {
+        "memories": 1,
+        "memory_sources": 1,
+        "sources": 1
+      },
+      "counts_before": {
+        "memories": 1,
+        "memory_sources": 1,
+        "sources": 1
+      },
+      "error": "captured content must be a non-empty string",
+      "error_type": "ValidationError",
+      "exit_code": 3,
+      "expectation": "empty/whitespace content -> ValidationError, no model call, no write",
+      "ok": true,
+      "scenario": "F_empty_input"
+    }
+  ]
+}

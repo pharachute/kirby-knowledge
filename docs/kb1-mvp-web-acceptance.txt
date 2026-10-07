@@ -1,0 +1,33 @@
+Knowledge Base 1.0 MVP (local Web UI) acceptance run
+generated_at : 2026-10-04T15:52:47.574Z
+command      : python -m personal_memory web --db data\ui-acceptance.db --port 49370
+package      : 0.8.0  phase=kb-1.0 mvp (local web ui)
+credential   : C:\Users\Pharachute\.dsh\.credentials.yaml (refs.DEEPSEEK_API_KEY)
+http calls   : 20   server log lines: 35
+
+[0_startup_binding_banner] ok=True
+  {"expectation": "以 `python -m personal_memory web` 启动，打印 URL/数据库/隐私提示，只在 127.0.0.1 监听", "command": "python -m personal_memory web --db data\\ui-acceptance.db --port 49370", "banner": ["Personal Knowledge Base", "http://127.0.0.1:49370", "database: data\\ui-acceptance.db", "model: deepseek / deepseek-flash (API key: configured)", "privacy: 真实 Formation 会把输入内容发送给配置的模型服务；UI 不显示 API Key，也不写入日志。", "Press Ctrl+C to stop."], "loopback_http_ok": true, "lan_ip": "192.168.1.212", "lan_connection_blocked": true}
+
+[A_text_capture] ok=True
+  {"expectation": "Capture → Formation → 至少一条 Memory（Formation 判断需要时才有 Source）", "http_status": 200, "page_marker_处理完成": true, "counts_before": {"sources": 0, "memories": 0, "memory_sources": 0}, "counts_after": {"sources": 1, "memories": 1, "memory_sources": 1}, "memories_created": [{"id": "mem_1325277dfd034ebfb7aa46ea44420f57", "type": "knowledge", "title": "RAG 是通过检索提供上下文的增强生成", "status": "active", "information_origin": "source_content"}], "sources_created": 1}
+
+[B_low_value_text] ok=True
+  {"expectation": "Memory = 0, Source = 0，数据库数量不增长", "http_status": 200, "counts_before": {"sources": 1, "memories": 1, "memory_sources": 1}, "counts_after": {"sources": 1, "memories": 1, "memory_sources": 1}, "status_line_present": true}
+
+[C_markdown_upload] ok=True
+  {"expectation": "浏览器上传 .md → FileImporter → Capture → Formation → Memory", "http_status": 200, "counts_before": {"sources": 1, "memories": 1, "memory_sources": 1}, "counts_after": {"sources": 2, "memories": 2, "memory_sources": 2}, "memory_delta": 1, "source": {"id": "src_819949779abe40189b92967ff815fd1f", "source_type": "file", "filename": "vector-search.md", "extension": ".md", "encoding": "utf-8", "file_sha256": "84580aca3067105d26f29c58e84aa6d34fc08b6a7590aec9bac489a6c1e804b4", "content_chars": 92}}
+
+[D_chat_upload] ok=True
+  {"expectation": "聊天文件 → ChatImporter → Capture → Formation → Memory，并可见 information_origin", "http_status": 200, "counts_before": {"sources": 2, "memories": 2, "memory_sources": 2}, "counts_after": {"sources": 3, "memories": 5, "memory_sources": 5}, "chat_source": {"id": "src_dc9ceacb357c4f23998dc415209547de", "source_type": "chat", "role_marker_sequence": ["[USER]", "[ASSISTANT]", "[USER]"], "content_chars": 92, "metadata": {"captured_from": "chat", "provider": null, "conversation_id": "conv_a45b9e58157ad91b", "message_count": 3, "roles": ["user", "assistant"]}}, "information_origins": ["source_content", "user_explicit"], "memory_titles": ["用户确定按先召回后排序的顺序实践", "检索系统：召回优先于排序", "用户正在系统学习检索系统"], "chat_body_in_page": false}
+
+[E_search] ok=True
+  {"expectation": "UI 搜索 RAG 找到场景 A 生成的 Memory", "http_status": 200, "searched_for": "RAG", "memory_id_found": "mem_1325277dfd034ebfb7aa46ea44420f57", "memory_title": "RAG 是通过检索提供上下文的增强生成", "score_rendered": true}
+
+[F_lifecycle] ok=True
+  {"expectation": "Edit 后新内容可立即搜索 → Archive 后从默认列表/搜索消失 → Restore 回来 → Delete 后 Memory 消失、Source 保留", "target_memory": {"id": "mem_c8662fe3d0f2453ba64adf469c919aca", "title": "用户确定按先召回后排序的顺序实践", "sources": ["src_dc9ceacb357c4f23998dc415209547de"]}, "steps": [{"step": "edit", "http_status": 200, "content_contains_keyword": true, "tags_in_db": ["检索", "重排序"], "new_content_searchable_immediately": true}, {"step": "archive", "http_status": 200, "status_in_db": "archived", "hidden_from_default_list": true, "hidden_from_default_search": true, "visible_with_status_all": true}, {"step": "restore", "http_status": 200, "status_in_db": "active", "visible_in_default_list": true, "searchable_again": true}, {"step": "delete", "http_status": 200, "memory_gone_from_db": true, "memory_gone_from_ui": true, "sources_kept": ["src_dc9ceacb357c4f23998dc415209547de"], "source_pages_still_ok": true, "source_count_after_delete": 3}]}
+
+[G_privacy] ok=True
+  {"expectation": "API Key 不出现在任何响应；原始对话渲染只出现在用户主动打开的 Source 详情页；页面明确提示内容会发送给模型服务", "responses_checked": 19, "api_key_absent_from_all_responses": true, "raw_conversation_block_probe": "[USER]\n我在系统学习检索系统，希望理解底层原理。\n\n[ASSISTANT]", "raw_conversation_block_paths": ["/sources/src_dc9ceacb357c4f23998dc415209547de"], "raw_block_only_on_the_source_detail_page": true, "source_detail_page": "/sources/src_dc9ceacb357c4f23998dc415209547de", "probe_phrase_paths_informational": ["/memories", "/memories?status=all", "/memories", "/memories/mem_c8662fe3d0f2453ba64adf469c919aca/delete", "/memories?status=all", "/sources/src_dc9ceacb357c4f23998dc415209547de"], "probe_phrase_note": "派生 Memory / Source 标题可能引用原话，属正常；被检查的是原始对话渲染本身", "privacy_notice_visible": true, "server_log_contains_key": false, "server_log_contains_chat_body": false, "server_log_lines_seen": 35}
+
+final counts : {'sources': 3, 'memories': 4, 'memory_sources': 4}
+overall      : PASS

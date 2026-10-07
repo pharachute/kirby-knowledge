@@ -1,0 +1,54 @@
+{
+  "status": "skipped",
+  "reason": "这只是一次性的日常状态描述（今天下午喝了奶茶），没有长期价值，也不影响未来与用户的交互。",
+  "worth_remembering": false,
+  "input_digest": "57d32dac94c6b2d4704f2d7671a70529342cf34613a7db40e2318ef4dd8c2569",
+  "memories": [],
+  "source": null,
+  "source_reused": false,
+  "links": 0,
+  "attempts": 1,
+  "dropped": [],
+  "prompt_version": "memory-formation-v1",
+  "model": "deepseek-flash",
+  "llm": {
+    "model": "deepseek-flash",
+    "finish_reason": "stop",
+    "usage": {
+      "prompt_tokens": 1357,
+      "completion_tokens": 56,
+      "total_tokens": 1413,
+      "prompt_tokens_details": {
+        "cached_tokens": 1152
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 12
+      },
+      "prompt_cache_hit_tokens": 1152,
+      "prompt_cache_miss_tokens": 205
+    },
+    "latency_seconds": 1.031,
+    "request_id": "2f1d3aee-6872-4c32-8e01-3bdc2c4defea",
+    "reasoning_chars": 56,
+    "text_chars": 102
+  },
+  "evidence": [],
+  "db_path": "data\\phase2-cli.db",
+  "llm_config": {
+    "provider": "deepseek",
+    "model": "deepseek-flash",
+    "base_url": "https://api.deepseek.com",
+    "api_key_present": true,
+    "api_key_env": "PERSONAL_MEMORY_LLM_API_KEY",
+    "timeout_seconds": 120.0,
+    "max_tokens": 2048,
+    "temperature": 0.0,
+    "json_mode": true,
+    "max_transport_retries": 2
+  },
+  "counts": {
+    "sources": 0,
+    "memories": 0,
+    "memory_sources": 0
+  }
+}

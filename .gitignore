@@ -1,0 +1,36 @@
+# ---- Python build / cache artefacts ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# ---- editor / harness scratch directories ----
+*.tmpdir/
+.tmpdir/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.tmp
+
+# ---- local LLM config may contain an API key -- never commit it ----
+config/llm.json
+config/llm.local.json
+*llm.local.json
+.env
+.env.*
+
+# ---- runtime data: SQLite database + WAL side files (real user data) ----
+data/
+*.db
+*.db-wal
+*.db-shm
+*.sqlite3
+
+# ---- runtime logs and process id (launcher / server) ----
+logs/
+*.log
+*.pid
+.pkb-uploads/

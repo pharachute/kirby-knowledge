@@ -1,0 +1,34 @@
+{
+  "db_path": "data\\memory.db",
+  "exists": true,
+  "schema_version": 1,
+  "tables": {
+    "memories": "CREATE TABLE memories (\n    id                 TEXT    PRIMARY KEY,\n    type               TEXT    NOT NULL\n                               CHECK (type IN ('knowledge', 'experience', 'event', 'profile')),\n    title              TEXT    NOT NULL CHECK (length(trim(title)) > 0),\n    content            TEXT    NOT NULL CHECK (length(trim(content)) > 0),\n    summary            TEXT,\n    tags_json          TEXT    NOT NULL DEFAULT '[]'\n                               CHECK (json_valid(tags_json) AND json_type(tags_json) = 'array'),\n    importance         REAL    NOT NULL DEFAULT 0.5\n                               CHECK (typeof(importance) IN ('integer', 'real')\n                                      AND importance >= 0.0 AND importance <= 1.0),\n    confidence         REAL    NOT NULL DEFAULT 0.5\n                               CHECK (typeof(confidence) IN ('integer', 'real')\n                                      AND confidence >= 0.0 AND confidence <= 1.0),\n    information_origin TEXT    NOT NULL\n                               CHECK (information_origin IN ('user_explicit', 'source_content', 'agent_inference')),\n    status             TEXT    NOT NULL DEFAULT 'active'\n                               CHECK (status IN ('active', 'pending', 'archived')),\n    created_at         TEXT    NOT NULL CHECK (length(created_at) > 0),\n    updated_at         TEXT    NOT NULL CHECK (length(updated_at) > 0),\n    schema_version     INTEGER NOT NULL DEFAULT 1 CHECK (schema_version >= 1)\n)",
+    "memory_sources": "CREATE TABLE memory_sources (\n    memory_id  TEXT NOT NULL REFERENCES memories(id) ON DELETE CASCADE,\n    source_id  TEXT NOT NULL REFERENCES sources(id)  ON DELETE CASCADE,\n    created_at TEXT NOT NULL CHECK (length(created_at) > 0),\n    PRIMARY KEY (memory_id, source_id)\n)",
+    "schema_migrations": "CREATE TABLE schema_migrations (\n    version    INTEGER PRIMARY KEY,\n    name       TEXT    NOT NULL,\n    applied_at TEXT    NOT NULL\n)",
+    "sources": "CREATE TABLE sources (\n    id            TEXT    PRIMARY KEY,\n    source_type   TEXT    NOT NULL\n                          CHECK (source_type IN ('text', 'chat', 'article', 'web', 'file')),\n    title         TEXT    NOT NULL CHECK (length(trim(title)) > 0),\n    content       TEXT    NOT NULL CHECK (length(trim(content)) > 0),\n    url           TEXT    CHECK (url IS NULL OR url LIKE 'http%'),\n    content_hash  TEXT    NOT NULL UNIQUE\n                          CHECK (length(content_hash) = 64 AND content_hash = lower(content_hash)),\n    metadata_json TEXT    NOT NULL DEFAULT '{}'\n                          CHECK (json_valid(metadata_json) AND json_type(metadata_json) = 'object'),\n    created_at    TEXT    NOT NULL CHECK (length(created_at) > 0),\n    updated_at    TEXT    NOT NULL CHECK (length(updated_at) > 0)\n)"
+  },
+  "indexes": {
+    "idx_memories_created_at": "CREATE INDEX idx_memories_created_at ON memories (created_at)",
+    "idx_memories_importance": "CREATE INDEX idx_memories_importance ON memories (importance)",
+    "idx_memories_status_created": "CREATE INDEX idx_memories_status_created ON memories (status, created_at)",
+    "idx_memories_type_status": "CREATE INDEX idx_memories_type_status ON memories (type, status)",
+    "idx_memory_sources_source": "CREATE INDEX idx_memory_sources_source ON memory_sources (source_id, memory_id)",
+    "idx_sources_created_at": "CREATE INDEX idx_sources_created_at ON sources (created_at)",
+    "idx_sources_type_created": "CREATE INDEX idx_sources_type_created ON sources (source_type, created_at)"
+  },
+  "counts": {
+    "sources": 0,
+    "memories": 0,
+    "memory_sources": 0,
+    "schema_migrations": 1
+  },
+  "package_version": "0.2.0",
+  "applied_migrations": [
+    {
+      "version": 1,
+      "name": "initial_schema",
+      "applied_at": "2026-10-04T13:50:00.705Z"
+    }
+  ]
+}

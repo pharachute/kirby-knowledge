@@ -1,0 +1,91 @@
+{
+  "status": "persisted",
+  "reason": "HNSW 索引的查询复杂度与内存代价是一条稳定、可复用的技术结论，属于长期有用的专业知识。 | source: memory states facts taken from the source material: ['HNSW 索引的查询复杂度与内存代价']",
+  "worth_remembering": true,
+  "input_digest": "c3a21653ac601d51204f27cbd5cdaa10663f97bf7e46d13927645ddd03ead0bb",
+  "memories": [
+    {
+      "id": "mem_3ed4656bd25f4464abc00c80c075c796",
+      "type": "knowledge",
+      "title": "HNSW 索引的查询复杂度与内存代价",
+      "content": "向量数据库的 HNSW 索引通过分层图结构实现近邻检索的对数级查询复杂度，代价是构建期内存占用较高。",
+      "summary": "HNSW 用分层图换取对数级近邻检索，代价是构建内存高。",
+      "importance": 0.6,
+      "confidence": 0.9,
+      "information_origin": "source_content",
+      "status": "active",
+      "created_at": "2026-10-04T13:50:34.289Z",
+      "updated_at": "2026-10-04T13:50:34.289Z",
+      "schema_version": 1,
+      "tags": [
+        "hnsw",
+        "向量数据库",
+        "索引",
+        "近邻检索"
+      ]
+    }
+  ],
+  "source": {
+    "id": "src_ca9c405121794905bdb45b5ea63406ef",
+    "source_type": "text",
+    "title": "HNSW 索引特性",
+    "content": "向量数据库的 HNSW 索引通过分层图结构在近邻检索中取得对数级查询复杂度，代价是构建期内存占用较高。",
+    "url": null,
+    "content_hash": "c3a21653ac601d51204f27cbd5cdaa10663f97bf7e46d13927645ddd03ead0bb",
+    "created_at": "2026-10-04T13:50:34.288Z",
+    "updated_at": "2026-10-04T13:50:34.288Z",
+    "metadata": {
+      "formation": {
+        "prompt_version": "memory-formation-v1",
+        "model": "deepseek-flash",
+        "formed_at": "2026-10-04T13:50:34.288Z"
+      }
+    }
+  },
+  "source_reused": false,
+  "links": 1,
+  "attempts": 1,
+  "dropped": [],
+  "prompt_version": "memory-formation-v1",
+  "model": "deepseek-flash",
+  "llm": {
+    "model": "deepseek-flash",
+    "finish_reason": "stop",
+    "usage": {
+      "prompt_tokens": 1391,
+      "completion_tokens": 385,
+      "total_tokens": 1776,
+      "prompt_tokens_details": {
+        "cached_tokens": 1152
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 201
+      },
+      "prompt_cache_hit_tokens": 1152,
+      "prompt_cache_miss_tokens": 239
+    },
+    "latency_seconds": 2.232,
+    "request_id": "5e2fe9df-81f5-4712-af31-703edf76e26e",
+    "reasoning_chars": 791,
+    "text_chars": 431
+  },
+  "evidence": [],
+  "db_path": "data\\phase2-cli.db",
+  "llm_config": {
+    "provider": "deepseek",
+    "model": "deepseek-flash",
+    "base_url": "https://api.deepseek.com",
+    "api_key_present": true,
+    "api_key_env": "PERSONAL_MEMORY_LLM_API_KEY",
+    "timeout_seconds": 120.0,
+    "max_tokens": 2048,
+    "temperature": 0.0,
+    "json_mode": true,
+    "max_transport_retries": 2
+  },
+  "counts": {
+    "sources": 1,
+    "memories": 1,
+    "memory_sources": 1
+  }
+}

@@ -1,0 +1,16 @@
+provider=deepseek model=deepseek-flash base_url=https://api.deepseek.com key=<set>
+prompt_version=memory-formation-v1 db=data\phase2-real.db
+
+[high_value_knowledge] status=persisted worth=True memories=1 source=yes attempts=1 2.7s
+  reason: RAG 的定义与原理是稳定、可复用的专业知识，对后续学习与项目实践有长期参考价值。 | source: memory states facts taken from the source material: ['RAG 把检索与生成结合']
+  - [knowledge/source_content] RAG 把检索与生成结合 (importance=0.75 confidence=0.95 status=active)
+  counts: {'sources': 0, 'memories': 0, 'memory_sources': 0} -> {'sources': 1, 'memories': 1, 'memory_sources': 1}
+  llm: {'model': 'deepseek-flash', 'finish_reason': 'stop', 'usage': {'prompt_tokens': 1411, 'completion_tokens': 558, 'total_tokens': 1969, 'prompt_tokens_details': {'cached_tokens': 1277}, 'completion_tokens_details': {'reasoning_tokens': 382}, 'prompt_cache_hit_tokens': 1277, 'prompt_cache_miss_tokens': 134}, 'latency_seconds': 2.693, 'request_id': '21e08ce8-7a0b-43cc-9de0-746019d492a7', 'reasoning_chars': 1606, 'text_chars': 460}
+
+[low_value_chat] status=skipped worth=False memories=0 source=no attempts=1 1.0s
+  reason: 这是一次性的日常琐事（喝奶茶），属于短期失效的临时状态，对用户长期目标与未来交互没有价值。
+  counts: {'sources': 1, 'memories': 1, 'memory_sources': 1} -> {'sources': 1, 'memories': 1, 'memory_sources': 1}
+  llm: {'model': 'deepseek-flash', 'finish_reason': 'stop', 'usage': {'prompt_tokens': 1357, 'completion_tokens': 69, 'total_tokens': 1426, 'prompt_tokens_details': {'cached_tokens': 1152}, 'completion_tokens_details': {'reasoning_tokens': 22}, 'prompt_cache_hit_tokens': 1152, 'prompt_cache_miss_tokens': 205}, 'latency_seconds': 0.998, 'request_id': 'de3d262b-5bdd-4eb0-a0e8-eef83a1929b8', 'reasoning_chars': 82, 'text_chars': 103}
+
+final counts: {'sources': 1, 'memories': 1, 'memory_sources': 1}
+evidence written to docs\phase2-real-llm.json (4697 bytes)

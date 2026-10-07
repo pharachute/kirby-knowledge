@@ -1,0 +1,363 @@
+{
+  "credential_source": "C:\\Users\\Pharachute\\.dsh\\.credentials.yaml (refs.DEEPSEEK_API_KEY)",
+  "db_path": "data\\ui-acceptance.db",
+  "final_counts": {
+    "memories": 4,
+    "memory_sources": 4,
+    "sources": 3
+  },
+  "generated_at": "2026-10-04T15:52:47.574Z",
+  "http_exchanges": [
+    {
+      "chars": 3803,
+      "method": "GET",
+      "path": "/",
+      "status": 200
+    },
+    {
+      "chars": 4508,
+      "method": "POST",
+      "path": "/capture",
+      "status": 200
+    },
+    {
+      "chars": 4145,
+      "method": "POST",
+      "path": "/capture",
+      "status": 200
+    },
+    {
+      "chars": 7434,
+      "method": "POST",
+      "path": "/import-file",
+      "status": 200
+    },
+    {
+      "chars": 7789,
+      "method": "POST",
+      "path": "/import-chat",
+      "status": 200
+    },
+    {
+      "chars": 4294,
+      "method": "GET",
+      "path": "/search?q=RAG",
+      "status": 200
+    },
+    {
+      "chars": 5620,
+      "method": "POST",
+      "path": "/memories/mem_c8662fe3d0f2453ba64adf469c919aca/update",
+      "status": 200
+    },
+    {
+      "chars": 4279,
+      "method": "GET",
+      "path": "/search?q=星河检索标记",
+      "status": 200
+    },
+    {
+      "chars": 5575,
+      "method": "POST",
+      "path": "/memories/mem_c8662fe3d0f2453ba64adf469c919aca/archive",
+      "status": 200
+    },
+    {
+      "chars": 6766,
+      "method": "GET",
+      "path": "/memories",
+      "status": 200
+    },
+    {
+      "chars": 3855,
+      "method": "GET",
+      "path": "/search?q=星河检索标记",
+      "status": 200
+    },
+    {
+      "chars": 7480,
+      "method": "GET",
+      "path": "/memories?status=all",
+      "status": 200
+    },
+    {
+      "chars": 5571,
+      "method": "POST",
+      "path": "/memories/mem_c8662fe3d0f2453ba64adf469c919aca/restore",
+      "status": 200
+    },
+    {
+      "chars": 7476,
+      "method": "GET",
+      "path": "/memories",
+      "status": 200
+    },
+    {
+      "chars": 4279,
+      "method": "GET",
+      "path": "/search?q=星河检索标记",
+      "status": 200
+    },
+    {
+      "chars": 6944,
+      "method": "POST",
+      "path": "/memories/mem_c8662fe3d0f2453ba64adf469c919aca/delete",
+      "status": 200
+    },
+    {
+      "chars": 6766,
+      "method": "GET",
+      "path": "/memories?status=all",
+      "status": 200
+    },
+    {
+      "chars": 4549,
+      "method": "GET",
+      "path": "/sources/src_dc9ceacb357c4f23998dc415209547de",
+      "status": 200
+    },
+    {
+      "chars": 3803,
+      "method": "GET",
+      "path": "/",
+      "status": 200
+    },
+    {
+      "chars": 3803,
+      "method": "GET",
+      "path": "/",
+      "status": 200
+    }
+  ],
+  "overall_ok": true,
+  "package_version": "0.8.0",
+  "phase": "kb-1.0 mvp (local web ui)",
+  "port": 49370,
+  "scenarios": [
+    {
+      "banner": [
+        "Personal Knowledge Base",
+        "http://127.0.0.1:49370",
+        "database: data\\ui-acceptance.db",
+        "model: deepseek / deepseek-flash (API key: configured)",
+        "privacy: 真实 Formation 会把输入内容发送给配置的模型服务；UI 不显示 API Key，也不写入日志。",
+        "Press Ctrl+C to stop."
+      ],
+      "command": "python -m personal_memory web --db data\\ui-acceptance.db --port 49370",
+      "expectation": "以 `python -m personal_memory web` 启动，打印 URL/数据库/隐私提示，只在 127.0.0.1 监听",
+      "lan_connection_blocked": true,
+      "lan_ip": "192.168.1.212",
+      "loopback_http_ok": true,
+      "ok": true,
+      "scenario": "0_startup_binding_banner"
+    },
+    {
+      "counts_after": {
+        "memories": 1,
+        "memory_sources": 1,
+        "sources": 1
+      },
+      "counts_before": {
+        "memories": 0,
+        "memory_sources": 0,
+        "sources": 0
+      },
+      "expectation": "Capture → Formation → 至少一条 Memory（Formation 判断需要时才有 Source）",
+      "http_status": 200,
+      "memories_created": [
+        {
+          "id": "mem_1325277dfd034ebfb7aa46ea44420f57",
+          "information_origin": "source_content",
+          "status": "active",
+          "title": "RAG 是通过检索提供上下文的增强生成",
+          "type": "knowledge"
+        }
+      ],
+      "ok": true,
+      "page_marker_处理完成": true,
+      "scenario": "A_text_capture",
+      "sources_created": 1
+    },
+    {
+      "counts_after": {
+        "memories": 1,
+        "memory_sources": 1,
+        "sources": 1
+      },
+      "counts_before": {
+        "memories": 1,
+        "memory_sources": 1,
+        "sources": 1
+      },
+      "expectation": "Memory = 0, Source = 0，数据库数量不增长",
+      "http_status": 200,
+      "ok": true,
+      "scenario": "B_low_value_text",
+      "status_line_present": true
+    },
+    {
+      "counts_after": {
+        "memories": 2,
+        "memory_sources": 2,
+        "sources": 2
+      },
+      "counts_before": {
+        "memories": 1,
+        "memory_sources": 1,
+        "sources": 1
+      },
+      "expectation": "浏览器上传 .md → FileImporter → Capture → Formation → Memory",
+      "http_status": 200,
+      "memory_delta": 1,
+      "ok": true,
+      "scenario": "C_markdown_upload",
+      "source": {
+        "content_chars": 92,
+        "encoding": "utf-8",
+        "extension": ".md",
+        "file_sha256": "84580aca3067105d26f29c58e84aa6d34fc08b6a7590aec9bac489a6c1e804b4",
+        "filename": "vector-search.md",
+        "id": "src_819949779abe40189b92967ff815fd1f",
+        "source_type": "file"
+      }
+    },
+    {
+      "chat_body_in_page": false,
+      "chat_source": {
+        "content_chars": 92,
+        "id": "src_dc9ceacb357c4f23998dc415209547de",
+        "metadata": {
+          "captured_from": "chat",
+          "conversation_id": "conv_a45b9e58157ad91b",
+          "message_count": 3,
+          "provider": null,
+          "roles": [
+            "user",
+            "assistant"
+          ]
+        },
+        "role_marker_sequence": [
+          "[USER]",
+          "[ASSISTANT]",
+          "[USER]"
+        ],
+        "source_type": "chat"
+      },
+      "counts_after": {
+        "memories": 5,
+        "memory_sources": 5,
+        "sources": 3
+      },
+      "counts_before": {
+        "memories": 2,
+        "memory_sources": 2,
+        "sources": 2
+      },
+      "expectation": "聊天文件 → ChatImporter → Capture → Formation → Memory，并可见 information_origin",
+      "http_status": 200,
+      "information_origins": [
+        "source_content",
+        "user_explicit"
+      ],
+      "memory_titles": [
+        "用户确定按先召回后排序的顺序实践",
+        "检索系统：召回优先于排序",
+        "用户正在系统学习检索系统"
+      ],
+      "ok": true,
+      "scenario": "D_chat_upload"
+    },
+    {
+      "expectation": "UI 搜索 RAG 找到场景 A 生成的 Memory",
+      "http_status": 200,
+      "memory_id_found": "mem_1325277dfd034ebfb7aa46ea44420f57",
+      "memory_title": "RAG 是通过检索提供上下文的增强生成",
+      "ok": true,
+      "scenario": "E_search",
+      "score_rendered": true,
+      "searched_for": "RAG"
+    },
+    {
+      "expectation": "Edit 后新内容可立即搜索 → Archive 后从默认列表/搜索消失 → Restore 回来 → Delete 后 Memory 消失、Source 保留",
+      "ok": true,
+      "scenario": "F_lifecycle",
+      "steps": [
+        {
+          "content_contains_keyword": true,
+          "http_status": 200,
+          "new_content_searchable_immediately": true,
+          "step": "edit",
+          "tags_in_db": [
+            "检索",
+            "重排序"
+          ]
+        },
+        {
+          "hidden_from_default_list": true,
+          "hidden_from_default_search": true,
+          "http_status": 200,
+          "status_in_db": "archived",
+          "step": "archive",
+          "visible_with_status_all": true
+        },
+        {
+          "http_status": 200,
+          "searchable_again": true,
+          "status_in_db": "active",
+          "step": "restore",
+          "visible_in_default_list": true
+        },
+        {
+          "http_status": 200,
+          "memory_gone_from_db": true,
+          "memory_gone_from_ui": true,
+          "source_count_after_delete": 3,
+          "source_pages_still_ok": true,
+          "sources_kept": [
+            "src_dc9ceacb357c4f23998dc415209547de"
+          ],
+          "step": "delete"
+        }
+      ],
+      "target_memory": {
+        "id": "mem_c8662fe3d0f2453ba64adf469c919aca",
+        "sources": [
+          "src_dc9ceacb357c4f23998dc415209547de"
+        ],
+        "title": "用户确定按先召回后排序的顺序实践"
+      }
+    },
+    {
+      "api_key_absent_from_all_responses": true,
+      "expectation": "API Key 不出现在任何响应；原始对话渲染只出现在用户主动打开的 Source 详情页；页面明确提示内容会发送给模型服务",
+      "ok": true,
+      "privacy_notice_visible": true,
+      "probe_phrase_note": "派生 Memory / Source 标题可能引用原话，属正常；被检查的是原始对话渲染本身",
+      "probe_phrase_paths_informational": [
+        "/memories",
+        "/memories?status=all",
+        "/memories",
+        "/memories/mem_c8662fe3d0f2453ba64adf469c919aca/delete",
+        "/memories?status=all",
+        "/sources/src_dc9ceacb357c4f23998dc415209547de"
+      ],
+      "raw_block_only_on_the_source_detail_page": true,
+      "raw_conversation_block_paths": [
+        "/sources/src_dc9ceacb357c4f23998dc415209547de"
+      ],
+      "raw_conversation_block_probe": "[USER]\n我在系统学习检索系统，希望理解底层原理。\n\n[ASSISTANT]",
+      "responses_checked": 19,
+      "scenario": "G_privacy",
+      "server_log_contains_chat_body": false,
+      "server_log_contains_key": false,
+      "server_log_lines_seen": 35,
+      "source_detail_page": "/sources/src_dc9ceacb357c4f23998dc415209547de"
+    }
+  ],
+  "server_command": "python -m personal_memory web --db data\\ui-acceptance.db --port 49370",
+  "server_kept_running": false,
+  "server_log_contains_chat_body": false,
+  "server_log_contains_key": false,
+  "server_log_lines": 35,
+  "started_at": "2026-10-04T15:52:33.491Z"
+}

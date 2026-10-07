@@ -1,0 +1,547 @@
+Phase 4 acceptance run (real CLI, real SQLite file)
+generated_at : 2026-10-04T14:56:29.524Z
+db           : data\phase4-acceptance.db
+package      : 0.4.0  phase=phase-4 (memory lifecycle & quality)
+prompts      : memory-formation-v1 / memory-conflict-v1
+llm          : provider=deepseek model=deepseek-flash base_url=https://api.deepseek.com key=None
+credential   : C:\Users\Pharachute\.dsh\.credentials.yaml (refs.DEEPSEEK_API_KEY)
+
+==============================================================================
+[A_archive] ok=True
+expectation: archived Memory is no longer returned by the default search
+{
+  "search_before": {
+    "exit_code": 0,
+    "query": "检索外部知识",
+    "statuses": [
+      "active"
+    ],
+    "total": 1,
+    "mode": "index",
+    "titles": [
+      "RAG 的基本原理"
+    ],
+    "ids": [
+      "mem_41fee2980e20493bb7fe35dff0fc9985"
+    ],
+    "hits": [
+      {
+        "memory_id": "mem_41fee2980e20493bb7fe35dff0fc9985",
+        "title": "RAG 的基本原理",
+        "status": "active",
+        "score": 1e-06,
+        "bm25": -1e-06,
+        "index": "trigram"
+      }
+    ]
+  },
+  "archive": {
+    "memory_id": "mem_41fee2980e20493bb7fe35dff0fc9985",
+    "from_status": "active",
+    "to_status": "archived",
+    "changed": true,
+    "reason": "active -> archived",
+    "memory": {
+      "id": "mem_41fee2980e20493bb7fe35dff0fc9985",
+      "type": "knowledge",
+      "title": "RAG 的基本原理",
+      "content": "RAG 通过检索外部知识，为大语言模型提供相关上下文。",
+      "summary": "RAG 用外部检索结果为大模型提供上下文。",
+      "importance": 0.8,
+      "confidence": 0.9,
+      "information_origin": "source_content",
+      "status": "archived",
+      "created_at": "2026-10-04T14:56:29.521Z",
+      "updated_at": "2026-10-04T14:56:29.537Z",
+      "schema_version": 1,
+      "tags": [
+        "rag",
+        "retrieval"
+      ]
+    },
+    "db_path": "data\\phase4-acceptance.db"
+  },
+  "search_after_default": {
+    "exit_code": 0,
+    "query": "检索外部知识",
+    "statuses": [
+      "active"
+    ],
+    "total": 0,
+    "mode": "none",
+    "titles": [],
+    "ids": [],
+    "hits": []
+  },
+  "search_after_explicit_archived": {
+    "exit_code": 0,
+    "query": "检索外部知识",
+    "statuses": [
+      "archived"
+    ],
+    "total": 1,
+    "mode": "index",
+    "titles": [
+      "RAG 的基本原理"
+    ],
+    "ids": [
+      "mem_41fee2980e20493bb7fe35dff0fc9985"
+    ],
+    "hits": [
+      {
+        "memory_id": "mem_41fee2980e20493bb7fe35dff0fc9985",
+        "title": "RAG 的基本原理",
+        "status": "archived",
+        "score": 1e-06,
+        "bm25": -1e-06,
+        "index": "trigram"
+      }
+    ]
+  }
+}
+
+==============================================================================
+[B_restore] ok=True
+expectation: restored Memory is returned by the default search again
+{
+  "restore": {
+    "memory_id": "mem_41fee2980e20493bb7fe35dff0fc9985",
+    "from_status": "archived",
+    "to_status": "active",
+    "changed": true,
+    "reason": "archived -> active",
+    "memory": {
+      "id": "mem_41fee2980e20493bb7fe35dff0fc9985",
+      "type": "knowledge",
+      "title": "RAG 的基本原理",
+      "content": "RAG 通过检索外部知识，为大语言模型提供相关上下文。",
+      "summary": "RAG 用外部检索结果为大模型提供上下文。",
+      "importance": 0.8,
+      "confidence": 0.9,
+      "information_origin": "source_content",
+      "status": "active",
+      "created_at": "2026-10-04T14:56:29.521Z",
+      "updated_at": "2026-10-04T14:56:29.561Z",
+      "schema_version": 1,
+      "tags": [
+        "rag",
+        "retrieval"
+      ]
+    },
+    "db_path": "data\\phase4-acceptance.db"
+  },
+  "search_after_restore": {
+    "exit_code": 0,
+    "query": "检索外部知识",
+    "statuses": [
+      "active"
+    ],
+    "total": 1,
+    "mode": "index",
+    "titles": [
+      "RAG 的基本原理"
+    ],
+    "ids": [
+      "mem_41fee2980e20493bb7fe35dff0fc9985"
+    ],
+    "hits": [
+      {
+        "memory_id": "mem_41fee2980e20493bb7fe35dff0fc9985",
+        "title": "RAG 的基本原理",
+        "status": "active",
+        "score": 1e-06,
+        "bm25": -1e-06,
+        "index": "trigram"
+      }
+    ]
+  }
+}
+
+==============================================================================
+[C_update] ok=True
+expectation: after a content update the old keyword misses and the new keyword hits
+{
+  "search_before_old_keyword": {
+    "exit_code": 0,
+    "query": "检索外部知识",
+    "statuses": [
+      "active"
+    ],
+    "total": 1,
+    "mode": "index",
+    "titles": [
+      "RAG 的基本原理"
+    ],
+    "ids": [
+      "mem_41fee2980e20493bb7fe35dff0fc9985"
+    ],
+    "hits": [
+      {
+        "memory_id": "mem_41fee2980e20493bb7fe35dff0fc9985",
+        "title": "RAG 的基本原理",
+        "status": "active",
+        "score": 1e-06,
+        "bm25": -1e-06,
+        "index": "trigram"
+      }
+    ]
+  },
+  "update": {
+    "db_path": "data\\phase4-acceptance.db",
+    "memory_id": "mem_41fee2980e20493bb7fe35dff0fc9985",
+    "changed_fields": [
+      "content",
+      "title"
+    ],
+    "memory": {
+      "id": "mem_41fee2980e20493bb7fe35dff0fc9985",
+      "type": "knowledge",
+      "title": "RAG 的基本原理（已修订）",
+      "content": "RAG 先检索再生成：把外部资料放进上下文，让答案可以追溯到原文出处。更新关键词 ocelot。",
+      "summary": "RAG 用外部检索结果为大模型提供上下文。",
+      "importance": 0.8,
+      "confidence": 0.9,
+      "information_origin": "source_content",
+      "status": "active",
+      "created_at": "2026-10-04T14:56:29.521Z",
+      "updated_at": "2026-10-04T14:56:29.586Z",
+      "schema_version": 1,
+      "tags": [
+        "rag",
+        "retrieval"
+      ]
+    }
+  },
+  "search_after_old_keyword": {
+    "exit_code": 0,
+    "query": "检索外部知识",
+    "statuses": [
+      "active"
+    ],
+    "total": 0,
+    "mode": "none",
+    "titles": [],
+    "ids": [],
+    "hits": []
+  },
+  "search_after_new_keyword": {
+    "exit_code": 0,
+    "query": "追溯到原文出处",
+    "statuses": [
+      "active"
+    ],
+    "total": 1,
+    "mode": "index",
+    "titles": [
+      "RAG 的基本原理（已修订）"
+    ],
+    "ids": [
+      "mem_41fee2980e20493bb7fe35dff0fc9985"
+    ],
+    "hits": [
+      {
+        "memory_id": "mem_41fee2980e20493bb7fe35dff0fc9985",
+        "title": "RAG 的基本原理（已修订）",
+        "status": "active",
+        "score": 1e-06,
+        "bm25": -1e-06,
+        "index": "trigram"
+      }
+    ]
+  },
+  "stored": {
+    "id": "mem_41fee2980e20493bb7fe35dff0fc9985",
+    "type": "knowledge",
+    "title": "RAG 的基本原理（已修订）",
+    "content": "RAG 先检索再生成：把外部资料放进上下文，让答案可以追溯到原文出处。更新关键词 ocelot。",
+    "summary": "RAG 用外部检索结果为大模型提供上下文。",
+    "importance": 0.8,
+    "confidence": 0.9,
+    "information_origin": "source_content",
+    "status": "active",
+    "created_at": "2026-10-04T14:56:29.521Z",
+    "updated_at": "2026-10-04T14:56:29.586Z",
+    "schema_version": 1,
+    "tags": [
+      "rag",
+      "retrieval"
+    ]
+  }
+}
+
+==============================================================================
+[D_duplicate] ok=True
+expectation: forming the same input twice never yields two identical long-term Memories
+{
+  "exact_duplicate_probe": {
+    "candidate_from_memory_id": "mem_cb5b3cbd9c3744348a9e213b0b45130f",
+    "action": "reuse",
+    "relation": "duplicate",
+    "duplicate_of": "mem_cb5b3cbd9c3744348a9e213b0b45130f",
+    "status": null,
+    "reasons": [
+      "exact duplicate of 'mem_cb5b3cbd9c3744348a9e213b0b45130f' (status=active)",
+      "refusing to store a second identical Memory"
+    ],
+    "counts_before": {
+      "sources": 1,
+      "memories": 3,
+      "memory_sources": 2
+    },
+    "counts_after": {
+      "sources": 1,
+      "memories": 3,
+      "memory_sources": 2
+    },
+    "ok": true
+  },
+  "input_chars": 44,
+  "first_outcome": {
+    "status": "persisted",
+    "memories": [
+      {
+        "id": "mem_cb5b3cbd9c3744348a9e213b0b45130f",
+        "title": "SQLite 适合个人数据规模场景",
+        "status": "active"
+      }
+    ],
+    "quality": [
+      {
+        "action": "persist",
+        "title": "SQLite 适合个人数据规模场景",
+        "fingerprint": "cd92c2223ee91195bd6c2557838d76d29976179c4947b7b18005d8f666e9fe5f",
+        "status": "active",
+        "base_status": "active",
+        "relation": "none",
+        "duplicate_of": null,
+        "related_ids": [],
+        "reasons": [
+          "no related Memory found by keyword retrieval"
+        ],
+        "duplicate": {
+          "fingerprint": "cd92c2223ee91195bd6c2557838d76d29976179c4947b7b18005d8f666e9fe5f",
+          "duplicate_of": null,
+          "scanned": 1,
+          "reason": "no exact duplicate in the store",
+          "existing_status": null
+        },
+        "conflict": {
+          "relation": "none",
+          "query": "SQLite 适合个人数据规模场景 在个人数据规模下 SQLite 足够使用：单文件、零服务、便于备份，不需要独立的数据库进程。",
+          "reason": "no related Memory found by keyword retrieval",
+          "related": [],
+          "verdict": null
+        }
+      }
+    ]
+  },
+  "second_outcome": {
+    "status": "persisted",
+    "reason": "这是一条稳定、可复用的技术结论（存储选型依据），未来做个人项目选型时仍可能有用。 | source: memory states facts taken from the source material: ['SQLite 适合个人数据规模']",
+    "memories": [
+      {
+        "id": "mem_6f0fd181f7aa47c8b9a7dd304648ca8e",
+        "title": "SQLite 适合个人数据规模",
+        "status": "pending"
+      }
+    ],
+    "reused": [],
+    "quality": {
+      "total": 1,
+      "persisted": 1,
+      "reused": 0,
+      "pended": 1,
+      "duplicate_ids": [],
+      "decisions": [
+        {
+          "action": "persist",
+          "title": "SQLite 适合个人数据规模",
+          "fingerprint": "eac43a0ceedf55834b234c2466892404fa91658dc2d831f1990b0e42b1d8707e",
+          "status": "pending",
+          "base_status": "active",
+          "relation": "same",
+          "duplicate_of": null,
+          "related_ids": [
+            "mem_cb5b3cbd9c3744348a9e213b0b45130f"
+          ],
+          "reasons": [
+            "relation=same with 1 related memory/memories -> status=pending (conservative; the old Memory is kept unchanged)",
+            "两条记忆表达的是同一件事：SQLite 在个人数据规模下足够使用，措辞几乎完全相同。"
+          ],
+          "duplicate": {
+            "fingerprint": "eac43a0ceedf55834b234c2466892404fa91658dc2d831f1990b0e42b1d8707e",
+            "duplicate_of": null,
+            "scanned": 2,
+            "reason": "no exact duplicate in the store",
+            "existing_status": null
+          },
+          "conflict": {
+            "relation": "same",
+            "query": "SQLite 适合个人数据规模 在个人数据规模下 SQLite 足够使用：单文件、零服务、便于备份，不需要独立数据库进程。",
+            "reason": "两条记忆表达的是同一件事：SQLite 在个人数据规模下足够使用，措辞几乎完全相同。",
+            "related": [
+              {
+                "id": "mem_cb5b3cbd9c3744348a9e213b0b45130f",
+                "title": "SQLite 适合个人数据规模场景",
+                "status": "active"
+              }
+            ],
+            "verdict": {
+              "relation": "same",
+              "reason": "两条记忆表达的是同一件事：SQLite 在个人数据规模下足够使用，措辞几乎完全相同。",
+              "classifier": "llm",
+              "llm": {
+                "model": "deepseek-flash",
+                "finish_reason": "stop",
+                "usage": {
+                  "prompt_tokens": 675,
+                  "completion_tokens": 61,
+                  "total_tokens": 736,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 256
+                  },
+                  "completion_tokens_details": {
+                    "reasoning_tokens": 26
+                  },
+                  "prompt_cache_hit_tokens": 256,
+                  "prompt_cache_miss_tokens": 419
+                },
+                "latency_seconds": 1.059,
+                "request_id": "1c1a9be0-1a11-41cd-b536-668c5c059809",
+                "reasoning_chars": 143,
+                "text_chars": 76,
+                "attempts": 1,
+                "prompt_version": "memory-conflict-v1"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "fingerprints_after_first": {
+    "memories": 2,
+    "unique_fingerprints": 2,
+    "duplicated": {}
+  },
+  "fingerprints_after_second": {
+    "memories": 3,
+    "unique_fingerprints": 3,
+    "duplicated": {}
+  }
+}
+
+==============================================================================
+[E_conflict] ok=True
+expectation: the older preference is kept untouched and the new one is not activated
+{
+  "input_a": "用户喜欢 A 方案，用它保存个人知识库。",
+  "input_b": "用户更喜欢 B 方案，用它保存个人知识库。",
+  "first_outcome": {
+    "status": "persisted",
+    "memories": [
+      {
+        "id": "mem_f4089dc17a6a45ac8e5a8c575c949e16",
+        "title": "用户偏好 A 方案存储个人知识库",
+        "type": "profile",
+        "status": "active"
+      }
+    ]
+  },
+  "second_outcome": {
+    "status": "persisted",
+    "reason": "这是一条关于用户个人知识库存储方案选择偏好的陈述，会影响后续建议与实现方式，但表述依赖原文语境（未说明 B 方案具体指什么），需保留原文依据。 | source: memory cannot be explained without the raw text: ['个人知识库偏好 B 方案']",
+    "memories": [
+      {
+        "id": "mem_2e1e1a7ff22940b78797517a9bb29c0b",
+        "title": "个人知识库偏好 B 方案",
+        "type": "profile",
+        "status": "pending"
+      }
+    ],
+    "quality": {
+      "total": 1,
+      "persisted": 1,
+      "reused": 0,
+      "pended": 1,
+      "duplicate_ids": [],
+      "decisions": [
+        {
+          "action": "persist",
+          "title": "个人知识库偏好 B 方案",
+          "fingerprint": "8d7e93e6f900958e17eb981e64ec928de929399683a59d5e008eb640290c6bd1",
+          "status": "pending",
+          "base_status": "active",
+          "relation": "conflict",
+          "duplicate_of": null,
+          "related_ids": [
+            "mem_f4089dc17a6a45ac8e5a8c575c949e16"
+          ],
+          "reasons": [
+            "relation=conflict with 1 related memory/memories -> status=pending (conservative; the old Memory is kept unchanged)",
+            "两条记忆都针对「个人知识库存储方案」这一同一对象的排他性偏好，一条说偏好 A 方案并实际使用，另一条说更偏好 B 方案并打算使用，二者不能同时为真。"
+          ],
+          "duplicate": {
+            "fingerprint": "8d7e93e6f900958e17eb981e64ec928de929399683a59d5e008eb640290c6bd1",
+            "duplicate_of": null,
+            "scanned": 1,
+            "reason": "no exact duplicate in the store",
+            "existing_status": null
+          },
+          "conflict": {
+            "relation": "conflict",
+            "query": "个人知识库偏好 B 方案 用户在保存个人知识库这件事上更偏好 B 方案，并打算用它来存储个人知识库。",
+            "reason": "两条记忆都针对「个人知识库存储方案」这一同一对象的排他性偏好，一条说偏好 A 方案并实际使用，另一条说更偏好 B 方案并打算使用，二者不能同时为真。",
+            "related": [
+              {
+                "id": "mem_f4089dc17a6a45ac8e5a8c575c949e16",
+                "title": "用户偏好 A 方案存储个人知识库",
+                "status": "active"
+              }
+            ],
+            "verdict": {
+              "relation": "conflict",
+              "reason": "两条记忆都针对「个人知识库存储方案」这一同一对象的排他性偏好，一条说偏好 A 方案并实际使用，另一条说更偏好 B 方案并打算使用，二者不能同时为真。",
+              "classifier": "llm",
+              "llm": {
+                "model": "deepseek-flash",
+                "finish_reason": "stop",
+                "usage": {
+                  "prompt_tokens": 667,
+                  "completion_tokens": 89,
+                  "total_tokens": 756,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 256
+                  },
+                  "completion_tokens_details": {
+                    "reasoning_tokens": 29
+                  },
+                  "prompt_cache_hit_tokens": 256,
+                  "prompt_cache_miss_tokens": 411
+                },
+                "latency_seconds": 1.006,
+                "request_id": "316cb92c-9824-44a8-a9ae-259e32edee62",
+                "reasoning_chars": 156,
+                "text_chars": 112,
+                "attempts": 1,
+                "prompt_version": "memory-conflict-v1"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "relation": "conflict",
+  "a_unchanged": true,
+  "a_created": [
+    "mem_f4089dc17a6a45ac8e5a8c575c949e16"
+  ],
+  "b_pending_ids": [
+    "mem_2e1e1a7ff22940b78797517a9bb29c0b"
+  ],
+  "b_not_active": true
+}
+
+==============================================================================
+overall: PASS

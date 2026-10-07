@@ -1,0 +1,28 @@
+db      : data\memory.db
+query   : 'SQLite'  status=['active']  type=None
+matches : total=2  mode=index  index=2 like_only=0  took=2.64ms
+score   : higher is more relevant (bm25 is negated; raw bm25 kept on each hit)
+
+1. SQLite 适合个人规模的本地优先存储   [knowledge]   score=1.55692e-06 (bm25)
+   memory_id : mem_demo_knowledge_01
+   status    : active   importance=0.8 confidence=0.9
+   origin    : source_content   schema_version=1
+   summary   : 本地优先场景优先选 SQLite。
+   content   : 单文件、零服务、易备份；个人数据量下无需独立数据库进程。
+   tags      : ['sqlite', 'local-first', 'storage']
+   matched   : ['title', 'summary', 'tags']   created=2026-10-04T13:50:00.723Z
+   sources (1):
+     - src_demo_text_01  [text]  本地优先存储的笔记  url=None
+
+2. 启动 Personal Memory System 阶段 1   [event]   score=9.1833e-07 (bm25)
+   memory_id : mem_demo_event_01
+   status    : active   importance=0.6 confidence=1.0
+   origin    : user_explicit   schema_version=1
+   content   : 2026-10-04 开始实现统一记忆数据模型与 SQLite 持久化基础。
+   tags      : ['project', 'milestone']
+   matched   : ['content']   created=2026-10-04T13:50:00.731Z
+   sources (2):
+     - src_demo_text_01  [text]  本地优先存储的笔记  url=None
+     - src_demo_text_02  [text]  项目启动记录  url=None
+
+full source text: python -m personal_memory source <source_id>

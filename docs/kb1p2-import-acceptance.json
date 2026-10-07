@@ -1,0 +1,283 @@
+{
+  "credential_source": "C:\\Users\\Pharachute\\.dsh\\.credentials.yaml (refs.DEEPSEEK_API_KEY)",
+  "db_path": "data\\kb1p2-import.db",
+  "final_counts": {
+    "memories": 6,
+    "memory_sources": 6,
+    "sources": 2
+  },
+  "final_status_counts": {
+    "active": 4,
+    "archived": 0,
+    "pending": 2
+  },
+  "fingerprints": {
+    "duplicated": {},
+    "memories": 6,
+    "unique": 6
+  },
+  "fixture_dir": "data\\kb1p2-fixtures",
+  "generated_at": "2026-10-04T15:24:56.064Z",
+  "index_consistency": {
+    "consistent": true,
+    "memories": 6,
+    "orphan_trigram_rows": 0,
+    "orphan_word_rows": 0,
+    "trigram_index": 6,
+    "word_index": 6
+  },
+  "overall_ok": true,
+  "package_version": "0.6.0",
+  "phase": "kb-1.0 phase-2 (txt + markdown importer)",
+  "scenarios": [
+    {
+      "counts_after": {
+        "memories": 2,
+        "memory_sources": 2,
+        "sources": 1
+      },
+      "counts_before": {
+        "memories": 0,
+        "memory_sources": 0,
+        "sources": 0
+      },
+      "exit_code": 0,
+      "expectation": "rag.txt -> import-file -> Capture -> real LLM -> Memory + file Source",
+      "file": {
+        "content_chars": 144,
+        "extension": ".txt",
+        "filename": "rag.txt",
+        "metadata": {
+          "captured_from": "file",
+          "encoding": "utf-8",
+          "extension": ".txt",
+          "file_sha256": "fbb45ddb504163c04cfda80e83f2246c6ae54002f1747522104aa0105bb176fc",
+          "filename": "rag.txt",
+          "size_bytes": 365,
+          "source_format": "text"
+        },
+        "size_bytes": 365,
+        "title": "rag",
+        "title_source": "filename"
+      },
+      "formation_status": "persisted",
+      "import_status": "imported",
+      "memories_created": [
+        {
+          "id": "mem_6edf23ba2ad74527aa73149cbde30533",
+          "status": "active",
+          "title": "RAG 的核心机制",
+          "type": "knowledge"
+        },
+        {
+          "id": "mem_f6433c47734f4ecca6b6439319ccddbf",
+          "status": "active",
+          "title": "RAG 效果上限由检索质量决定",
+          "type": "knowledge"
+        }
+      ],
+      "ok": true,
+      "reason": "内容是关于 RAG 的稳定、可复用的技术原理与实践要点，属于对用户长期有用的专业知识。 | source: memory states facts taken from the source material: ['RAG 的核心机制', 'RAG 效果上限由检索质量决定']",
+      "scenario": "A_txt_import",
+      "sources_created": [
+        {
+          "content_hash": "42b9669e9cd4701de66b24096a603572cccc9be6d8d5d0a64c9b9ef2ec175fab",
+          "created_at": "2026-10-04T15:24:56.189Z",
+          "id": "src_bc765562ec8f4cf8b9138e36c7e9bb3d",
+          "metadata": {
+            "captured_from": "file",
+            "encoding": "utf-8",
+            "extension": ".txt",
+            "file_sha256": "fbb45ddb504163c04cfda80e83f2246c6ae54002f1747522104aa0105bb176fc",
+            "filename": "rag.txt",
+            "formation": {
+              "formed_at": "2026-10-04T15:24:59.006Z",
+              "model": "deepseek-flash",
+              "prompt_version": "memory-formation-v1"
+            },
+            "size_bytes": 365,
+            "source_format": "text"
+          },
+          "source_type": "file",
+          "title": "rag",
+          "url": null
+        }
+      ]
+    },
+    {
+      "counts_after": {
+        "memories": 4,
+        "memory_sources": 4,
+        "sources": 2
+      },
+      "counts_before": {
+        "memories": 2,
+        "memory_sources": 2,
+        "sources": 1
+      },
+      "exit_code": 0,
+      "expectation": "rag.md -> import-file -> Capture -> real LLM -> Memory (H1 title, code kept)",
+      "file": {
+        "content_chars": 254,
+        "extension": ".md",
+        "filename": "rag.md",
+        "metadata": {
+          "captured_from": "file",
+          "encoding": "utf-8",
+          "extension": ".md",
+          "file_sha256": "af17e36c8e4b55fc6d49b8e0a5d3ad778b304124ea705baa84d78f4f61515833",
+          "filename": "rag.md",
+          "size_bytes": 515,
+          "source_format": "markdown"
+        },
+        "size_bytes": 515,
+        "title": "向量检索与重排序",
+        "title_source": "heading"
+      },
+      "formation_status": "persisted",
+      "import_status": "imported",
+      "memories_created": [
+        {
+          "id": "mem_d9a6377e86274da198547876a320eef6",
+          "status": "active",
+          "title": "向量检索与 rerank 精排的关系",
+          "type": "knowledge"
+        },
+        {
+          "id": "mem_5ed9c4f286fb4f9ba5da8010b15c94be",
+          "status": "active",
+          "title": "RAG 检索的实践顺序",
+          "type": "knowledge"
+        }
+      ],
+      "ok": true,
+      "reason": "这是用户手写笔记中关于 RAG 检索环节的可复用技术方法论（向量召回 + rerank 精排 + 离线评测调参），属于稳定的专业知识，对后续检索类项目有长期参考价值。 | source: memory states facts taken from the source material: ['向量检索与 rerank 精排的关系', 'RAG 检索的实践顺序']",
+      "scenario": "B_markdown_import",
+      "sources_created": [
+        {
+          "content_hash": "204dfd6beb6dd019f7c72ce6dccfe8ffff22d468b5a5694fb960f9c72e942699",
+          "created_at": "2026-10-04T15:24:59.149Z",
+          "id": "src_81299306db6b4005a5eb775a8631c117",
+          "metadata": {
+            "captured_from": "file",
+            "encoding": "utf-8",
+            "extension": ".md",
+            "file_sha256": "af17e36c8e4b55fc6d49b8e0a5d3ad778b304124ea705baa84d78f4f61515833",
+            "filename": "rag.md",
+            "formation": {
+              "formed_at": "2026-10-04T15:25:04.420Z",
+              "model": "deepseek-flash",
+              "prompt_version": "memory-formation-v1"
+            },
+            "size_bytes": 515,
+            "source_format": "markdown"
+          },
+          "source_type": "file",
+          "title": "向量检索与重排序",
+          "url": null
+        }
+      ]
+    },
+    {
+      "counts_after": {
+        "memories": 6,
+        "memory_sources": 6,
+        "sources": 2
+      },
+      "counts_before": {
+        "memories": 4,
+        "memory_sources": 4,
+        "sources": 2
+      },
+      "exit_code": 0,
+      "expectation": "re-importing the same file reuses the frozen dedupe (Source reused, no second identical or active Memory)",
+      "fingerprints_after": {
+        "duplicated": {},
+        "memories": 6,
+        "unique": 6
+      },
+      "fingerprints_before": {
+        "duplicated": {},
+        "memories": 4,
+        "unique": 4
+      },
+      "human_readable_output": "db        : data\\kb1p2-import.db\nfile      : data\\kb1p2-fixtures\\rag.md\nformat    : rag.md  (.md, 515 bytes, utf-8, sha256=af17e36c8e4b…)\ntitle     : 向量检索与重排序   (from heading)\nimport    : status=imported   content_chars=254\nformation : status=persisted  worth_remembering=True  attempts=1  model=deepseek-flash\nreason    : 这是关于 RAG 检索流程的可复用技术结论（向量召回 + rerank 精排及其调参顺序），属于稳定的专业知识，未来可反复用于工程实践。 | source: memory states facts taken from the source material: ['向量检索与重排序的分工', '检索链路的实践顺序']\nmemories  : 2\n   - mem_ecf094ae38094be4866485ad0b457077  [knowledge]  向量检索与重排序的分工  status=pending  importance=0.75 confidence=0.9\n   - mem_b6e304ae2e234e5685c3df3e60568592  [knowledge]  检索链路的实践顺序  status=pending  importance=0.7 confidence=0.9\nsources   : 1   reused=True\n   - src_81299306db6b4005a5eb775a8631c117  [file]  向量检索与重排序  url=None",
+      "new_memories": [
+        {
+          "id": "mem_b6e304ae2e234e5685c3df3e60568592",
+          "status": "pending",
+          "title": "检索链路的实践顺序"
+        },
+        {
+          "id": "mem_ecf094ae38094be4866485ad0b457077",
+          "status": "pending",
+          "title": "向量检索与重排序的分工"
+        }
+      ],
+      "ok": true,
+      "scenario": "C_reimport_dedupe",
+      "source_rows_before_after": [
+        2,
+        2
+      ]
+    },
+    {
+      "command_output": "{\n  \"query\": \"检索\",\n  \"total\": 6,\n  \"limit\": 10,\n  \"offset\": 0,\n  \"statuses\": [],\n  \"memory_type\": null,\n  \"mode\": \"like\",\n  \"took_ms\": 3.703,\n  \"index_matches\": 0,\n  \"like_only_matches\": 6,\n  \"truncated\": false,\n  \"score_direction\": \"higher is more relevant (bm25 is negated; raw bm25 kept on each hit)\",\n  \"hits\": [\n    {\n      \"memory\": {\n        \"id\": \"mem_b6e304ae2e234e5685c3df3e60568592\",\n        \"type\": \"knowledge\",\n        \"title\": \"检索链路的实践顺序\",\n        \"content\": \"搭建检索链路时的推荐顺序是：先做关键词或向量召回，再加 rerank 精排，最后按离线评测结果调参。\",\n        \"summary\": \"召回 → rerank → 按离线评测调参。\",\n        \"importance\": 0.7,\n ",
+      "exit_code": 0,
+      "expectation": "a new process finds the imported Memories through Phase 3 retrieval",
+      "fresh_connection_counts": {
+        "memories": 6,
+        "memory_sources": 6,
+        "sources": 2
+      },
+      "ok": true,
+      "scenario": "D_new_process_retrieval",
+      "search_modes": "like",
+      "search_titles": [
+        "检索链路的实践顺序",
+        "向量检索与重排序的分工",
+        "RAG 检索的实践顺序",
+        "向量检索与 rerank 精排的关系",
+        "RAG 效果上限由检索质量决定",
+        "RAG 的核心机制"
+      ],
+      "search_total": 6
+    },
+    {
+      "cases": [
+        {
+          "case": "missing_file",
+          "error": "file not found: data\\kb1p2-fixtures\\does-not-exist.txt",
+          "error_type": "FileMissingError",
+          "exit_code": 3,
+          "target": "data\\kb1p2-fixtures\\does-not-exist.txt"
+        },
+        {
+          "case": "unsupported_extension",
+          "error": "unsupported file type '.pdf' for data\\kb1p2-fixtures\\notes.pdf; this phase imports ['.txt', '.md', '.markdown']",
+          "error_type": "UnsupportedFileTypeError",
+          "exit_code": 3,
+          "target": "data\\kb1p2-fixtures\\notes.pdf"
+        },
+        {
+          "case": "empty_file",
+          "error": "file is empty (no content to capture): data\\kb1p2-fixtures\\empty.txt",
+          "error_type": "EmptyFileError",
+          "exit_code": 3,
+          "target": "data\\kb1p2-fixtures\\empty.txt"
+        },
+        {
+          "case": "directory",
+          "error": "not a regular file (directory or special file): data\\kb1p2-fixtures",
+          "error_type": "NotAFileError",
+          "exit_code": 3,
+          "target": "data\\kb1p2-fixtures"
+        }
+      ],
+      "database_created": false,
+      "expectation": "every failure is typed, writes nothing, and does not even create a database",
+      "ok": true,
+      "scenario": "E_failures"
+    }
+  ]
+}

@@ -1,0 +1,219 @@
+Knowledge Base 1.0 -- Phase 3 (Chat Importer) acceptance run
+generated_at : 2026-10-04T15:39:54.404Z
+db           : data\kb1p3-chat.db
+package      : 0.7.0  phase=kb-1.0 phase-3 (chat importer)
+credential   : C:\Users\Pharachute\.dsh\.credentials.yaml (refs.DEEPSEEK_API_KEY)
+fixtures     : data\kb1p3-fixtures (fictional chats)
+model calls  : A, A2 and B only; C/D/E/F call no model
+
+==============================================================================
+[A_high_value_chat_default_policy] ok=True
+expectation: chat -> import-chat -> Capture -> real LLM -> Memory (>=1 valuable Memory)
+{
+  "exit_code": 0,
+  "title_chars": 37,
+  "title_source": "first_user_message",
+  "title_is_first_user_message_excerpt": true,
+  "provider": null,
+  "provider_known": false,
+  "message_count": 3,
+  "import_status": "imported",
+  "formation_status": "persisted",
+  "memory_count": 3,
+  "memories_created": [
+    {
+      "id": "mem_8b193383745940f09d4181587b316f70",
+      "type": "profile",
+      "title": "用户系统学习 Agent 并重原理",
+      "status": "active",
+      "information_origin": "user_explicit"
+    },
+    {
+      "id": "mem_f7077ea1bdf945b6a6e5b7433a07eee6",
+      "type": "profile",
+      "title": "用户认可的 Agent 学习三阶段路线",
+      "status": "active",
+      "information_origin": "user_explicit"
+    },
+    {
+      "id": "mem_64c564519f274a39b090662fd8c1ec84",
+      "type": "profile",
+      "title": "每周至少投入十小时学习",
+      "status": "active",
+      "information_origin": "user_explicit"
+    }
+  ],
+  "source_count": 0,
+  "source_probe": null,
+  "body_sentence_in_conversation_view": false,
+  "counts_before": {
+    "sources": 0,
+    "memories": 0,
+    "memory_sources": 0
+  },
+  "counts_after": {
+    "sources": 0,
+    "memories": 3,
+    "memory_sources": 0
+  }
+}
+
+==============================================================================
+[A2_source_kept_with_keep_source_always] ok=True
+expectation: with keep_source=always the chat Source exists, typed chat, with role boundaries
+{
+  "exit_code": 0,
+  "formation_status": "persisted",
+  "memory_count": 1,
+  "source_probe": {
+    "id": "src_e708e9e661ba4da8aa9e2e01cf3a18a5",
+    "source_type": "chat",
+    "content_chars": 139,
+    "role_marker_sequence": [
+      "[USER]",
+      "[ASSISTANT]"
+    ],
+    "metadata": {
+      "captured_from": "chat",
+      "conversation_id": "conv_088c57b28942d2fe",
+      "ended_at": null,
+      "formation": {
+        "formed_at": "2026-10-04T15:40:04.996Z",
+        "model": "deepseek-flash",
+        "prompt_version": "memory-formation-v1"
+      },
+      "message_count": 2,
+      "provider": null,
+      "roles": [
+        "user",
+        "assistant"
+      ],
+      "started_at": null
+    }
+  },
+  "counts_before": {
+    "sources": 0,
+    "memories": 3,
+    "memory_sources": 0
+  },
+  "counts_after": {
+    "sources": 1,
+    "memories": 4,
+    "memory_sources": 1
+  }
+}
+
+==============================================================================
+[B_low_value_chat] ok=True
+expectation: worthless chat -> Memory = 0, Source = 0, no write
+{
+  "exit_code": 0,
+  "status": "skipped",
+  "memory_count": 0,
+  "source_count": 0,
+  "source_reused": false,
+  "counts_before": {
+    "sources": 1,
+    "memories": 4,
+    "memory_sources": 1
+  },
+  "counts_after": {
+    "sources": 1,
+    "memories": 4,
+    "memory_sources": 1
+  }
+}
+
+==============================================================================
+[C_json_format] ok=True
+expectation: provider-neutral JSON -> same ChatConversation / CaptureRequest (no model call)
+{
+  "conversation_id": "conv-accept-001",
+  "title": "RAG 讨论",
+  "provider": "fictional-exporter",
+  "message_count": 2,
+  "roles": [
+    "user",
+    "assistant"
+  ],
+  "started_at": "2026-10-04T09:00:00Z",
+  "ended_at": "2026-10-04T09:00:03Z",
+  "role_marker_sequence": [
+    "[USER]",
+    "[ASSISTANT]"
+  ],
+  "source_type": "chat",
+  "capture_metadata": {
+    "captured_from": "chat",
+    "provider": "fictional-exporter",
+    "conversation_id": "conv-accept-001",
+    "message_count": 2,
+    "roles": [
+      "user",
+      "assistant"
+    ],
+    "started_at": "2026-10-04T09:00:00Z",
+    "ended_at": "2026-10-04T09:00:03Z"
+  },
+  "rendered_chars": 41
+}
+
+==============================================================================
+[D_long_conversation_fails_explicitly] ok=True
+expectation: over the limit -> typed failure, never a silent truncation, no write
+{
+  "exit_code": 3,
+  "error_type": "FileTooLargeError",
+  "error": "file is too large: 7242 bytes > limit 400 bytes (data\\kb1p3-fixtures\\long-chat.txt)",
+  "fixture_bytes": 7242,
+  "counts_before": {
+    "sources": 1,
+    "memories": 4,
+    "memory_sources": 1
+  },
+  "counts_after": {
+    "sources": 1,
+    "memories": 4,
+    "memory_sources": 1
+  }
+}
+
+==============================================================================
+[E_privacy_default_view] ok=True
+expectation: default views carry no message text; preview/content are explicit opt-ins
+{
+  "probe_sentence_in_default_view": false,
+  "probe_sentence_in_preview_view": true,
+  "probe_sentence_in_content_view": true,
+  "default_message_keys": [
+    "content_chars",
+    "role",
+    "timestamp"
+  ],
+  "privacy_note": "chat text is sent to the configured model service during real Memory Formation; local SQLite storage does not mean local inference"
+}
+
+==============================================================================
+[F_new_process_retrieval] ok=True
+expectation: a NEW process finds the chat-derived Memory through Phase 3 retrieval
+{
+  "exit_code": 0,
+  "search_total": 3,
+  "hit_ids": [
+    "mem_8b193383745940f09d4181587b316f70",
+    "mem_f7077ea1bdf945b6a6e5b7433a07eee6",
+    "mem_64c564519f274a39b090662fd8c1ec84"
+  ],
+  "chat_memory_ids": [
+    "mem_8b193383745940f09d4181587b316f70",
+    "mem_f7077ea1bdf945b6a6e5b7433a07eee6",
+    "mem_64c564519f274a39b090662fd8c1ec84"
+  ],
+  "command_output_chars": 2936
+}
+
+==============================================================================
+final counts: {'sources': 1, 'memories': 4, 'memory_sources': 1}  statuses: {'active': 4, 'pending': 0, 'archived': 0}
+index consistent: True
+conversation body in evidence: []
+overall: PASS

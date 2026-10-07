@@ -1,0 +1,16 @@
+db      : data\phase3-demo.db
+query   : '记忆'  status=['active']  type=None
+matches : total=1  mode=like  index=0 like_only=1  took=3.326ms
+score   : higher is more relevant (bm25 is negated; raw bm25 kept on each hit)
+
+1. Agent Memory   [knowledge]   score=1 (like)
+   memory_id : mem_demo_agent
+   status    : active   importance=0.7 confidence=0.85
+   origin    : source_content   schema_version=1
+   content   : 长期记忆可以帮助 Agent 保留用户信息，维持跨会话的上下文。
+   tags      : ['agent', 'memory']
+   matched   : ['content']   created=2026-10-04T14:20:17.043Z
+   sources (1):
+     - src_demo_chat  [text]  某次聊天记录  url=None
+
+full source text: python -m personal_memory source <source_id>

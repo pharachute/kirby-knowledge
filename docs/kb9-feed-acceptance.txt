@@ -1,0 +1,35 @@
+卡比 Capture Home（喂知识）第一阶段 — 真实验收
+==============================================================================
+驱动方式：真实 web 服务器子进程 + 与前端 JS 完全相同的 HTTP 契约（X-Requested-With: fetch, Accept: application/json）
+模型：真实 deepseek-flash Formation（非 Mock）
+数据库：data/kb9-feed-acceptance.db
+
+-- 首页 (GET /) --
+   {"has_kirby": true, "has_lead": true, "stat_cards": false, "chinese_nav": true, "state_hooks": true, "fallbacks": true}
+
+-- 真实输入的完整链路（吸入 → 真实 Capture/Formation → 吃饱了~） --
+   文字输入             http=200 ok=True feedback='吃饱了~' note='记住了 1 件事' memory=1 source=1 counts {'sources': 0, 'memories': 0, 'memory_sources': 0} -> {'sources': 1, 'memories': 1, 'memory_sources': 1}
+   TXT/Markdown 文件  http=200 ok=True feedback='吃饱了~' note='这次没有留下长期记忆' memory=0 source=0 counts {'sources': 1, 'memories': 1, 'memory_sources': 1} -> {'sources': 1, 'memories': 1, 'memory_sources': 1}
+   聊天记录             http=200 ok=True feedback='吃饱了~' note='记住了 1 件事' memory=1 source=0 counts {'sources': 1, 'memories': 1, 'memory_sources': 1} -> {'sources': 1, 'memories': 2, 'memory_sources': 1}
+   URL              http=200 ok=True feedback='吃饱了~' note='记住了 2 件事' memory=2 source=1 counts {'sources': 1, 'memories': 2, 'memory_sources': 1} -> {'sources': 2, 'memories': 4, 'memory_sources': 3}
+   PDF              http=200 ok=True feedback='吃饱了~' note='记住了 1 件事' memory=1 source=1 counts {'sources': 2, 'memories': 4, 'memory_sources': 3} -> {'sources': 3, 'memories': 5, 'memory_sources': 4}
+   低价值内容            http=200 ok=True feedback='吃饱了~' note='这次没有留下长期记忆' memory=0 source=0 counts {'sources': 3, 'memories': 5, 'memory_sources': 4} -> {'sources': 3, 'memories': 5, 'memory_sources': 4}
+
+-- 失败输入（卡比不会卡住，中文可理解，无技术泄露） --
+   损坏 PDF           http=400 ok=False title='这份 PDF 好像坏掉了' hint='文件不完整，暂时读不出来。' leaks=[]
+   无文字 PDF          http=400 ok=False title='这份 PDF 里没有文字' hint='看起来像是扫描件或图片型 PDF，暂时读不出来。' leaks=[]
+   不允许的网址           http=400 ok=False title='这个网址卡比不能去' hint='只能喂公开的网页地址。' leaks=[]
+   空内容              http=400 ok=False title='先写点东西再喂' hint='内容不能为空。' leaks=[]
+
+-- 传统表单路径回归（无 fetch 头 → 303 + 横幅） --
+   {"http": 200, "has_banner": true, "redirect_followed": true}
+
+-- 汇总 --
+   所有输入 ok        : True
+   低价值不算失败      : True
+   失败中文且无泄露    : True
+   传统表单路径        : True
+   计数                : {'sources': 0, 'memories': 0, 'memory_sources': 0} -> {'sources': 3, 'memories': 5, 'memory_sources': 4}
+   OVERALL            : PASS
+
+未验证：浏览器中的实际视觉/动画渲染（本机无浏览器自动化）；状态机由 node 执行已发布的同一份 JS 验证（见 docs/KIRBY-CAPTURE-HOME.md §6）。

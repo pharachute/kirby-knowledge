@@ -1,0 +1,21 @@
+Phase 4 conflict-safety audit -- raw SQLite triggers, Mock LLM (no network)
+generated_at : 2026-10-04T15:04:26.666Z
+command      : python scripts/phase4_conflict_audit_probe.py
+
+Setup: one active profile Memory (用户喜欢 A 方案) + AFTER UPDATE / AFTER DELETE
+audit triggers on `memories` created with raw SQL.  A formation whose candidate is
+classified `conflict` then runs through the real quality gate + real repository path.
+Verdict: PASS
+
+{
+  "old_memory_id": "mem_2e16b45ffafe44918c4237170ae9fac5",
+  "new_memory_id": "mem_253755c4b9e64bbeac4941b3d90f6b0a",
+  "outcome_status": "persisted",
+  "relation": "conflict",
+  "new_memory_status": "pending",
+  "old_memory_unchanged": true,
+  "update_or_delete_statements_on_memories": [],
+  "memories_after": 2,
+  "index_consistent": true,
+  "ok": true
+}

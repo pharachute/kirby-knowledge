@@ -1,0 +1,11 @@
+{
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "base_url": "https://api.deepseek.com",
+  "api_key_env": "PERSONAL_MEMORY_LLM_API_KEY",
+  "timeout_seconds": 120,
+  "max_tokens": 2048,
+  "temperature": 0,
+  "json_mode": true,
+  "max_transport_retries": 2
+}

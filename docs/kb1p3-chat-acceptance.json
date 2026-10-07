@@ -1,0 +1,229 @@
+{
+  "body_in_evidence": [],
+  "credential_source": "C:\\Users\\Pharachute\\.dsh\\.credentials.yaml (refs.DEEPSEEK_API_KEY)",
+  "db_path": "data\\kb1p3-chat.db",
+  "final_counts": {
+    "memories": 4,
+    "memory_sources": 1,
+    "sources": 1
+  },
+  "final_status_counts": {
+    "active": 4,
+    "archived": 0,
+    "pending": 0
+  },
+  "fixture_dir": "data\\kb1p3-fixtures",
+  "generated_at": "2026-10-04T15:39:54.404Z",
+  "index_consistency": {
+    "consistent": true,
+    "memories": 4,
+    "orphan_trigram_rows": 0,
+    "orphan_word_rows": 0,
+    "trigram_index": 4,
+    "word_index": 4
+  },
+  "overall_ok": true,
+  "package_version": "0.7.0",
+  "phase": "kb-1.0 phase-3 (chat importer)",
+  "scenarios": [
+    {
+      "body_sentence_in_conversation_view": false,
+      "counts_after": {
+        "memories": 3,
+        "memory_sources": 0,
+        "sources": 0
+      },
+      "counts_before": {
+        "memories": 0,
+        "memory_sources": 0,
+        "sources": 0
+      },
+      "exit_code": 0,
+      "expectation": "chat -> import-chat -> Capture -> real LLM -> Memory (>=1 valuable Memory)",
+      "formation_status": "persisted",
+      "import_status": "imported",
+      "memories_created": [
+        {
+          "id": "mem_8b193383745940f09d4181587b316f70",
+          "information_origin": "user_explicit",
+          "status": "active",
+          "title": "用户系统学习 Agent 并重原理",
+          "type": "profile"
+        },
+        {
+          "id": "mem_f7077ea1bdf945b6a6e5b7433a07eee6",
+          "information_origin": "user_explicit",
+          "status": "active",
+          "title": "用户认可的 Agent 学习三阶段路线",
+          "type": "profile"
+        },
+        {
+          "id": "mem_64c564519f274a39b090662fd8c1ec84",
+          "information_origin": "user_explicit",
+          "status": "active",
+          "title": "每周至少投入十小时学习",
+          "type": "profile"
+        }
+      ],
+      "memory_count": 3,
+      "message_count": 3,
+      "ok": true,
+      "provider": null,
+      "provider_known": false,
+      "scenario": "A_high_value_chat_default_policy",
+      "source_count": 0,
+      "source_probe": null,
+      "title_chars": 37,
+      "title_is_first_user_message_excerpt": true,
+      "title_source": "first_user_message"
+    },
+    {
+      "counts_after": {
+        "memories": 4,
+        "memory_sources": 1,
+        "sources": 1
+      },
+      "counts_before": {
+        "memories": 3,
+        "memory_sources": 0,
+        "sources": 0
+      },
+      "exit_code": 0,
+      "expectation": "with keep_source=always the chat Source exists, typed chat, with role boundaries",
+      "formation_status": "persisted",
+      "memory_count": 1,
+      "ok": true,
+      "scenario": "A2_source_kept_with_keep_source_always",
+      "source_probe": {
+        "content_chars": 139,
+        "id": "src_e708e9e661ba4da8aa9e2e01cf3a18a5",
+        "metadata": {
+          "captured_from": "chat",
+          "conversation_id": "conv_088c57b28942d2fe",
+          "ended_at": null,
+          "formation": {
+            "formed_at": "2026-10-04T15:40:04.996Z",
+            "model": "deepseek-flash",
+            "prompt_version": "memory-formation-v1"
+          },
+          "message_count": 2,
+          "provider": null,
+          "roles": [
+            "user",
+            "assistant"
+          ],
+          "started_at": null
+        },
+        "role_marker_sequence": [
+          "[USER]",
+          "[ASSISTANT]"
+        ],
+        "source_type": "chat"
+      }
+    },
+    {
+      "counts_after": {
+        "memories": 4,
+        "memory_sources": 1,
+        "sources": 1
+      },
+      "counts_before": {
+        "memories": 4,
+        "memory_sources": 1,
+        "sources": 1
+      },
+      "exit_code": 0,
+      "expectation": "worthless chat -> Memory = 0, Source = 0, no write",
+      "memory_count": 0,
+      "ok": true,
+      "scenario": "B_low_value_chat",
+      "source_count": 0,
+      "source_reused": false,
+      "status": "skipped"
+    },
+    {
+      "capture_metadata": {
+        "captured_from": "chat",
+        "conversation_id": "conv-accept-001",
+        "ended_at": "2026-10-04T09:00:03Z",
+        "message_count": 2,
+        "provider": "fictional-exporter",
+        "roles": [
+          "user",
+          "assistant"
+        ],
+        "started_at": "2026-10-04T09:00:00Z"
+      },
+      "conversation_id": "conv-accept-001",
+      "ended_at": "2026-10-04T09:00:03Z",
+      "expectation": "provider-neutral JSON -> same ChatConversation / CaptureRequest (no model call)",
+      "message_count": 2,
+      "ok": true,
+      "provider": "fictional-exporter",
+      "rendered_chars": 41,
+      "role_marker_sequence": [
+        "[USER]",
+        "[ASSISTANT]"
+      ],
+      "roles": [
+        "user",
+        "assistant"
+      ],
+      "scenario": "C_json_format",
+      "source_type": "chat",
+      "started_at": "2026-10-04T09:00:00Z",
+      "title": "RAG 讨论"
+    },
+    {
+      "counts_after": {
+        "memories": 4,
+        "memory_sources": 1,
+        "sources": 1
+      },
+      "counts_before": {
+        "memories": 4,
+        "memory_sources": 1,
+        "sources": 1
+      },
+      "error": "file is too large: 7242 bytes > limit 400 bytes (data\\kb1p3-fixtures\\long-chat.txt)",
+      "error_type": "FileTooLargeError",
+      "exit_code": 3,
+      "expectation": "over the limit -> typed failure, never a silent truncation, no write",
+      "fixture_bytes": 7242,
+      "ok": true,
+      "scenario": "D_long_conversation_fails_explicitly"
+    },
+    {
+      "default_message_keys": [
+        "content_chars",
+        "role",
+        "timestamp"
+      ],
+      "expectation": "default views carry no message text; preview/content are explicit opt-ins",
+      "ok": true,
+      "privacy_note": "chat text is sent to the configured model service during real Memory Formation; local SQLite storage does not mean local inference",
+      "probe_sentence_in_content_view": true,
+      "probe_sentence_in_default_view": false,
+      "probe_sentence_in_preview_view": true,
+      "scenario": "E_privacy_default_view"
+    },
+    {
+      "chat_memory_ids": [
+        "mem_8b193383745940f09d4181587b316f70",
+        "mem_f7077ea1bdf945b6a6e5b7433a07eee6",
+        "mem_64c564519f274a39b090662fd8c1ec84"
+      ],
+      "command_output_chars": 2936,
+      "exit_code": 0,
+      "expectation": "a NEW process finds the chat-derived Memory through Phase 3 retrieval",
+      "hit_ids": [
+        "mem_8b193383745940f09d4181587b316f70",
+        "mem_f7077ea1bdf945b6a6e5b7433a07eee6",
+        "mem_64c564519f274a39b090662fd8c1ec84"
+      ],
+      "ok": true,
+      "scenario": "F_new_process_retrieval",
+      "search_total": 3
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "db_path": "data\\memory.db",
+  "applied": [
+    {
+      "version": 1,
+      "name": "initial_schema"
+    }
+  ],
+  "schema_version": 1,
+  "applied_count": 1
+}

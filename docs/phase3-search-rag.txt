@@ -1,0 +1,18 @@
+db      : data\phase3-demo.db
+query   : 'RAG'  status=['active']  type=None
+matches : total=1  mode=index  index=1 like_only=0  took=2.775ms
+score   : higher is more relevant (bm25 is negated; raw bm25 kept on each hit)
+
+1. RAG 的基本原理   [knowledge]   score=0.816179 (bm25)
+   memory_id : mem_demo_rag
+   status    : active   importance=0.8 confidence=0.9
+   origin    : source_content   schema_version=1
+   summary   : 检索增强生成把检索与生成结合起来。
+   content   : RAG 通过检索外部知识为模型提供上下文，从而降低幻觉。
+   tags      : ['rag', 'retrieval']
+   matched   : ['title', 'content', 'tags']   created=2026-10-04T14:20:17.033Z
+   sources (2):
+     - src_demo_rag_intro  [text]  《RAG 入门》  url=None
+     - src_demo_chat  [text]  某次聊天记录  url=None
+
+full source text: python -m personal_memory source <source_id>

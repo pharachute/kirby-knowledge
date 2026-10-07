@@ -1,0 +1,1689 @@
+{
+  "sqlite_version": "3.45.3",
+  "fts5_compiled": true,
+  "tokenizers": [
+    "unicode61",
+    "trigram",
+    "porter"
+  ],
+  "dataset": [
+    {
+      "id": "mem_1",
+      "title": "RAG 的基本原理",
+      "content": "RAG 通过检索外部知识为模型提供上下文。",
+      "summary": "检索增强生成把检索与生成结合起来。",
+      "tags": "rag retrieval augmented"
+    },
+    {
+      "id": "mem_2",
+      "title": "Agent Memory",
+      "content": "长期记忆可以帮助 Agent 保留用户信息。",
+      "summary": "Agent 需要长期记忆来维持上下文。",
+      "tags": "agent memory"
+    },
+    {
+      "id": "mem_3",
+      "title": "SQLite 本地存储",
+      "content": "SQLite 适合个人规模的本地应用。",
+      "summary": "单文件、零服务的本地数据库。",
+      "tags": "sqlite storage local-first"
+    },
+    {
+      "id": "mem_4",
+      "title": "顺便一提",
+      "content": "这里顺便提到 RAG，但没有展开。",
+      "summary": null,
+      "tags": ""
+    },
+    {
+      "id": "mem_5",
+      "title": "对象存储笔记",
+      "content": "对象存储（object storage）与本地存储的区别。",
+      "summary": null,
+      "tags": "storage"
+    },
+    {
+      "id": "mem_6",
+      "title": "标签探针",
+      "content": "这条记忆的关键词只写在标签里。",
+      "summary": null,
+      "tags": "RAG"
+    },
+    {
+      "id": "mem_7",
+      "title": "摘要探针",
+      "content": "正文里没有出现目标词。",
+      "summary": "摘要里提到长期记忆的维护成本。",
+      "tags": ""
+    }
+  ],
+  "queries": [
+    {
+      "label": "english_upper",
+      "query": "RAG",
+      "results": {
+        "unicode61": {
+          "raw": {
+            "ok": true,
+            "match_expression": "RAG",
+            "ids": [
+              "mem_1",
+              "mem_6",
+              "mem_4"
+            ],
+            "bm25": [
+              -0.3709,
+              -0.3178,
+              -0.2931
+            ],
+            "rank": [
+              -0.3709,
+              -0.3178,
+              -0.2931
+            ]
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"RAG\"",
+            "ids": [
+              "mem_1",
+              "mem_6",
+              "mem_4"
+            ],
+            "bm25": [
+              -0.3709,
+              -0.3178,
+              -0.2931
+            ],
+            "rank": [
+              -0.3709,
+              -0.3178,
+              -0.2931
+            ]
+          }
+        },
+        "trigram": {
+          "raw": {
+            "ok": true,
+            "match_expression": "RAG",
+            "ids": [
+              "mem_5",
+              "mem_1",
+              "mem_6",
+              "mem_4",
+              "mem_3"
+            ],
+            "bm25": [
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0
+            ],
+            "rank": [
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0
+            ]
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"RAG\"",
+            "ids": [
+              "mem_5",
+              "mem_1",
+              "mem_6",
+              "mem_4",
+              "mem_3"
+            ],
+            "bm25": [
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0
+            ],
+            "rank": [
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0
+            ]
+          }
+        },
+        "porter": {
+          "raw": {
+            "ok": true,
+            "match_expression": "RAG",
+            "ids": [
+              "mem_1",
+              "mem_6",
+              "mem_4"
+            ],
+            "bm25": [
+              -0.3709,
+              -0.3178,
+              -0.2931
+            ],
+            "rank": [
+              -0.3709,
+              -0.3178,
+              -0.2931
+            ]
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"RAG\"",
+            "ids": [
+              "mem_1",
+              "mem_6",
+              "mem_4"
+            ],
+            "bm25": [
+              -0.3709,
+              -0.3178,
+              -0.2931
+            ],
+            "rank": [
+              -0.3709,
+              -0.3178,
+              -0.2931
+            ]
+          }
+        },
+        "like": {
+          "ok": true,
+          "pattern": "%RAG%",
+          "ids": [
+            "mem_1",
+            "mem_3",
+            "mem_4",
+            "mem_5",
+            "mem_6"
+          ]
+        }
+      }
+    },
+    {
+      "label": "english_lower",
+      "query": "rag",
+      "results": {
+        "unicode61": {
+          "raw": {
+            "ok": true,
+            "match_expression": "rag",
+            "ids": [
+              "mem_1",
+              "mem_6",
+              "mem_4"
+            ],
+            "bm25": [
+              -0.3709,
+              -0.3178,
+              -0.2931
+            ],
+            "rank": [
+              -0.3709,
+              -0.3178,
+              -0.2931
+            ]
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"rag\"",
+            "ids": [
+              "mem_1",
+              "mem_6",
+              "mem_4"
+            ],
+            "bm25": [
+              -0.3709,
+              -0.3178,
+              -0.2931
+            ],
+            "rank": [
+              -0.3709,
+              -0.3178,
+              -0.2931
+            ]
+          }
+        },
+        "trigram": {
+          "raw": {
+            "ok": true,
+            "match_expression": "rag",
+            "ids": [
+              "mem_5",
+              "mem_1",
+              "mem_6",
+              "mem_4",
+              "mem_3"
+            ],
+            "bm25": [
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0
+            ],
+            "rank": [
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0
+            ]
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"rag\"",
+            "ids": [
+              "mem_5",
+              "mem_1",
+              "mem_6",
+              "mem_4",
+              "mem_3"
+            ],
+            "bm25": [
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0
+            ],
+            "rank": [
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0
+            ]
+          }
+        },
+        "porter": {
+          "raw": {
+            "ok": true,
+            "match_expression": "rag",
+            "ids": [
+              "mem_1",
+              "mem_6",
+              "mem_4"
+            ],
+            "bm25": [
+              -0.3709,
+              -0.3178,
+              -0.2931
+            ],
+            "rank": [
+              -0.3709,
+              -0.3178,
+              -0.2931
+            ]
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"rag\"",
+            "ids": [
+              "mem_1",
+              "mem_6",
+              "mem_4"
+            ],
+            "bm25": [
+              -0.3709,
+              -0.3178,
+              -0.2931
+            ],
+            "rank": [
+              -0.3709,
+              -0.3178,
+              -0.2931
+            ]
+          }
+        },
+        "like": {
+          "ok": true,
+          "pattern": "%rag%",
+          "ids": [
+            "mem_1",
+            "mem_3",
+            "mem_4",
+            "mem_5",
+            "mem_6"
+          ]
+        }
+      }
+    },
+    {
+      "label": "english_word",
+      "query": "SQLite",
+      "results": {
+        "unicode61": {
+          "raw": {
+            "ok": true,
+            "match_expression": "SQLite",
+            "ids": [
+              "mem_3"
+            ],
+            "bm25": [
+              -2.031
+            ],
+            "rank": [
+              -2.031
+            ]
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"SQLite\"",
+            "ids": [
+              "mem_3"
+            ],
+            "bm25": [
+              -2.031
+            ],
+            "rank": [
+              -2.031
+            ]
+          }
+        },
+        "trigram": {
+          "raw": {
+            "ok": true,
+            "match_expression": "SQLite",
+            "ids": [
+              "mem_3"
+            ],
+            "bm25": [
+              -2.048
+            ],
+            "rank": [
+              -2.048
+            ]
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"SQLite\"",
+            "ids": [
+              "mem_3"
+            ],
+            "bm25": [
+              -2.048
+            ],
+            "rank": [
+              -2.048
+            ]
+          }
+        },
+        "porter": {
+          "raw": {
+            "ok": true,
+            "match_expression": "SQLite",
+            "ids": [
+              "mem_3"
+            ],
+            "bm25": [
+              -2.031
+            ],
+            "rank": [
+              -2.031
+            ]
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"SQLite\"",
+            "ids": [
+              "mem_3"
+            ],
+            "bm25": [
+              -2.031
+            ],
+            "rank": [
+              -2.031
+            ]
+          }
+        },
+        "like": {
+          "ok": true,
+          "pattern": "%SQLite%",
+          "ids": [
+            "mem_3"
+          ]
+        }
+      }
+    },
+    {
+      "label": "english_word2",
+      "query": "Agent",
+      "results": {
+        "unicode61": {
+          "raw": {
+            "ok": true,
+            "match_expression": "Agent",
+            "ids": [
+              "mem_2"
+            ],
+            "bm25": [
+              -2.2966
+            ],
+            "rank": [
+              -2.2966
+            ]
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"Agent\"",
+            "ids": [
+              "mem_2"
+            ],
+            "bm25": [
+              -2.2966
+            ],
+            "rank": [
+              -2.2966
+            ]
+          }
+        },
+        "trigram": {
+          "raw": {
+            "ok": true,
+            "match_expression": "Agent",
+            "ids": [
+              "mem_2"
+            ],
+            "bm25": [
+              -2.2999
+            ],
+            "rank": [
+              -2.2999
+            ]
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"Agent\"",
+            "ids": [
+              "mem_2"
+            ],
+            "bm25": [
+              -2.2999
+            ],
+            "rank": [
+              -2.2999
+            ]
+          }
+        },
+        "porter": {
+          "raw": {
+            "ok": true,
+            "match_expression": "Agent",
+            "ids": [
+              "mem_2"
+            ],
+            "bm25": [
+              -2.2966
+            ],
+            "rank": [
+              -2.2966
+            ]
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"Agent\"",
+            "ids": [
+              "mem_2"
+            ],
+            "bm25": [
+              -2.2966
+            ],
+            "rank": [
+              -2.2966
+            ]
+          }
+        },
+        "like": {
+          "ok": true,
+          "pattern": "%Agent%",
+          "ids": [
+            "mem_2"
+          ]
+        }
+      }
+    },
+    {
+      "label": "english_prefix",
+      "query": "retriev",
+      "results": {
+        "unicode61": {
+          "raw": {
+            "ok": true,
+            "match_expression": "retriev",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"retriev\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "trigram": {
+          "raw": {
+            "ok": true,
+            "match_expression": "retriev",
+            "ids": [
+              "mem_1"
+            ],
+            "bm25": [
+              -1.1836
+            ],
+            "rank": [
+              -1.1836
+            ]
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"retriev\"",
+            "ids": [
+              "mem_1"
+            ],
+            "bm25": [
+              -1.1836
+            ],
+            "rank": [
+              -1.1836
+            ]
+          }
+        },
+        "porter": {
+          "raw": {
+            "ok": true,
+            "match_expression": "retriev",
+            "ids": [
+              "mem_1"
+            ],
+            "bm25": [
+              -1.3049
+            ],
+            "rank": [
+              -1.3049
+            ]
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"retriev\"",
+            "ids": [
+              "mem_1"
+            ],
+            "bm25": [
+              -1.3049
+            ],
+            "rank": [
+              -1.3049
+            ]
+          }
+        },
+        "like": {
+          "ok": true,
+          "pattern": "%retriev%",
+          "ids": [
+            "mem_1"
+          ]
+        }
+      }
+    },
+    {
+      "label": "cjk_4char",
+      "query": "长期记忆",
+      "results": {
+        "unicode61": {
+          "raw": {
+            "ok": true,
+            "match_expression": "长期记忆",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"长期记忆\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "trigram": {
+          "raw": {
+            "ok": true,
+            "match_expression": "长期记忆",
+            "ids": [
+              "mem_2",
+              "mem_7"
+            ],
+            "bm25": [
+              -0.9608,
+              -0.9367
+            ],
+            "rank": [
+              -0.9608,
+              -0.9367
+            ]
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"长期记忆\"",
+            "ids": [
+              "mem_2",
+              "mem_7"
+            ],
+            "bm25": [
+              -0.9608,
+              -0.9367
+            ],
+            "rank": [
+              -0.9608,
+              -0.9367
+            ]
+          }
+        },
+        "porter": {
+          "raw": {
+            "ok": true,
+            "match_expression": "长期记忆",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"长期记忆\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "like": {
+          "ok": true,
+          "pattern": "%长期记忆%",
+          "ids": [
+            "mem_2",
+            "mem_7"
+          ]
+        }
+      }
+    },
+    {
+      "label": "cjk_2char",
+      "query": "记忆",
+      "results": {
+        "unicode61": {
+          "raw": {
+            "ok": true,
+            "match_expression": "记忆",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"记忆\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "trigram": {
+          "raw": {
+            "ok": true,
+            "match_expression": "记忆",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"记忆\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "porter": {
+          "raw": {
+            "ok": true,
+            "match_expression": "记忆",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"记忆\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "like": {
+          "ok": true,
+          "pattern": "%记忆%",
+          "ids": [
+            "mem_2",
+            "mem_6",
+            "mem_7"
+          ]
+        }
+      }
+    },
+    {
+      "label": "cjk_multi",
+      "query": "本地存储",
+      "results": {
+        "unicode61": {
+          "raw": {
+            "ok": true,
+            "match_expression": "本地存储",
+            "ids": [
+              "mem_3"
+            ],
+            "bm25": [
+              -1.1667
+            ],
+            "rank": [
+              -1.1667
+            ]
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"本地存储\"",
+            "ids": [
+              "mem_3"
+            ],
+            "bm25": [
+              -1.1667
+            ],
+            "rank": [
+              -1.1667
+            ]
+          }
+        },
+        "trigram": {
+          "raw": {
+            "ok": true,
+            "match_expression": "本地存储",
+            "ids": [
+              "mem_5",
+              "mem_3"
+            ],
+            "bm25": [
+              -0.8152,
+              -0.6364
+            ],
+            "rank": [
+              -0.8152,
+              -0.6364
+            ]
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"本地存储\"",
+            "ids": [
+              "mem_5",
+              "mem_3"
+            ],
+            "bm25": [
+              -0.8152,
+              -0.6364
+            ],
+            "rank": [
+              -0.8152,
+              -0.6364
+            ]
+          }
+        },
+        "porter": {
+          "raw": {
+            "ok": true,
+            "match_expression": "本地存储",
+            "ids": [
+              "mem_3"
+            ],
+            "bm25": [
+              -1.1667
+            ],
+            "rank": [
+              -1.1667
+            ]
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"本地存储\"",
+            "ids": [
+              "mem_3"
+            ],
+            "bm25": [
+              -1.1667
+            ],
+            "rank": [
+              -1.1667
+            ]
+          }
+        },
+        "like": {
+          "ok": true,
+          "pattern": "%本地存储%",
+          "ids": [
+            "mem_3",
+            "mem_5"
+          ]
+        }
+      }
+    },
+    {
+      "label": "cjk_phrase2",
+      "query": "存储",
+      "results": {
+        "unicode61": {
+          "raw": {
+            "ok": true,
+            "match_expression": "存储",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"存储\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "trigram": {
+          "raw": {
+            "ok": true,
+            "match_expression": "存储",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"存储\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "porter": {
+          "raw": {
+            "ok": true,
+            "match_expression": "存储",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"存储\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "like": {
+          "ok": true,
+          "pattern": "%存储%",
+          "ids": [
+            "mem_3",
+            "mem_5"
+          ]
+        }
+      }
+    },
+    {
+      "label": "mixed",
+      "query": "RAG 原理",
+      "results": {
+        "unicode61": {
+          "raw": {
+            "ok": true,
+            "match_expression": "RAG 原理",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"RAG 原理\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "trigram": {
+          "raw": {
+            "ok": true,
+            "match_expression": "RAG 原理",
+            "ids": [
+              "mem_5",
+              "mem_1",
+              "mem_6",
+              "mem_4",
+              "mem_3"
+            ],
+            "bm25": [
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0
+            ],
+            "rank": [
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0
+            ]
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"RAG 原理\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "porter": {
+          "raw": {
+            "ok": true,
+            "match_expression": "RAG 原理",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"RAG 原理\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "like": {
+          "ok": true,
+          "pattern": "%RAG 原理%",
+          "ids": []
+        }
+      }
+    },
+    {
+      "label": "field_summary",
+      "query": "维护成本",
+      "results": {
+        "unicode61": {
+          "raw": {
+            "ok": true,
+            "match_expression": "维护成本",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"维护成本\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "trigram": {
+          "raw": {
+            "ok": true,
+            "match_expression": "维护成本",
+            "ids": [
+              "mem_7"
+            ],
+            "bm25": [
+              -1.742
+            ],
+            "rank": [
+              -1.742
+            ]
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"维护成本\"",
+            "ids": [
+              "mem_7"
+            ],
+            "bm25": [
+              -1.742
+            ],
+            "rank": [
+              -1.742
+            ]
+          }
+        },
+        "porter": {
+          "raw": {
+            "ok": true,
+            "match_expression": "维护成本",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"维护成本\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "like": {
+          "ok": true,
+          "pattern": "%维护成本%",
+          "ids": [
+            "mem_7"
+          ]
+        }
+      }
+    },
+    {
+      "label": "field_tags",
+      "query": "local-first",
+      "results": {
+        "unicode61": {
+          "raw": {
+            "ok": false,
+            "match_expression": "local-first",
+            "error": "OperationalError: no such column: first"
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"local-first\"",
+            "ids": [
+              "mem_3"
+            ],
+            "bm25": [
+              -1.1667
+            ],
+            "rank": [
+              -1.1667
+            ]
+          }
+        },
+        "trigram": {
+          "raw": {
+            "ok": false,
+            "match_expression": "local-first",
+            "error": "OperationalError: no such column: first"
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"local-first\"",
+            "ids": [
+              "mem_3"
+            ],
+            "bm25": [
+              -1.1836
+            ],
+            "rank": [
+              -1.1836
+            ]
+          }
+        },
+        "porter": {
+          "raw": {
+            "ok": false,
+            "match_expression": "local-first",
+            "error": "OperationalError: no such column: first"
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"local-first\"",
+            "ids": [
+              "mem_3"
+            ],
+            "bm25": [
+              -1.1667
+            ],
+            "rank": [
+              -1.1667
+            ]
+          }
+        },
+        "like": {
+          "ok": true,
+          "pattern": "%local-first%",
+          "ids": [
+            "mem_3"
+          ]
+        }
+      }
+    },
+    {
+      "label": "hostile_quote",
+      "query": "\"",
+      "results": {
+        "unicode61": {
+          "raw": {
+            "ok": false,
+            "match_expression": "\"",
+            "error": "OperationalError: unterminated string"
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"\"\"\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "trigram": {
+          "raw": {
+            "ok": false,
+            "match_expression": "\"",
+            "error": "OperationalError: unterminated string"
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"\"\"\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "porter": {
+          "raw": {
+            "ok": false,
+            "match_expression": "\"",
+            "error": "OperationalError: unterminated string"
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"\"\"\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "like": {
+          "ok": true,
+          "pattern": "%\"%",
+          "ids": []
+        }
+      }
+    },
+    {
+      "label": "hostile_apostrophe",
+      "query": "'",
+      "results": {
+        "unicode61": {
+          "raw": {
+            "ok": false,
+            "match_expression": "'",
+            "error": "OperationalError: fts5: syntax error near \"'\""
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"'\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "trigram": {
+          "raw": {
+            "ok": false,
+            "match_expression": "'",
+            "error": "OperationalError: fts5: syntax error near \"'\""
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"'\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "porter": {
+          "raw": {
+            "ok": false,
+            "match_expression": "'",
+            "error": "OperationalError: fts5: syntax error near \"'\""
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"'\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "like": {
+          "ok": true,
+          "pattern": "%'%",
+          "ids": []
+        }
+      }
+    },
+    {
+      "label": "hostile_star",
+      "query": "*",
+      "results": {
+        "unicode61": {
+          "raw": {
+            "ok": false,
+            "match_expression": "*",
+            "error": "OperationalError: unknown special query: "
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"*\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "trigram": {
+          "raw": {
+            "ok": false,
+            "match_expression": "*",
+            "error": "OperationalError: unknown special query: "
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"*\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "porter": {
+          "raw": {
+            "ok": false,
+            "match_expression": "*",
+            "error": "OperationalError: unknown special query: "
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"*\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "like": {
+          "ok": true,
+          "pattern": "%*%",
+          "ids": []
+        }
+      }
+    },
+    {
+      "label": "hostile_colon",
+      "query": ":",
+      "results": {
+        "unicode61": {
+          "raw": {
+            "ok": false,
+            "match_expression": ":",
+            "error": "OperationalError: fts5: syntax error near \":\""
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\":\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "trigram": {
+          "raw": {
+            "ok": false,
+            "match_expression": ":",
+            "error": "OperationalError: fts5: syntax error near \":\""
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\":\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "porter": {
+          "raw": {
+            "ok": false,
+            "match_expression": ":",
+            "error": "OperationalError: fts5: syntax error near \":\""
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\":\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "like": {
+          "ok": true,
+          "pattern": "%:%",
+          "ids": []
+        }
+      }
+    },
+    {
+      "label": "hostile_paren",
+      "query": "(",
+      "results": {
+        "unicode61": {
+          "raw": {
+            "ok": false,
+            "match_expression": "(",
+            "error": "OperationalError: fts5: syntax error near \"\""
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"(\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "trigram": {
+          "raw": {
+            "ok": false,
+            "match_expression": "(",
+            "error": "OperationalError: fts5: syntax error near \"\""
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"(\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "porter": {
+          "raw": {
+            "ok": false,
+            "match_expression": "(",
+            "error": "OperationalError: fts5: syntax error near \"\""
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"(\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "like": {
+          "ok": true,
+          "pattern": "%(%",
+          "ids": []
+        }
+      }
+    },
+    {
+      "label": "hostile_and",
+      "query": "AND",
+      "results": {
+        "unicode61": {
+          "raw": {
+            "ok": false,
+            "match_expression": "AND",
+            "error": "OperationalError: fts5: syntax error near \"AND\""
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"AND\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "trigram": {
+          "raw": {
+            "ok": false,
+            "match_expression": "AND",
+            "error": "OperationalError: fts5: syntax error near \"AND\""
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"AND\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "porter": {
+          "raw": {
+            "ok": false,
+            "match_expression": "AND",
+            "error": "OperationalError: fts5: syntax error near \"AND\""
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"AND\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "like": {
+          "ok": true,
+          "pattern": "%AND%",
+          "ids": []
+        }
+      }
+    },
+    {
+      "label": "hostile_or",
+      "query": "OR",
+      "results": {
+        "unicode61": {
+          "raw": {
+            "ok": false,
+            "match_expression": "OR",
+            "error": "OperationalError: fts5: syntax error near \"OR\""
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"OR\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "trigram": {
+          "raw": {
+            "ok": false,
+            "match_expression": "OR",
+            "error": "OperationalError: fts5: syntax error near \"OR\""
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"OR\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "porter": {
+          "raw": {
+            "ok": false,
+            "match_expression": "OR",
+            "error": "OperationalError: fts5: syntax error near \"OR\""
+          },
+          "quoted": {
+            "ok": true,
+            "match_expression": "\"OR\"",
+            "ids": [],
+            "bm25": [],
+            "rank": []
+          }
+        },
+        "like": {
+          "ok": true,
+          "pattern": "%OR%",
+          "ids": [
+            "mem_2",
+            "mem_3",
+            "mem_5"
+          ]
+        }
+      }
+    },
+    {
+      "label": "multi_token_or",
+      "query": "RAG 原理",
+      "results": {
+        "unicode61": {
+          "quoted_or": {
+            "ok": true,
+            "match_expression": "\"RAG\" OR \"原理\"",
+            "ids": [
+              "mem_1",
+              "mem_6",
+              "mem_4"
+            ],
+            "bm25": [
+              -0.3709,
+              -0.3178,
+              -0.2931
+            ],
+            "rank": [
+              -0.3709,
+              -0.3178,
+              -0.2931
+            ]
+          }
+        },
+        "trigram": {
+          "quoted_or": {
+            "ok": true,
+            "match_expression": "\"RAG\" OR \"原理\"",
+            "ids": [
+              "mem_5",
+              "mem_1",
+              "mem_6",
+              "mem_4",
+              "mem_3"
+            ],
+            "bm25": [
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0
+            ],
+            "rank": [
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0,
+              -0.0
+            ]
+          }
+        },
+        "porter": {
+          "quoted_or": {
+            "ok": true,
+            "match_expression": "\"RAG\" OR \"原理\"",
+            "ids": [
+              "mem_1",
+              "mem_6",
+              "mem_4"
+            ],
+            "bm25": [
+              -0.3709,
+              -0.3178,
+              -0.2931
+            ],
+            "rank": [
+              -0.3709,
+              -0.3178,
+              -0.2931
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "bm25_direction": {
+    "note": "SQLite bm25(): more negative = better match; ascending order puts the best first",
+    "probe": {
+      "unicode61": {
+        "ok": true,
+        "match_expression": "\"RAG\"",
+        "ids": [
+          "mem_1",
+          "mem_6",
+          "mem_4"
+        ],
+        "bm25": [
+          -0.3709,
+          -0.3178,
+          -0.2931
+        ],
+        "rank": [
+          -0.3709,
+          -0.3178,
+          -0.2931
+        ]
+      },
+      "trigram": {
+        "ok": true,
+        "match_expression": "\"RAG\"",
+        "ids": [
+          "mem_5",
+          "mem_1",
+          "mem_6",
+          "mem_4",
+          "mem_3"
+        ],
+        "bm25": [
+          -0.0,
+          -0.0,
+          -0.0,
+          -0.0,
+          -0.0
+        ],
+        "rank": [
+          -0.0,
+          -0.0,
+          -0.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      "porter": {
+        "ok": true,
+        "match_expression": "\"RAG\"",
+        "ids": [
+          "mem_1",
+          "mem_6",
+          "mem_4"
+        ],
+        "bm25": [
+          -0.3709,
+          -0.3178,
+          -0.2931
+        ],
+        "rank": [
+          -0.3709,
+          -0.3178,
+          -0.2931
+        ]
+      }
+    }
+  }
+}

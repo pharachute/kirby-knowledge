@@ -1,0 +1,158 @@
+{
+  "base_url": "https://api.deepseek.com",
+  "cases": [
+    {
+      "attempts": 1,
+      "counts_after": {
+        "memories": 1,
+        "memory_sources": 1,
+        "sources": 1
+      },
+      "counts_before": {
+        "memories": 0,
+        "memory_sources": 0,
+        "sources": 0
+      },
+      "dropped": [],
+      "elapsed_seconds": 2.24,
+      "evidence": [],
+      "expectation": "worth_remembering = true, memories >= 1, Memory row readable",
+      "input_chars": 105,
+      "llm": {
+        "finish_reason": "stop",
+        "latency_seconds": 2.235,
+        "model": "deepseek-flash",
+        "reasoning_chars": 767,
+        "request_id": "f130b333-855b-40f0-9855-60d317964021",
+        "text_chars": 485,
+        "usage": {
+          "completion_tokens": 402,
+          "completion_tokens_details": {
+            "reasoning_tokens": 203
+          },
+          "prompt_cache_hit_tokens": 1277,
+          "prompt_cache_miss_tokens": 134,
+          "prompt_tokens": 1411,
+          "prompt_tokens_details": {
+            "cached_tokens": 1277
+          },
+          "total_tokens": 1813
+        }
+      },
+      "memories": [
+        {
+          "confidence": 0.9,
+          "content": "Retrieval-Augmented Generation（RAG）先用检索器从外部语料库取回相关片段，再让生成模型只基于这些片段作答；这样可降低幻觉，并让答案能追溯到具体资料。",
+          "created_at": "2026-10-04T14:08:15.778Z",
+          "id": "mem_448d8178ce674d71a9a98ec83b89de61",
+          "importance": 0.6,
+          "information_origin": "source_content",
+          "schema_version": 1,
+          "status": "active",
+          "summary": "RAG = 先检索外部语料，再让模型基于检索片段作答，以降低幻觉并支持溯源。",
+          "tags": [
+            "rag",
+            "retrieval",
+            "llm",
+            "hallucination"
+          ],
+          "title": "RAG 的原理与作用",
+          "type": "knowledge",
+          "updated_at": "2026-10-04T14:08:15.778Z"
+        }
+      ],
+      "model": "deepseek-flash",
+      "name": "high_value_knowledge",
+      "reason": "输入是一条稳定、可复用的技术概念解释（RAG 的原理与作用），属于长期有价值的专业知识。 | source: memory states facts taken from the source material: ['RAG 的原理与作用']",
+      "reread_from_new_connection": [
+        {
+          "confidence": 0.9,
+          "id": "mem_448d8178ce674d71a9a98ec83b89de61",
+          "importance": 0.6,
+          "information_origin": "source_content",
+          "matched_in_memory_object": true,
+          "schema_version": 1,
+          "status": "active",
+          "type": "knowledge"
+        }
+      ],
+      "source_id": "src_afc216729bc6406296ba509ad4274ffa",
+      "source_persisted": true,
+      "source_reused": false,
+      "status": "persisted",
+      "worth_remembering": true
+    },
+    {
+      "attempts": 1,
+      "counts_after": {
+        "memories": 1,
+        "memory_sources": 1,
+        "sources": 1
+      },
+      "counts_before": {
+        "memories": 1,
+        "memory_sources": 1,
+        "sources": 1
+      },
+      "dropped": [],
+      "elapsed_seconds": 1.14,
+      "evidence": [],
+      "expectation": "worth_remembering = false, memories = 0, source not persisted",
+      "input_chars": 11,
+      "llm": {
+        "finish_reason": "stop",
+        "latency_seconds": 1.139,
+        "model": "deepseek-flash",
+        "reasoning_chars": 116,
+        "request_id": "a1024aa2-f07b-49d3-a716-1f5f20cdbbe0",
+        "text_chars": 99,
+        "usage": {
+          "completion_tokens": 70,
+          "completion_tokens_details": {
+            "reasoning_tokens": 30
+          },
+          "prompt_cache_hit_tokens": 1152,
+          "prompt_cache_miss_tokens": 205,
+          "prompt_tokens": 1357,
+          "prompt_tokens_details": {
+            "cached_tokens": 1152
+          },
+          "total_tokens": 1427
+        }
+      },
+      "memories": [],
+      "model": "deepseek-flash",
+      "name": "low_value_chat",
+      "reason": "这是一次性的临时生活状态（喝了一杯奶茶），对未来与用户的长期交互没有任何持续价值。",
+      "reread_from_new_connection": [],
+      "source_id": null,
+      "source_persisted": false,
+      "source_reused": false,
+      "status": "skipped",
+      "worth_remembering": false
+    }
+  ],
+  "counts_after_all_cases": {
+    "memories": 1,
+    "memory_sources": 1,
+    "sources": 1
+  },
+  "db_path": "data\\phase2-real.db",
+  "generated_at": "2026-10-04T14:08:13.541Z",
+  "llm_config": {
+    "api_key_env": "PERSONAL_MEMORY_LLM_API_KEY",
+    "api_key_present": true,
+    "base_url": "https://api.deepseek.com",
+    "json_mode": true,
+    "max_tokens": 2048,
+    "max_transport_retries": 2,
+    "model": "deepseek-flash",
+    "provider": "deepseek",
+    "temperature": 0.0,
+    "timeout_seconds": 120.0
+  },
+  "model": "deepseek-flash",
+  "phase": "phase-2 (memory formation)",
+  "prompt_version": "memory-formation-v1",
+  "provider": "deepseek"
+}

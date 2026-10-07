@@ -1,0 +1,424 @@
+{
+  "phase": "kb-1.0 phase-5 (pdf importer)",
+  "backend": "pdfminer.six 20260107",
+  "db": "data\\kb1p5-acceptance.db",
+  "credential_source": "C:\\Users\\Pharachute\\.dsh\\.credentials.yaml",
+  "inputs": {
+    "A1": "C:\\Users\\Pharachute\\Documents\\Codex\\2026-09-16\\https-github-com-tylogi-yourchar-https\\work\\demo\\fixtures\\课表-文字型.pdf",
+    "A2": "D:\\DSH-worlp\\deliverables\\高性价比人生指南-对我的启示与发展点.pdf",
+    "B": "D:\\pycharm\\PyCharm 2026.2.2\\help\\ReferenceCard.pdf"
+  },
+  "imports": [
+    {
+      "file": "课表-文字型.pdf",
+      "exit_code": 0,
+      "title": "课程表 2026 秋季学期",
+      "title_source": "first_page_line",
+      "page_count": 1,
+      "content_chars": 227,
+      "import_status": "imported",
+      "formation_status": "persisted",
+      "worth_remembering": true,
+      "memory_count": 1,
+      "source_count": 1,
+      "memories": [
+        {
+          "id": "mem_7625edb012e1415ebb881472a9ac6890",
+          "type": "event",
+          "status": "active",
+          "information_origin": "source_content",
+          "title_length": 13,
+          "confidence": 0.9
+        }
+      ],
+      "source_facts": {
+        "source_type": "file",
+        "url": null,
+        "content_chars": 227,
+        "cjk_chars": 103,
+        "latin_chars": 10,
+        "page_markers": 1,
+        "first_marker": true,
+        "last_marker": true,
+        "contains_pdf_structure": false,
+        "metadata_keys": [
+          "captured_from",
+          "content_chars",
+          "extraction_backend",
+          "filename",
+          "formation",
+          "pdf_author",
+          "pdf_creator",
+          "pdf_page_count",
+          "pdf_pages_with_text",
+          "pdf_producer",
+          "pdf_sha256",
+          "pdf_subject",
+          "pdf_title",
+          "title_source"
+        ],
+        "captured_from": "pdf",
+        "pdf_page_count": 1,
+        "extraction_backend": "pdfminer.six",
+        "pdf_title": "untitled",
+        "pdf_author": "anonymous",
+        "pdf_producer": "ReportLab PDF Library - (opensource)",
+        "local_path_in_metadata": false
+      },
+      "label": "A1_chinese_with_metadata",
+      "counts_before": {
+        "sources": 0,
+        "memories": 0,
+        "memory_sources": 0
+      },
+      "counts_after": {
+        "sources": 1,
+        "memories": 1,
+        "memory_sources": 1
+      }
+    },
+    {
+      "file": "高性价比人生指南-对我的启示与发展点.pdf",
+      "exit_code": 0,
+      "title": "个人研究报告 • RESEARCH BRIEF",
+      "title_source": "first_page_line",
+      "page_count": 20,
+      "content_chars": 19129,
+      "import_status": "imported",
+      "formation_status": "persisted",
+      "worth_remembering": true,
+      "memory_count": 4,
+      "source_count": 1,
+      "memories": [
+        {
+          "id": "mem_c4b892c4fe004fed99486b39883e4527",
+          "type": "knowledge",
+          "status": "active",
+          "information_origin": "source_content",
+          "title_length": 10,
+          "confidence": 0.9
+        },
+        {
+          "id": "mem_02f24b8a2bb94c4282d1c62633edc911",
+          "type": "knowledge",
+          "status": "active",
+          "information_origin": "source_content",
+          "title_length": 12,
+          "confidence": 0.9
+        },
+        {
+          "id": "mem_be3f09239c00459b87af78a439741784",
+          "type": "knowledge",
+          "status": "active",
+          "information_origin": "source_content",
+          "title_length": 12,
+          "confidence": 0.9
+        },
+        {
+          "id": "mem_37b58a53a8c94374920d1eb40b558586",
+          "type": "knowledge",
+          "status": "active",
+          "information_origin": "source_content",
+          "title_length": 14,
+          "confidence": 0.85
+        }
+      ],
+      "source_facts": {
+        "source_type": "file",
+        "url": null,
+        "content_chars": 19129,
+        "cjk_chars": 8358,
+        "latin_chars": 2508,
+        "page_markers": 20,
+        "first_marker": true,
+        "last_marker": true,
+        "contains_pdf_structure": false,
+        "metadata_keys": [
+          "captured_from",
+          "content_chars",
+          "extraction_backend",
+          "filename",
+          "formation",
+          "pdf_page_count",
+          "pdf_pages_with_text",
+          "pdf_sha256",
+          "title_source"
+        ],
+        "captured_from": "pdf",
+        "pdf_page_count": 20,
+        "extraction_backend": "pdfminer.six",
+        "pdf_title": null,
+        "pdf_author": null,
+        "pdf_producer": null,
+        "local_path_in_metadata": false
+      },
+      "label": "A2_chinese_multipage",
+      "counts_before": {
+        "sources": 1,
+        "memories": 1,
+        "memory_sources": 1
+      },
+      "counts_after": {
+        "sources": 2,
+        "memories": 5,
+        "memory_sources": 5
+      }
+    },
+    {
+      "file": "ReferenceCard.pdf",
+      "exit_code": 0,
+      "title": "Find any action inside the IDE",
+      "title_source": "first_page_line",
+      "page_count": 1,
+      "content_chars": 4098,
+      "import_status": "imported",
+      "formation_status": "persisted",
+      "worth_remembering": true,
+      "memory_count": 2,
+      "source_count": 1,
+      "memories": [
+        {
+          "id": "mem_7ed1bf5558f540429e0d6270e3499a37",
+          "type": "knowledge",
+          "status": "active",
+          "information_origin": "source_content",
+          "title_length": 16,
+          "confidence": 0.9
+        },
+        {
+          "id": "mem_5605429088764bcb9107e3df353ec99c",
+          "type": "knowledge",
+          "status": "active",
+          "information_origin": "source_content",
+          "title_length": 14,
+          "confidence": 0.9
+        }
+      ],
+      "source_facts": {
+        "source_type": "file",
+        "url": null,
+        "content_chars": 4098,
+        "cjk_chars": 0,
+        "latin_chars": 2838,
+        "page_markers": 1,
+        "first_marker": true,
+        "last_marker": true,
+        "contains_pdf_structure": false,
+        "metadata_keys": [
+          "captured_from",
+          "content_chars",
+          "extraction_backend",
+          "filename",
+          "formation",
+          "pdf_creator",
+          "pdf_page_count",
+          "pdf_pages_with_text",
+          "pdf_producer",
+          "pdf_sha256",
+          "title_source"
+        ],
+        "captured_from": "pdf",
+        "pdf_page_count": 1,
+        "extraction_backend": "pdfminer.six",
+        "pdf_title": null,
+        "pdf_author": null,
+        "pdf_producer": "Adobe PDF Library 15.0",
+        "local_path_in_metadata": false
+      },
+      "label": "B_english_technical",
+      "counts_before": {
+        "sources": 2,
+        "memories": 5,
+        "memory_sources": 5
+      },
+      "counts_after": {
+        "sources": 3,
+        "memories": 7,
+        "memory_sources": 7
+      }
+    }
+  ],
+  "new_process_retrieval": [
+    {
+      "scenario": "A1_chinese_with_metadata",
+      "memory_id": "mem_7625edb012e1415ebb881472a9ac6890",
+      "keyword_chars": 2,
+      "exit_code": 0,
+      "total": 1,
+      "found_in_new_process": true
+    },
+    {
+      "scenario": "A2_chinese_multipage",
+      "memory_id": "mem_c4b892c4fe004fed99486b39883e4527",
+      "keyword_chars": 4,
+      "exit_code": 0,
+      "total": 1,
+      "found_in_new_process": true
+    },
+    {
+      "scenario": "A2_chinese_multipage",
+      "memory_id": "mem_02f24b8a2bb94c4282d1c62633edc911",
+      "keyword_chars": 4,
+      "exit_code": 0,
+      "total": 2,
+      "found_in_new_process": true
+    },
+    {
+      "scenario": "A2_chinese_multipage",
+      "memory_id": "mem_be3f09239c00459b87af78a439741784",
+      "keyword_chars": 4,
+      "exit_code": 0,
+      "total": 1,
+      "found_in_new_process": true
+    },
+    {
+      "scenario": "A2_chinese_multipage",
+      "memory_id": "mem_37b58a53a8c94374920d1eb40b558586",
+      "keyword_chars": 7,
+      "exit_code": 0,
+      "total": 1,
+      "found_in_new_process": true
+    },
+    {
+      "scenario": "B_english_technical",
+      "memory_id": "mem_7ed1bf5558f540429e0d6270e3499a37",
+      "keyword_chars": 7,
+      "exit_code": 0,
+      "total": 2,
+      "found_in_new_process": true
+    },
+    {
+      "scenario": "B_english_technical",
+      "memory_id": "mem_5605429088764bcb9107e3df353ec99c",
+      "keyword_chars": 7,
+      "exit_code": 0,
+      "total": 2,
+      "found_in_new_process": true
+    }
+  ],
+  "web_ui_upload": {
+    "server_ready": true,
+    "http_status": 200,
+    "marker": true,
+    "counts_before": {
+      "sources": 3,
+      "memories": 7,
+      "memory_sources": 7
+    },
+    "counts_after": {
+      "sources": 3,
+      "memories": 9,
+      "memory_sources": 9
+    },
+    "body_has_pdf_text": false,
+    "memory_delta": 2
+  },
+  "failure_cases": [
+    {
+      "case": "corrupt_non_pdf",
+      "file": "a.pdf",
+      "expected": "PdfCorruptError",
+      "exit_code": 3,
+      "error_type": "PdfCorruptError",
+      "counts_unchanged": true,
+      "ok": true
+    },
+    {
+      "case": "truncated",
+      "file": "b.pdf",
+      "expected": "PdfCorruptError",
+      "exit_code": 3,
+      "error_type": "PdfCorruptError",
+      "counts_unchanged": true,
+      "ok": true
+    },
+    {
+      "case": "encrypted_password",
+      "file": "c.pdf",
+      "expected": "PdfEncryptedError",
+      "exit_code": 3,
+      "error_type": "PdfEncryptedError",
+      "counts_unchanged": true,
+      "ok": true
+    },
+    {
+      "case": "encryption_forbids_extraction",
+      "file": "d.pdf",
+      "expected": "PdfEncryptedError",
+      "exit_code": 3,
+      "error_type": "PdfEncryptedError",
+      "counts_unchanged": true,
+      "ok": true
+    },
+    {
+      "case": "no_text_scanned",
+      "file": "e.pdf",
+      "expected": "PdfEmptyTextError",
+      "exit_code": 3,
+      "error_type": "PdfEmptyTextError",
+      "counts_unchanged": true,
+      "ok": true
+    },
+    {
+      "case": "over_max_bytes",
+      "file": "高性价比人生指南-对我的启示与发展点.pdf",
+      "expected": "PdfTooLargeError",
+      "exit_code": 3,
+      "error_type": "PdfTooLargeError",
+      "counts_unchanged": true,
+      "ok": true
+    },
+    {
+      "case": "over_max_pages",
+      "file": "高性价比人生指南-对我的启示与发展点.pdf",
+      "expected": "PdfTooManyPagesError",
+      "exit_code": 3,
+      "error_type": "PdfTooManyPagesError",
+      "counts_unchanged": true,
+      "ok": true
+    },
+    {
+      "case": "over_max_text_chars",
+      "file": "高性价比人生指南-对我的启示与发展点.pdf",
+      "expected": "PdfTextTooLargeError",
+      "exit_code": 3,
+      "error_type": "PdfTextTooLargeError",
+      "counts_unchanged": true,
+      "ok": true
+    },
+    {
+      "case": "below_min_chars",
+      "file": "课表-文字型.pdf",
+      "expected": "PdfEmptyTextError",
+      "exit_code": 3,
+      "error_type": "PdfEmptyTextError",
+      "counts_unchanged": true,
+      "ok": true
+    }
+  ],
+  "final_counts": {
+    "sources": 3,
+    "memories": 9,
+    "memory_sources": 9
+  },
+  "final_status_counts": {
+    "active": 7,
+    "pending": 2,
+    "archived": 0
+  },
+  "index_consistency": {
+    "memories": 9,
+    "word_index": 9,
+    "trigram_index": 9,
+    "orphan_word_rows": 0,
+    "orphan_trigram_rows": 0,
+    "consistent": true
+  },
+  "all_imports_ok": true,
+  "memory_forming_ok": true,
+  "all_failures_ok": true,
+  "retrieval_ok": true,
+  "ui_ok": true,
+  "note_privacy": "counts/ids/hashes/metadata only: no personal PDF text, no memory titles",
+  "overall_ok": true
+}

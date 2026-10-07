@@ -1,0 +1,12 @@
+KB 1.0 Phase 1 -- human-readable `capture` CLI output (real process, real LLM)
+command : python -m personal_memory --db data/kb1-cli-demo.db capture "RAG 的核心是把检索结果放进上下文：先取回相关片段，再让模型只依据这些片段作答。" --title "RAG 核心"
+==============================================================================
+db        : data\kb1-cli-demo.db
+captured  : True   captured_from=cli
+capture   : status=persisted  chars=41  source_type=text  captured_at=2026-10-04T15:18:08.722Z
+formation : status=persisted  worth_remembering=True  attempts=1  model=deepseek-flash
+reason    : 这是一条关于 RAG 核心机制的稳定专业知识，对未来理解和使用检索增强生成有长期参考价值。 | source: memory states facts taken from the source material: ['RAG 的核心机制']
+memories  : 1
+   - mem_78d68c134d5747efbcfcb1db448844a9  [knowledge]  RAG 的核心机制  status=active  importance=0.7 confidence=0.9
+sources   : 1   reused=False
+   - src_a60adf879dc24dde98a489ec418fc765  [text]  RAG 核心  url=None

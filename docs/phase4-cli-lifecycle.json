@@ -1,0 +1,236 @@
+{
+  "checks": {
+    "archived_visible_when_asked": true,
+    "counts": {
+      "memories": 1,
+      "memory_sources": 1,
+      "sources": 1
+    },
+    "deleted_memory_unsearchable": true,
+    "illegal_transition_exit_3": true,
+    "index_consistent": true,
+    "invalid_update_exit_3": true,
+    "new_keyword_hits": true,
+    "old_keyword_gone": true,
+    "repository_refuses_active_to_pending": true,
+    "restored_searchable": true,
+    "schema_version": 2,
+    "search_missed_after_archive": true,
+    "source_survives_memory_delete": true,
+    "status_counts": {
+      "active": 1,
+      "archived": 0,
+      "pending": 0
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "init"
+      ],
+      "command": "python -m personal_memory --db data\\phase4-cli.db init",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "{\n  \"db_path\": \"data\\\\phase4-cli.db\",\n  \"applied\": [\n    {\n      \"version\": 1,\n      \"name\": \"initial_schema\"\n    },\n    {\n      \"version\": 2,\n      \"name\": \"memory_search_index\"\n    }\n  ],\n  \"schema_version\": 2,\n  \"applied_count\": 2\n}\n"
+    },
+    {
+      "argv": [
+        "search",
+        "zebra"
+      ],
+      "command": "python -m personal_memory --db data\\phase4-cli.db search zebra",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "db      : data\\phase4-cli.db\nquery   : 'zebra'  status=['active']  type=None\nmatches : total=1  mode=index  index=1 like_only=0  took=2.849ms\nscore   : higher is more relevant (bm25 is negated; raw bm25 kept on each hit)\n\n1. RAG 的基本原理   [knowledge]   score=8.95349e-07 (bm25)\n   memory_id : mem_b7768628980943baaf722b2bc92543a9\n   status    : active   importance=0.8 confidence=0.9\n   origin    : source_content   schema_version=1\n   content   : RAG 通过检索外部知识，为大语言模型提供相关上下文。检索关键词 zebra。\n   tags      : ['rag', 'retrieval']\n   matched   : ['content']   created=2026-10-04T15:04:21.099Z\n   sources (1):\n     - src_d9ac78a7e9c64fa7954d2a22d31f00c2  [text]  《RAG 入门》  url=None\n\nfull source text: python -m personal_memory source <source_id>\n"
+    },
+    {
+      "argv": [
+        "archive",
+        "mem_b7768628980943baaf722b2bc92543a9"
+      ],
+      "command": "python -m personal_memory --db data\\phase4-cli.db archive mem_b7768628980943baaf722b2bc92543a9",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "db      : data\\phase4-cli.db\nmemory  : mem_b7768628980943baaf722b2bc92543a9\nchange  : active -> archived   changed=True\nreason  : active -> archived\ntitle   : RAG 的基本原理\nstatus  : archived   updated_at=2026-10-04T15:04:21.352Z\n"
+    },
+    {
+      "argv": [
+        "search",
+        "zebra"
+      ],
+      "command": "python -m personal_memory --db data\\phase4-cli.db search zebra",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "db      : data\\phase4-cli.db\nquery   : 'zebra'  status=['active']  type=None\nmatches : total=0  mode=none  index=0 like_only=0  took=0.936ms\nscore   : higher is more relevant (bm25 is negated; raw bm25 kept on each hit)\n(no memory matched)\n"
+    },
+    {
+      "argv": [
+        "search",
+        "zebra",
+        "--status",
+        "archived",
+        "--json"
+      ],
+      "command": "python -m personal_memory --db data\\phase4-cli.db search zebra --status archived --json",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "{\n  \"query\": \"zebra\",\n  \"total\": 1,\n  \"limit\": 5,\n  \"offset\": 0,\n  \"statuses\": [\n    \"archived\"\n  ],\n  \"memory_type\": null,\n  \"mode\": \"index\",\n  \"took_ms\": 2.506,\n  \"index_matches\": 1,\n  \"like_only_matches\": 0,\n  \"truncated\": false,\n  \"score_direction\": \"higher is more relevant (bm25 is negated; raw bm25 kept on each hit)\",\n  \"hits\": [\n    {\n      \"memory\": {\n        \"id\": \"mem_b7768628980943baaf722b2bc92543a9\",\n        \"type\": \"knowledge\",\n        \"title\": \"RAG 的基本原理\",\n        \"content\": \"RAG 通过检索外部知识，为大语言模型提供相关上下文。检索关键词 zebra。\",\n        \"summary\": null,\n        \"importance\": 0.8,\n        \"confidence\": 0.9,\n        \"information_origin\": \"source_content\",\n        \"status\": \"archived\",\n        \"created_at\": \"2026-10-04T15:04:21.099Z\",\n        \"updated_at\": \"2026-10-04T15:04:21.352Z\",\n        \"schema_version\": 1,\n        \"tags\": [\n          \"rag\",\n          \"retrieval\"\n        ]\n      },\n      \"score\": 8.953488372093023e-07,\n      \"score_kind\": \"bm25\",\n      \"index\": \"word\",\n      \"bm25\": -8.953488372093023e-07,\n      \"matched_fields\": [\n        \"content\"\n      ],\n      \"sources\": [\n        {\n          \"id\": \"src_d9ac78a7e9c64fa7954d2a22d31f00c2\",\n          \"source_type\": \"text\",\n          \"title\": \"《RAG 入门》\",\n          \"url\": null,\n          \"created_at\": \"2026-10-04T15:04:21.097Z\",\n          \"content_hint\": \"use MemoryRetriever.resolve_source(source_id) for the full text\"\n        }\n      ]\n    }\n  ],\n  \"db_path\": \"data\\\\phase4-cli.db\"\n}\n"
+    },
+    {
+      "argv": [
+        "pending"
+      ],
+      "command": "python -m personal_memory --db data\\phase4-cli.db pending",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "db      : data\\phase4-cli.db\ncounts  : {'active': 0, 'pending': 1, 'archived': 1}\npending : 1 (limit=20)\n\n1. 待删除的临时记忆   [event]   confidence=0.5\n   memory_id : mem_330cfbc378944647a99c0990f13fa8a7\n   content   : 这条记忆会被删除，关键词 narwhal 只出现在这里。\n"
+    },
+    {
+      "argv": [
+        "restore",
+        "mem_b7768628980943baaf722b2bc92543a9"
+      ],
+      "command": "python -m personal_memory --db data\\phase4-cli.db restore mem_b7768628980943baaf722b2bc92543a9",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "db      : data\\phase4-cli.db\nmemory  : mem_b7768628980943baaf722b2bc92543a9\nchange  : archived -> active   changed=True\nreason  : archived -> active\ntitle   : RAG 的基本原理\nstatus  : active   updated_at=2026-10-04T15:04:21.839Z\n"
+    },
+    {
+      "argv": [
+        "search",
+        "zebra"
+      ],
+      "command": "python -m personal_memory --db data\\phase4-cli.db search zebra",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "db      : data\\phase4-cli.db\nquery   : 'zebra'  status=['active']  type=None\nmatches : total=1  mode=index  index=1 like_only=0  took=2.924ms\nscore   : higher is more relevant (bm25 is negated; raw bm25 kept on each hit)\n\n1. RAG 的基本原理   [knowledge]   score=8.95349e-07 (bm25)\n   memory_id : mem_b7768628980943baaf722b2bc92543a9\n   status    : active   importance=0.8 confidence=0.9\n   origin    : source_content   schema_version=1\n   content   : RAG 通过检索外部知识，为大语言模型提供相关上下文。检索关键词 zebra。\n   tags      : ['rag', 'retrieval']\n   matched   : ['content']   created=2026-10-04T15:04:21.099Z\n   sources (1):\n     - src_d9ac78a7e9c64fa7954d2a22d31f00c2  [text]  《RAG 入门》  url=None\n\nfull source text: python -m personal_memory source <source_id>\n"
+    },
+    {
+      "argv": [
+        "update",
+        "mem_b7768628980943baaf722b2bc92543a9",
+        "--title",
+        "RAG 的基本原理（修订）",
+        "--content",
+        "RAG 先检索再生成，答案可以追溯出处。更新关键词 ocelot。"
+      ],
+      "command": "python -m personal_memory --db data\\phase4-cli.db update mem_b7768628980943baaf722b2bc92543a9 --title \"RAG 的基本原理（修订）\" --content \"RAG 先检索再生成，答案可以追溯出处。更新关键词 ocelot。\"",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "db      : data\\phase4-cli.db\nmemory  : mem_b7768628980943baaf722b2bc92543a9\nchanged : ['content', 'title']\ntitle   : RAG 的基本原理（修订）   [knowledge]   status=active\ncontent : RAG 先检索再生成，答案可以追溯出处。更新关键词 ocelot。\ntags    : ['rag', 'retrieval']   importance=0.8 confidence=0.9\n"
+    },
+    {
+      "argv": [
+        "search",
+        "zebra"
+      ],
+      "command": "python -m personal_memory --db data\\phase4-cli.db search zebra",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "db      : data\\phase4-cli.db\nquery   : 'zebra'  status=['active']  type=None\nmatches : total=0  mode=none  index=0 like_only=0  took=0.893ms\nscore   : higher is more relevant (bm25 is negated; raw bm25 kept on each hit)\n(no memory matched)\n"
+    },
+    {
+      "argv": [
+        "search",
+        "ocelot"
+      ],
+      "command": "python -m personal_memory --db data\\phase4-cli.db search ocelot",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "db      : data\\phase4-cli.db\nquery   : 'ocelot'  status=['active']  type=None\nmatches : total=1  mode=index  index=1 like_only=0  took=2.705ms\nscore   : higher is more relevant (bm25 is negated; raw bm25 kept on each hit)\n\n1. RAG 的基本原理（修订）   [knowledge]   score=8.8e-07 (bm25)\n   memory_id : mem_b7768628980943baaf722b2bc92543a9\n   status    : active   importance=0.8 confidence=0.9\n   origin    : source_content   schema_version=1\n   content   : RAG 先检索再生成，答案可以追溯出处。更新关键词 ocelot。\n   tags      : ['rag', 'retrieval']\n   matched   : ['content']   created=2026-10-04T15:04:21.099Z\n   sources (1):\n     - src_d9ac78a7e9c64fa7954d2a22d31f00c2  [text]  《RAG 入门》  url=None\n\nfull source text: python -m personal_memory source <source_id>\n"
+    },
+    {
+      "argv": [
+        "update",
+        "mem_b7768628980943baaf722b2bc92543a9",
+        "--status",
+        "pending"
+      ],
+      "command": "python -m personal_memory --db data\\phase4-cli.db update mem_b7768628980943baaf722b2bc92543a9 --status pending",
+      "exit_code": 3,
+      "stderr": "",
+      "stdout": "{\n  \"error\": \"illegal Memory status transition for 'mem_b7768628980943baaf722b2bc92543a9': active -> pending; allowed from active: ['archived']\",\n  \"error_type\": \"IllegalTransitionError\",\n  \"db_path\": \"data\\\\phase4-cli.db\"\n}\n"
+    },
+    {
+      "argv": [
+        "update",
+        "mem_b7768628980943baaf722b2bc92543a9",
+        "--importance",
+        "2"
+      ],
+      "command": "python -m personal_memory --db data\\phase4-cli.db update mem_b7768628980943baaf722b2bc92543a9 --importance 2",
+      "exit_code": 3,
+      "stderr": "",
+      "stdout": "{\n  \"error\": \"Memory validation failed -> importance: must be within [0.0, 1.0], got 2.0\",\n  \"error_type\": \"ValidationError\",\n  \"db_path\": \"data\\\\phase4-cli.db\"\n}\n"
+    },
+    {
+      "argv": [
+        "<repository guard probe>",
+        "data\\phase4-cli.db",
+        "mem_b7768628980943baaf722b2bc92543a9"
+      ],
+      "command": "python -c <repository guard probe> data\\phase4-cli.db",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "{\"error\": \"IllegalTransitionError\", \"from_status\": \"active\", \"to_status\": \"pending\", \"allowed\": [\"archived\"], \"row_unchanged\": true, \"status_after\": \"active\"}\n"
+    },
+    {
+      "argv": [
+        "delete",
+        "mem_330cfbc378944647a99c0990f13fa8a7",
+        "--json"
+      ],
+      "command": "python -m personal_memory --db data\\phase4-cli.db delete mem_330cfbc378944647a99c0990f13fa8a7 --json",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "{\n  \"memory_id\": \"mem_330cfbc378944647a99c0990f13fa8a7\",\n  \"deleted\": true,\n  \"links_removed\": 1,\n  \"links_remaining\": 0,\n  \"sources_kept\": [\n    \"src_d9ac78a7e9c64fa7954d2a22d31f00c2\"\n  ],\n  \"sources_deleted\": [],\n  \"sources_intact\": true,\n  \"db_path\": \"data\\\\phase4-cli.db\"\n}\n"
+    },
+    {
+      "argv": [
+        "search",
+        "narwhal",
+        "--status",
+        "all"
+      ],
+      "command": "python -m personal_memory --db data\\phase4-cli.db search narwhal --status all",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "db      : data\\phase4-cli.db\nquery   : 'narwhal'  status=all  type=None\nmatches : total=0  mode=none  index=0 like_only=0  took=0.912ms\nscore   : higher is more relevant (bm25 is negated; raw bm25 kept on each hit)\n(no memory matched)\n"
+    },
+    {
+      "argv": [
+        "source",
+        "src_d9ac78a7e9c64fa7954d2a22d31f00c2"
+      ],
+      "command": "python -m personal_memory --db data\\phase4-cli.db source src_d9ac78a7e9c64fa7954d2a22d31f00c2",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "{\n  \"id\": \"src_d9ac78a7e9c64fa7954d2a22d31f00c2\",\n  \"source_type\": \"text\",\n  \"title\": \"《RAG 入门》\",\n  \"content\": \"RAG 是 Retrieval-Augmented Generation 的缩写：先检索，再生成。\",\n  \"url\": null,\n  \"content_hash\": \"d8d4e53967d362f506c414ae7a269e402d821fb334c683b5059849aeecdcaa66\",\n  \"created_at\": \"2026-10-04T15:04:21.097Z\",\n  \"updated_at\": \"2026-10-04T15:04:21.097Z\",\n  \"metadata\": {}\n}\n"
+    },
+    {
+      "argv": [
+        "info"
+      ],
+      "command": "python -m personal_memory --db data\\phase4-cli.db info",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "{\n  \"db_path\": \"data\\\\phase4-cli.db\",\n  \"exists\": true,\n  \"schema_version\": 2,\n  \"tables\": {\n    \"memories\": \"CREATE TABLE memories (\\n    id                 TEXT    PRIMARY KEY,\\n    type               TEXT    NOT NULL\\n                               CHECK (type IN ('knowledge', 'experience', 'event', 'profile')),\\n    title              TEXT    NOT NULL CHECK (length(trim(title)) > 0),\\n    content            TEXT    NOT NULL CHECK (length(trim(content)) > 0),\\n    summary            TEXT,\\n    tags_json          TEXT    NOT NULL DEFAULT '[]'\\n                               CHECK (json_valid(tags_json) AND json_type(tags_json) = 'array'),\\n    importance         REAL    NOT NULL DEFAULT 0.5\\n                               CHECK (typeof(importance) IN ('integer', 'real')\\n                                      AND importance >= 0.0 AND importance <= 1.0),\\n    confidence         REAL    NOT NULL DEFAULT 0.5\\n                               CHECK (typeof(confidence) IN ('integer', 'real')\\n                                      AND confidence >= 0.0 AND confidence <= 1.0),\\n    information_origin TEXT    NOT NULL\\n                               CHECK (information_origin IN ('user_explicit', 'source_content', 'agent_inference')),\\n    status             TEXT    NOT NULL DEFAULT 'active'\\n                               CHECK (status IN ('active', 'pending', 'archived')),\\n    created_at         TEXT    NOT NULL CHECK (length(created_at) > 0),\\n    updated_at         TEXT    NOT NULL CHECK (length(updated_at) > 0),\\n    schema_version     INTEGER NOT NULL DEFAULT 1 CHECK (schema_version >= 1)\\n)\",\n    \"memory_fts_trigram\": \"CREATE VIRTUAL TABLE memory_fts_trigram USING fts5(memory_id UNINDEXED, title, content, summary, tags, tokenize='trigram')\",\n    \"memory_fts_trigram_config\": \"CREATE TABLE 'memory_fts_trigram_config'(k PRIMARY KEY, v) WITHOUT ROWID\",\n    \"memory_fts_trigram_content\": \"CREATE TABLE 'memory_fts_trigram_content'(id INTEGER PRIMARY KEY, c0, c1, c2, c3, c4)\",\n    \"memory_fts_trigram_data\": \"CREATE TABLE 'memory_fts_trigram_data'(id INTEGER PRIMARY KEY, block BLOB)\",\n    \"memory_fts_trigram_docsize\": \"CREATE TABLE 'memory_fts_trigram_docsize'(id INTEGER PRIMARY KEY, sz BLOB)\",\n    \"memory_fts_trigram_idx\": \"CREATE TABLE 'memory_fts_trigram_idx'(segid, term, pgno, PRIMARY KEY(segid, term)) WITHOUT ROWID\",\n    \"memory_fts_word\": \"CREATE VIRTUAL TABLE memory_fts_word USING fts5(memory_id UNINDEXED, title, content, summary, tags, tokenize='unicode61')\",\n    \"memory_fts_word_config\": \"CREATE TABLE 'memory_fts_word_config'(k PRIMARY KEY, v) WITHOUT ROWID\",\n    \"memory_fts_word_content\": \"CREATE TABLE 'memory_fts_word_content'(id INTEGER PRIMARY KEY, c0, c1, c2, c3, c4)\",\n    \"memory_fts_word_data\": \"CREATE TABLE 'memory_fts_word_data'(id INTEGER PRIMARY KEY, block BLOB)\",\n    \"memory_fts_word_docsize\": \"CREATE TABLE 'memory_fts_word_docsize'(id INTEGER PRIMARY KEY, sz BLOB)\",\n    \"memory_fts_word_idx\": \"CREATE TABLE 'memory_fts_word_idx'(segid, term, pgno, PRIMARY KEY(segid, term)) WITHOUT ROWID\",\n    \"memory_sources\": \"CREATE TABLE memory_sources (\\n    memory_id  TEXT NOT NULL REFERENCES memories(id) ON DELETE CASCADE,\\n    source_id  TEXT NOT NULL REFERENCES sources(id)  ON DELETE CASCADE,\\n    created_at TEXT NOT NULL CHECK (length(created_at) > 0),\\n    PRIMARY KEY (memory_id, source_id)\\n)\",\n    \"schema_migrations\": \"CREATE TABLE schema_migrations (\\n    version    INTEGER PRIMARY KEY,\\n    name       TEXT    NOT NULL,\\n    applied_at TEXT    NOT NULL\\n)\",\n    \"sources\": \"CREATE TABLE sources (\\n    id            TEXT    PRIMARY KEY,\\n    source_type   TEXT    NOT NULL\\n                          CHECK (source_type IN ('text', 'chat', 'article', 'web', 'file')),\\n    title         TEXT    NOT NULL CHECK (length(trim(title)) > 0),\\n    content       TEXT    NOT NULL CHECK (length(trim(content)) > 0),\\n    url           TEXT    CHECK (url IS NULL OR url LIKE 'http%'),\\n    content_hash  TEXT    NOT NULL UNIQUE\\n                          CHECK (length(content_hash) = 64 AND content_hash = lower(content_hash)),\\n    metadata_json TEXT    NOT NULL DEFAULT '{}'\\n                          CHECK (json_valid(metadata_json) AND json_type(metadata_json) = 'object'),\\n    created_at    TEXT    NOT NULL CHECK (length(created_at) > 0),\\n    updated_at    TEXT    NOT NULL CHECK (length(updated_at) > 0)\\n)\"\n  },\n  \"indexes\": {\n    \"idx_memories_created_at\": \"CREATE INDEX idx_memories_created_at ON memories (created_at)\",\n    \"idx_memories_importance\": \"CREATE INDEX idx_memories_importance ON memories (importance)\",\n    \"idx_memories_status_created\": \"CREATE INDEX idx_memories_status_created ON memories (status, created_at)\",\n    \"idx_memories_type_status\": \"CREATE INDEX idx_memories_type_status ON memories (type, status)\",\n    \"idx_memory_sources_source\": \"CREATE INDEX idx_memory_sources_source ON memory_sources (source_id, memory_id)\",\n    \"idx_sources_created_at\": \"CREATE INDEX idx_sources_created_at ON sources (created_at)\",\n    \"idx_sources_type_created\": \"CREATE INDEX idx_sources_type_created ON sources (source_type, created_at)\"\n  },\n  \"counts\": {\n    \"sources\": 1,\n    \"memories\": 1,\n    \"memory_sources\": 1,\n    \"schema_migrations\": 2,\n    \"memory_fts_word\": 1,\n    \"memory_fts_trigram\": 1\n  },\n  \"package_version\": \"0.4.0\",\n  \"applied_migrations\": [\n    {\n      \"version\": 1,\n      \"name\": \"initial_schema\",\n      \"applied_at\": \"2026-10-04T15:04:21.078Z\"\n    },\n    {\n      \"version\": 2,\n      \"name\": \"memory_search_index\",\n      \"applied_at\": \"2026-10-04T15:04:21.079Z\"\n    }\n  ]\n}\n"
+    },
+    {
+      "argv": [
+        "version"
+      ],
+      "command": "python -m personal_memory --db data\\phase4-cli.db version",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "{\n  \"package_version\": \"0.4.0\",\n  \"schema_version\": 2,\n  \"memory_schema_version\": 1,\n  \"prompt_version\": \"memory-formation-v1\",\n  \"conflict_prompt_version\": \"memory-conflict-v1\",\n  \"phase\": \"phase-4 (memory lifecycle & quality)\"\n}\n"
+    }
+  ],
+  "db_path": "data\\phase4-cli.db",
+  "generated_at": "2026-10-04T15:04:23.313Z",
+  "seed": {
+    "doomed_id": "mem_330cfbc378944647a99c0990f13fa8a7",
+    "memory_id": "mem_b7768628980943baaf722b2bc92543a9",
+    "source_id": "src_d9ac78a7e9c64fa7954d2a22d31f00c2"
+  }
+}

@@ -1,0 +1,9 @@
+Phase 4 concurrency probe -- two independent processes, identical content
+generated_at : 2026-10-04T15:04:27.746Z
+command      : python scripts/phase4_concurrency_probe.py --rounds 3
+each line is one round: both worker outcomes + the final database state
+verdict      : PASS (3 round(s))
+====================================================================================================
+{"round": 0, "first": {"exit": 0, "stdout": "{\"status\": \"persisted\", \"memories\": 1, \"reused\": []}", "stderr": ""}, "second": {"exit": 0, "stdout": "{\"status\": \"duplicate\", \"memories\": 0, \"reused\": [\"mem_a422fa841cd64f07835560aeed43579b\"]}", "stderr": ""}, "final": {"memories": 1, "ids": ["mem_a422fa841cd64f07835560aeed43579b"], "consistency": {"memories": 1, "word_index": 1, "trigram_index": 1, "orphan_word_rows": 0, "orphan_trigram_rows": 0, "consistent": true}}, "ok": true}
+{"round": 1, "first": {"exit": 0, "stdout": "{\"status\": \"persisted\", \"memories\": 1, \"reused\": []}", "stderr": ""}, "second": {"exit": 0, "stdout": "{\"status\": \"duplicate\", \"memories\": 0, \"reused\": [\"mem_4a9e528d0f78468e8128e07991c3c0dd\"]}", "stderr": ""}, "final": {"memories": 1, "ids": ["mem_4a9e528d0f78468e8128e07991c3c0dd"], "consistency": {"memories": 1, "word_index": 1, "trigram_index": 1, "orphan_word_rows": 0, "orphan_trigram_rows": 0, "consistent": true}}, "ok": true}
+{"round": 2, "first": {"exit": 0, "stdout": "{\"status\": \"persisted\", \"memories\": 1, \"reused\": []}", "stderr": ""}, "second": {"exit": 0, "stdout": "{\"status\": \"duplicate\", \"memories\": 0, \"reused\": [\"mem_8f8e01abe3e64f659e7b1525f8b26694\"]}", "stderr": ""}, "final": {"memories": 1, "ids": ["mem_8f8e01abe3e64f659e7b1525f8b26694"], "consistency": {"memories": 1, "word_index": 1, "trigram_index": 1, "orphan_word_rows": 0, "orphan_trigram_rows": 0, "consistent": true}}, "ok": true}
