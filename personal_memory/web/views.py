@@ -442,12 +442,15 @@ def memory_detail_page(
     transitions: Sequence[str],
     related: Sequence[Any] = (),
     flash: Flash | None = None,
+    learn_href: str | None = None,
 ) -> str:
     """单条记忆：第一眼是「卡比记住了什么」，然后才是依据与操作。
 
     「来自」只列真实关联的 Source（点进去是既有 /sources/<id> 页面）；
     「相关记忆」只在存在真实关联（共享来源）时显示，不做相似度算法。
     不提供删除；生命周期操作只使用既有 Web 接口（归档 / 恢复 / 记住 / 先不记）。
+    ``learn_href`` 由路由层给出（P2D-2 的 Memory → Teacher 入口）：视图只渲染它，
+    既不知道学习逻辑，也不构造学习 URL。
     """
     status = str(memory.status)
     paragraphs = [block.strip() for block in (memory.content or "").split("\n\n") if block.strip()]
@@ -493,11 +496,20 @@ def memory_detail_page(
         actions.append(("restore", "恢复", " primary"))
     if "archived" in transitions and status == "pending":
         actions.append(("archive", "先不记", ""))
-    action_html = "".join(
+    lifecycle_html = "".join(
         f'<form method="post" action="/memories/{escape(memory.id)}/{action}">'
         f'<button class="btn{style}" type="submit">{label}</button></form>'
         for action, label, style in actions
-    ) or '<span class="muted">这条记忆当前没有可执行的操作。</span>'
+    )
+    # 学习入口（P2D-2）：这条记忆是第一等公民，所以它排在生命周期操作之前。
+    # 页面只拿到一个 URL；真正的会话创建/对话由 /learn 后面的产品入口调用 P2D-1 的
+    # TeacherApplication 完成——这里不碰任何学习状态，也不知道学习逻辑。
+    learn_html = (
+        f'<a class="btn primary" href="{escape(learn_href)}">学习这一条</a>'
+        if learn_href
+        else ""
+    )
+    action_html = learn_html + lifecycle_html
 
     edit_form = f"""
 <details class="edit">

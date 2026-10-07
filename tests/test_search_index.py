@@ -36,11 +36,14 @@ class MigrationV2Test(TempDirTestCase):
     prefix = "pms-idx-"
 
     def test_migration_list_contains_v1_and_v2(self) -> None:
-        self.assertEqual([(m.version, m.name) for m in MIGRATIONS], [
+        versions = [(m.version, m.name) for m in MIGRATIONS]
+        self.assertEqual(versions[:2], [
             (1, "initial_schema"),
             (2, "memory_search_index"),
         ])
-        self.assertEqual(SUPPORTED_SCHEMA_VERSION, 2)
+        # append-only: later migrations (1.1+) are added at the end, never inserted/renamed
+        self.assertEqual([v for v, _ in versions], sorted(v for v, _ in versions))
+        self.assertEqual(SUPPORTED_SCHEMA_VERSION, max(m.version for m in MIGRATIONS))
 
     def test_fresh_database_has_indexes_and_triggers(self) -> None:
         database = Database(self.tmpdir / "fresh.db")
@@ -117,11 +120,15 @@ class MigrationV2Test(TempDirTestCase):
         finally:
             conn.close()
 
-        # initialize() must apply ONLY migration 2 and backfill the existing memory
+        # initialize() must apply every pending migration (v2's index + backfill, plus any
+        # migration appended later) and backfill the existing memory
         database = Database(db_path)
         report = database.initialize()
-        self.assertEqual(report.applied, ((2, "memory_search_index"),))
-        self.assertEqual(report.version, 2)
+        self.assertEqual(
+            report.applied,
+            tuple((m.version, m.name) for m in MIGRATIONS if m.version > 1),
+        )
+        self.assertEqual(report.version, SUPPORTED_SCHEMA_VERSION)
 
         repository = MemoryRepository(database)
         self.assertEqual(repository.index_row_count("word"), 1)
@@ -141,7 +148,7 @@ class MigrationV2Test(TempDirTestCase):
         before = repository.index_row_count("word")
         second = database.initialize()
         self.assertEqual(second.applied_count, 0)
-        self.assertEqual(second.version, 2)
+        self.assertEqual(second.version, SUPPORTED_SCHEMA_VERSION)
         self.assertEqual(repository.index_row_count("word"), before)
         self.assertTrue(MemoryRetriever(repository).search("RAG").hits[0].memory.id == memory.id)
 

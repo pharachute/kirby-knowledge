@@ -32,6 +32,8 @@ __all__ = [
     "REQUIRED_COLUMNS",
     "SEARCH_INDEX_TABLES",
     "SEARCH_INDEX_TRIGGER_NAMES",
+    "LEARNING_TABLES",
+    "LEARNING_REQUIRED_COLUMNS",
     "MigrationReport",
     "Database",
     "resolve_db_path",
@@ -200,6 +202,98 @@ SEARCH_INDEX_STATEMENTS: tuple[str, ...] = (
 )
 
 
+# --------------------------------------------------------------------------
+# Learning layer (migration 3) -- KB 1.1 Phase 2A
+# --------------------------------------------------------------------------
+#
+# Two additive tables; nothing here touches the 1.0 tables (append-only).
+#   * ``learning_states``   -- 1:1 with a Memory: how well the user knows it.
+#     Keyed by ``memory_id`` on purpose: the same knowledge can be supported by
+#     several Sources, but "does the user understand it" is a property of the
+#     knowledge, not of the material it was read from.
+#   * ``learning_sessions`` -- one concrete learning run over ONE Source
+#     (a Source usually maps to several Memories: the session walks them).
+#
+# Deletion policy is deliberate and must stay visible in the UI copy:
+#   memory deleted  -> state CASCADE (progress dies with the knowledge)
+#                      session SURVIVES, ``current_memory_id`` becomes NULL (SET NULL)
+#   source deleted  -> session CASCADE (a session without its material cannot continue)
+#                      state SURVIVES (progress is not tied to a Source)
+#
+_LEARNING_STATES_DDL = """
+CREATE TABLE IF NOT EXISTS learning_states (
+    memory_id           TEXT    PRIMARY KEY
+                                REFERENCES memories(id) ON DELETE CASCADE,
+    understanding_level TEXT    NOT NULL DEFAULT 'unknown'
+                                CHECK (understanding_level IN ('unknown', 'fuzzy', 'partial', 'solid')),
+    known_aspects_json  TEXT    NOT NULL DEFAULT '[]'
+                                CHECK (json_valid(known_aspects_json) AND json_type(known_aspects_json) = 'array'),
+    weak_aspects_json   TEXT    NOT NULL DEFAULT '[]'
+                                CHECK (json_valid(weak_aspects_json) AND json_type(weak_aspects_json) = 'array'),
+    misconceptions_json TEXT    NOT NULL DEFAULT '[]'
+                                CHECK (json_valid(misconceptions_json) AND json_type(misconceptions_json) = 'array'),
+    learn_count         INTEGER NOT NULL DEFAULT 0
+                                CHECK (typeof(learn_count) = 'integer' AND learn_count >= 0),
+    last_learned_at     TEXT    CHECK (last_learned_at IS NULL OR length(last_learned_at) > 0),
+    created_at          TEXT    NOT NULL CHECK (length(created_at) > 0),
+    updated_at          TEXT    NOT NULL CHECK (length(updated_at) > 0),
+    schema_version      INTEGER NOT NULL DEFAULT 1 CHECK (schema_version >= 1)
+)
+"""
+
+_LEARNING_SESSIONS_DDL = """
+CREATE TABLE IF NOT EXISTS learning_sessions (
+    id                TEXT    PRIMARY KEY,
+    source_id         TEXT    NOT NULL
+                              REFERENCES sources(id) ON DELETE CASCADE,
+    status            TEXT    NOT NULL DEFAULT 'active'
+                              CHECK (status IN ('active', 'completed', 'abandoned')),
+    current_memory_id TEXT    REFERENCES memories(id) ON DELETE SET NULL,
+    current_stage     TEXT    NOT NULL DEFAULT 'explain'
+                              CHECK (current_stage IN ('explain', 'question', 'analyze', 'remedy',
+                                                       'reinforce', 'practice', 'done')),
+    plan_json         TEXT    NOT NULL DEFAULT '[]'
+                              CHECK (json_valid(plan_json) AND json_type(plan_json) = 'array'),
+    plan_cursor       INTEGER NOT NULL DEFAULT 0
+                              CHECK (typeof(plan_cursor) = 'integer' AND plan_cursor >= 0),
+    exchange_json     TEXT    NOT NULL DEFAULT '{}'
+                              CHECK (json_valid(exchange_json) AND json_type(exchange_json) = 'object'),
+    started_at        TEXT    NOT NULL CHECK (length(started_at) > 0),
+    updated_at        TEXT    NOT NULL CHECK (length(updated_at) > 0),
+    ended_at          TEXT    CHECK (ended_at IS NULL OR length(ended_at) > 0),
+    schema_version    INTEGER NOT NULL DEFAULT 1 CHECK (schema_version >= 1)
+)
+"""
+
+_LEARNING_INDEX_DDL: tuple[str, ...] = (
+    "CREATE INDEX IF NOT EXISTS idx_learning_states_level "
+    "ON learning_states (understanding_level, last_learned_at)",
+    "CREATE INDEX IF NOT EXISTS idx_learning_sessions_source "
+    "ON learning_sessions (source_id, status, updated_at)",
+    "CREATE INDEX IF NOT EXISTS idx_learning_sessions_status "
+    "ON learning_sessions (status, updated_at)",
+    # one Source can have at most ONE running session; finished/abandoned ones
+    # accumulate as history and never block a new run
+    "CREATE UNIQUE INDEX IF NOT EXISTS idx_learning_sessions_one_active "
+    "ON learning_sessions (source_id) WHERE status = 'active'",
+)
+
+LEARNING_TABLES: tuple[str, ...] = ("learning_states", "learning_sessions")
+
+#: Columns this code reads/writes for the learning tables (checked after init).
+LEARNING_REQUIRED_COLUMNS: dict[str, tuple[str, ...]] = {
+    "learning_states": (
+        "memory_id", "understanding_level", "known_aspects_json", "weak_aspects_json",
+        "misconceptions_json", "learn_count", "last_learned_at", "created_at", "updated_at",
+        "schema_version",
+    ),
+    "learning_sessions": (
+        "id", "source_id", "status", "current_memory_id", "current_stage", "plan_json",
+        "plan_cursor", "exchange_json", "started_at", "updated_at", "ended_at", "schema_version",
+    ),
+}
+
+
 @dataclass(frozen=True)
 class Migration:
     version: int
@@ -227,6 +321,12 @@ MIGRATIONS: tuple[Migration, ...] = (
         tables=("memory_fts_word", "memory_fts_trigram"),
         triggers=SEARCH_INDEX_TRIGGER_NAMES,
     ),
+    Migration(
+        version=3,
+        name="learning_layer",
+        statements=(_LEARNING_STATES_DDL, _LEARNING_SESSIONS_DDL, *_LEARNING_INDEX_DDL),
+        tables=LEARNING_TABLES,
+    ),
 )
 
 #: Highest migration version this build knows about.
@@ -249,6 +349,7 @@ REQUIRED_COLUMNS: dict[str, tuple[str, ...]] = {
     "schema_migrations": ("version", "name", "applied_at"),
     "memory_fts_word": _FTS_COLUMNS,
     "memory_fts_trigram": _FTS_COLUMNS,
+    **LEARNING_REQUIRED_COLUMNS,
 }
 
 
@@ -514,6 +615,7 @@ class Database:
                 "schema_migrations",
                 "memory_fts_word",
                 "memory_fts_trigram",
+                *LEARNING_TABLES,
             ):
                 if table in tables:
                     counts[table] = int(conn.execute(f"SELECT COUNT(*) AS n FROM {table}").fetchone()["n"])

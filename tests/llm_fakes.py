@@ -14,6 +14,43 @@ from typing import Any, Iterable, Mapping, Sequence
 from personal_memory.llm import LLMClient, LLMConfig, LLMResponse
 
 
+class FakeTeacherModel:
+    """A ``TeacherModel`` (Phase 2C-3) with no network and no provider behind it.
+
+    Scripted like :class:`ScriptedTransport`: every queued item is returned as-is, and
+    an ``Exception`` item is raised.  Every call is recorded, so a test can assert
+    exactly what the adapter asked the model for (prompt texts, response schema) and
+    how many times it asked (retry checks).
+    """
+
+    def __init__(self, *responses: Any) -> None:
+        self.responses: list[Any] = list(responses)
+        self.calls: list[dict[str, Any]] = []
+
+    def generate(self, *, system_prompt: str, user_prompt: str, response_schema: Any) -> Any:
+        self.calls.append(
+            {
+                "system_prompt": system_prompt,
+                "user_prompt": user_prompt,
+                "response_schema": response_schema,
+            }
+        )
+        if not self.responses:
+            raise AssertionError("FakeTeacherModel ran out of scripted responses")
+        item = self.responses.pop(0)
+        if isinstance(item, BaseException):
+            raise item
+        return item
+
+    @property
+    def call_count(self) -> int:
+        return len(self.calls)
+
+    @property
+    def last_call(self) -> dict[str, Any]:
+        return self.calls[-1]
+
+
 def response(
     content: str,
     *,

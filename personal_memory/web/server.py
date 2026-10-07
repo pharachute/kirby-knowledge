@@ -73,6 +73,8 @@ from ..models import MemoryStatus, SourceType
 from ..quality import LLMConflictClassifier, MemoryQualityGate
 from ..retrieval import RetrievalError, MemoryRetriever
 from ..store import MemoryRepository
+from ..teacher_llm import TeacherModelError
+from . import teacher as teacher_ui
 from .views import (
     STATUS_CHOICES,
     Flash,
@@ -126,6 +128,7 @@ _ERROR_MAP: tuple[tuple[type[BaseException], int, str], ...] = (
     (DuplicateContentHashError, 409, "已存在相同来源（内容重复，已自动复用）"),
     (ConflictError, 409, "已存在相同或冲突的记忆"),
     (NotFoundError, 404, "这条记忆或来源不存在"),
+    (TeacherModelError, 502, "模型这次没有回答成功"),
     (ExtractionValidationError, 502, "模型输出无法形成有效记忆"),
     (LLMConfigError, 503, "模型未配置或配置无效"),
     (LLMRequestError, 502, "模型请求失败"),
@@ -181,6 +184,12 @@ class WebContext:
     max_bytes: int = MAX_FILE_BYTES
     max_upload_bytes: int = MAX_UPLOAD_BYTES
     flashes: dict[str, Flash] = field(default_factory=dict)
+    #: Injected ``TeacherModel`` for the Teacher pages (a fake in tests, or a local
+    #: model).  ``None`` means "build the configured provider", which is what the real
+    #: application does; browsing never needs either.
+    teacher_model: Any | None = field(default=None, repr=False, compare=False)
+    #: The lazily built product-level Teacher entry (P2D-2); never part of equality.
+    teacher: Any | None = field(default=None, repr=False, compare=False)
 
     # -- construction -----------------------------------------------------
     @classmethod
@@ -596,6 +605,7 @@ class KnowledgeBaseHandler(BaseHTTPRequestHandler):
                     transitions=context.lifecycle.allowed_transitions(memory_id),
                     related=related[:6],
                     flash=flash,
+                    learn_href=teacher_ui.learn_href(memory_id),
                 ),
             )
         if path == "/sources":
@@ -616,6 +626,8 @@ class KnowledgeBaseHandler(BaseHTTPRequestHandler):
             )
         if path == "/search":
             return self._handle_search(query, flash)
+        if path.startswith(f"{teacher_ui.LEARN_ROUTE}/"):
+            return self._get_learn(path[len(teacher_ui.LEARN_ROUTE) + 1:], flash)
         self._send_page(
             404,
             error_page(
@@ -693,6 +705,13 @@ class KnowledgeBaseHandler(BaseHTTPRequestHandler):
             return self._post_import_url()
         if path == "/import-pdf":
             return self._post_import_pdf()
+        if path.startswith(f"{teacher_ui.LEARN_ROUTE}/"):
+            segments = path.split("/")
+            if len(segments) == 4 and segments[1] == teacher_ui.LEARN_ROUTE[1:]:
+                if segments[3] == "start":
+                    return self._post_learn_start(segments[2])
+                if segments[3] == "turn":
+                    return self._post_learn_turn(segments[2])
         segments = path.split("/")
         if len(segments) == 4 and segments[1] == "memories" and segments[3] in {
             "archive",
@@ -1012,6 +1031,97 @@ class KnowledgeBaseHandler(BaseHTTPRequestHandler):
             Flash(kind="ok", title=titles.get(action, "操作完成"), detail=summary)
         )
         self._redirect(f"/memories/{memory_id}?flash={token}")
+
+    # ------------------------------------------------------------------
+    # Teacher (P2D-2): Memory -> 开始学习 -> 对话 -> 真实学习状态
+    # ------------------------------------------------------------------
+    def _teacher_entry(self) -> Any:
+        """The product-level Teacher entry, built once per context (lazy)."""
+        if self.context.teacher is None:
+            self.context.teacher = teacher_ui.TeacherEntry(self.context)
+        return self.context.teacher
+
+    def _learn_snapshot(self, memory_id: str) -> dict[str, Any]:
+        """Read-only snapshot for the Teacher page (existing APIs + application boundary).
+
+        No learning rule is evaluated here: the session, its cursor and its current Memory
+        come from ``LearningSession`` objects the application boundary returned.
+        """
+        memory = self.context.repository.require_memory(memory_id)
+        entry = self._teacher_entry()
+        ready, reason = entry.available()
+        sources = entry.sources_for_memory(memory_id)
+        session = None
+        current_memory = None
+        if ready and sources:
+            session = entry.active_session(sources[0].id)
+            if session is not None and session.current_memory_id:
+                current_memory = self.context.repository.get_memory(session.current_memory_id)
+        return {
+            "memory": memory,
+            "sources": sources,
+            "session": session,
+            "current_memory": current_memory,
+            "ready": ready,
+            "reason": reason,
+        }
+
+    def _render_learn(
+        self,
+        memory_id: str,
+        *,
+        status: int = 200,
+        turn: Any | None = None,
+        error: BaseException | None = None,
+        message: str = "",
+        flash: Flash | None = None,
+    ) -> None:
+        snapshot = self._learn_snapshot(memory_id)
+        self._send_page(
+            status,
+            teacher_ui.learn_page(turn=turn, error=error, message=message, flash=flash, **snapshot),
+        )
+
+    def _get_learn(self, memory_id: str, flash: Flash | None) -> None:
+        self._render_learn(memory_id, flash=flash)
+
+    def _post_learn_start(self, memory_id: str) -> None:
+        """Start (or refuse to duplicate) this Memory's learning session."""
+        try:
+            context = self._teacher_entry().start(memory_id)
+        except MemorySystemError as exc:
+            # a refusal is rendered as a refusal: correct status, no success claim
+            status, _ = classify_error(exc)
+            return self._render_learn(memory_id, status=status, error=exc)
+        token = self.context.put_flash(
+            Flash(
+                kind="ok",
+                title="开始了一次学习",
+                detail=f"这次学习只包含 1 条记忆（计划共 {len(context.session.plan)} 条），"
+                       "现在可以和卡比对话了。",
+            )
+        )
+        self._redirect(f"{teacher_ui.LEARN_ROUTE}/{memory_id}?flash={token}")
+
+    def _post_learn_turn(self, memory_id: str) -> None:
+        """One real Teacher turn for the session running on this Memory's Source."""
+        form = self._read_form()
+        message = (form.get("message") or "").strip()
+        if not message:
+            error = ValidationError("请先说点什么再发送（内容不能为空）", field="message")
+            if self._wants_json():
+                return self._send_json(400, teacher_ui.error_payload(error))
+            return self._render_learn(memory_id, status=400, error=error)
+        try:
+            result = self._teacher_entry().turn(memory_id, message)
+        except MemorySystemError as exc:
+            status, _ = classify_error(exc)
+            if self._wants_json():
+                return self._send_json(status, teacher_ui.error_payload(exc))
+            return self._render_learn(memory_id, status=status, error=exc, message=message)
+        if self._wants_json():
+            return self._send_json(200, teacher_ui.turn_payload(result))
+        return self._render_learn(memory_id, turn=result)
 
 
 class KnowledgeBaseServer(ThreadingHTTPServer):

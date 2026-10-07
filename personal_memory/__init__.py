@@ -179,6 +179,53 @@ from .quality import (  # noqa: E402
     memory_fingerprint,
 )
 from .store import MemoryRepository, MemoryUnitOfWork  # noqa: E402
+from .learning_models import (  # noqa: E402
+    LEARNING_SCHEMA_VERSION,
+    LearningSession,
+    LearningState,
+    SessionStatus,
+    TeachingStage,
+    UnderstandingLevel,
+    new_learning_session_id,
+)
+from .learning_store import LearningRepository, LearningUnitOfWork  # noqa: E402
+from .learning import LearningContext, LearningOverview, LearningService  # noqa: E402
+from .teacher import (  # noqa: E402
+    ALLOWED_ACTION_TYPES,
+    FORBIDDEN_ACTION_TYPES,
+    AbandonSessionAction,
+    FinishSessionAction,
+    RecordAssessmentAction,
+    RecordLearningAction,
+    TeacherAction,
+    TeacherContext,
+    TeacherTurnRequest,
+    TeacherTurnResponse,
+)
+from .teacher_executor import SUPPORTED_ACTION_TYPES, TeacherActionExecutor  # noqa: E402
+from .teacher_llm import (  # noqa: E402
+    DEFAULT_PROMPT_BUILDER,
+    TEACHER_PROMPT_VERSION,
+    TEACHER_PROMPT_VERSION_V2,
+    TEACHER_RESPONSE_SCHEMA,
+    PromptPayload,
+    TeacherLLMAdapter,
+    TeacherModel,
+    TeacherModelError,
+    TeacherPromptBuilder,
+    TeacherPromptV2Builder,
+    validate_action_context,
+)
+from .teacher_runtime import TeacherRuntime, TeacherTurnResult  # noqa: E402
+from .teacher_provider import TeacherProvider  # noqa: E402
+from .teacher_agent import (  # noqa: E402
+    DEFAULT_MAX_STEPS,
+    MAX_STEPS_LIMIT,
+    STOP_ACTION_TYPES,
+    TeacherAgent,
+    TeacherAgentResult,
+)
+from .teacher_application import TeacherApplication  # noqa: E402
 from .web import WebContext, create_server  # noqa: E402
 
 __all__ = [
@@ -194,6 +241,50 @@ __all__ = [
     "MigrationReport",
     "MemoryRepository",
     "MemoryUnitOfWork",
+    "LEARNING_SCHEMA_VERSION",
+    "LearningContext",
+    "LearningOverview",
+    "LearningRepository",
+    "LearningService",
+    "ALLOWED_ACTION_TYPES",
+    "FORBIDDEN_ACTION_TYPES",
+    "AbandonSessionAction",
+    "FinishSessionAction",
+    "RecordAssessmentAction",
+    "RecordLearningAction",
+    "TeacherAction",
+    "TeacherContext",
+    "TeacherTurnRequest",
+    "TeacherActionExecutor",
+    "SUPPORTED_ACTION_TYPES",
+    "TeacherTurnResponse",
+    "TEACHER_PROMPT_VERSION",
+    "TEACHER_PROMPT_VERSION_V2",
+    "DEFAULT_PROMPT_BUILDER",
+    "TEACHER_RESPONSE_SCHEMA",
+    "PromptPayload",
+    "TeacherLLMAdapter",
+    "TeacherModel",
+    "TeacherModelError",
+    "TeacherPromptBuilder",
+    "TeacherPromptV2Builder",
+    "validate_action_context",
+    "TeacherRuntime",
+    "TeacherTurnResult",
+    "TeacherProvider",
+    "DEFAULT_MAX_STEPS",
+    "MAX_STEPS_LIMIT",
+    "STOP_ACTION_TYPES",
+    "TeacherAgent",
+    "TeacherAgentResult",
+    "TeacherApplication",
+    "LearningState",
+    "LearningSession",
+    "LearningUnitOfWork",
+    "SessionStatus",
+    "TeachingStage",
+    "UnderstandingLevel",
+    "new_learning_session_id",
     "PROMPT_VERSION",
     "RawInput",
     "MemoryDraft",
